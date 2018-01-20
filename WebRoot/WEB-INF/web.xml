@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>YingYunTong</display-name>
+  <display-name></display-name>
+  <filter>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.web.filter.LoginFilter</filter-class>
+    <async-supported>true</async-supported>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/jsps/main.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>YingYunTongSpringmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springmvc-config.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>YingYunTongSpringmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Larage_group_Goods</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Larage_group_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_ALL_Fendian</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_ALL_Fendian</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_T_GroupType</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_All_T_GroupType</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Storeno_t_Warehouse</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Storeno_t_Warehouse</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Request_Order</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Request_Order</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Fen_Jian</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Fen_Jian</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_Fendian_Cangku</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_All_Fendian_Cangku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_wh_cStoreOutWarehouseDetail</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_All_wh_cStoreOutWarehouseDetail</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_wh_cStoreOutWarehouse</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_wh_cStoreOutWarehouse</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_ALL_t_Pallet</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_ALL_t_Pallet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_DistributionBox</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_All_DistributionBox</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Tuo_Pan</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Tuo_Pan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Update_Car_Message</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Update_Car_Message</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Yi_Yan_Tuo_Pan_dan</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Yi_Yan_Tuo_Pan_dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Zhuang_Chen</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Zhuang_Chen</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tuo_Pan_Select_box</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Tuo_Pan_Select_box</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Fen_Jian_dan_No_Select_Goods</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Fen_Jian_dan_No_Select_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Recovery_Pallet</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Recovery_Pallet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Recovery_Box</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Recovery_Box</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Yi_Fen_Jian_Message</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Yi_Fen_Jian_Message</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tuo_Pan_dan_No_Select_Goods</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Tuo_Pan_dan_No_Select_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Yi_shen_Yan_huo_dan</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Select_Yi_shen_Yan_huo_dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_pei_song_yan_huo_cha_yi</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Upload_pei_song_yan_huo_cha_yi</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Pei_Song_Yan_Huo_Dan</servlet-name>
+    <servlet-class>Yan_Pei_Song_Chu_Ku.Upload_Pei_Song_Yan_Huo_Dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Fen_dian_yan_shou</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Fen_dian_yan_shou</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Yi_Yan_Tuo_Pan_Dan</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Yi_Yan_Tuo_Pan_Dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Fen_dian_Yi_Yan_Shou</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_Fen_dian_Yi_Yan_Shou</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Fen_dian_ru_ku</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Upload_Fen_dian_ru_ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Check_in</servlet-name>
+    <servlet-class>operation.Check_in</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Driver_Sign</servlet-name>
+    <servlet-class>operation.Driver_Sign</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Yi_shen_zhuang_che_dan</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_Yi_shen_zhuang_che_dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Driver_Ok</servlet-name>
+    <servlet-class>operation.Driver_Ok</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_box_Pallet_point</servlet-name>
+    <servlet-class>operation.Select_box_Pallet_point</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_t_Truck</servlet-name>
+    <servlet-class>operation.Select_All_t_Truck</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_All_t_Store</servlet-name>
+    <servlet-class>operation.Select_All_t_Store</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Sheng_cheng_ru_ku_dan</servlet-name>
+    <servlet-class>Head_shop.Sheng_cheng_ru_ku_dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Images</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Images</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Return_Pallet_box</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Return_Pallet_box</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Not_Check_Fen_jian_dan</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Not_Check_Fen_jian_dan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_fu_he</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_fu_he</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_xiao_piao</servlet-name>
+    <servlet-class>operation.Select_xiao_piao</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_xiao_piaoContent</servlet-name>
+    <servlet-class>operation.Select_xiao_piaoContent</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Box_union_goods</servlet-name>
+    <servlet-class>Select_Goods.Box_union_goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Version</servlet-name>
+    <servlet-class>operation.Version</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>edit_version</servlet-name>
+    <servlet-class>operation.edit_version</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Horizontal_report_table</servlet-name>
+    <servlet-class>report_forms.Horizontal_report_table</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>upload_fen_dian_tui_huo</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.upload_fen_dian_tui_huo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Update_Bu_Huo</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Update_Bu_Huo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_fen_dian_bu_huo</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_fen_dian_bu_huo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Diao_bo_chu_ku</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Diao_bo_chu_ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Diao_bo_ru_ku</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Diao_bo_ru_ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Diao_bo_chu_ku_Select</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Diao_bo_chu_ku_Select</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>goods_Sale_Details</servlet-name>
+    <servlet-class>report_forms.goods_Sale_Details</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Larage_group_Goods_Zi_dong</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Larage_group_Goods_Zi_dong</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Request_Smart_Order</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Upload_Request_Smart_Order</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>tongzhi</servlet-name>
+    <servlet-class>operation.tongzhi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Select_Larage_group_Goods</servlet-name>
+    <url-pattern>/Select_Larage_group_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_ALL_Fendian</servlet-name>
+    <url-pattern>/Select_ALL_Fendian</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_T_GroupType</servlet-name>
+    <url-pattern>/Select_All_T_GroupType</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Storeno_t_Warehouse</servlet-name>
+    <url-pattern>/Select_Storeno_t_Warehouse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Request_Order</servlet-name>
+    <url-pattern>/Upload_Request_Order</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Fen_Jian</servlet-name>
+    <url-pattern>/Upload_Fen_Jian</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_Fendian_Cangku</servlet-name>
+    <url-pattern>/Select_All_Fendian_Cangku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_wh_cStoreOutWarehouseDetail</servlet-name>
+    <url-pattern>/Select_All_wh_cStoreOutWarehouseDetail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_wh_cStoreOutWarehouse</servlet-name>
+    <url-pattern>/Select_wh_cStoreOutWarehouse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_ALL_t_Pallet</servlet-name>
+    <url-pattern>/Select_ALL_t_Pallet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_DistributionBox</servlet-name>
+    <url-pattern>/Select_All_DistributionBox</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Tuo_Pan</servlet-name>
+    <url-pattern>/Upload_Tuo_Pan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Update_Car_Message</servlet-name>
+    <url-pattern>/Update_Car_Message</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Yi_Yan_Tuo_Pan_dan</servlet-name>
+    <url-pattern>/Yi_Yan_Tuo_Pan_dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Zhuang_Chen</servlet-name>
+    <url-pattern>/Upload_Zhuang_Chen</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tuo_Pan_Select_box</servlet-name>
+    <url-pattern>/Tuo_Pan_Select_box</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Fen_Jian_dan_No_Select_Goods</servlet-name>
+    <url-pattern>/Fen_Jian_dan_No_Select_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Recovery_Pallet</servlet-name>
+    <url-pattern>/Recovery_Pallet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Recovery_Box</servlet-name>
+    <url-pattern>/Recovery_Box</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Yi_Fen_Jian_Message</servlet-name>
+    <url-pattern>/Select_Yi_Fen_Jian_Message</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tuo_Pan_dan_No_Select_Goods</servlet-name>
+    <url-pattern>/Tuo_Pan_dan_No_Select_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Yi_shen_Yan_huo_dan</servlet-name>
+    <url-pattern>/Select_Yi_shen_Yan_huo_dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_pei_song_yan_huo_cha_yi</servlet-name>
+    <url-pattern>/Upload_pei_song_yan_huo_cha_yi</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Pei_Song_Yan_Huo_Dan</servlet-name>
+    <url-pattern>/Upload_Pei_Song_Yan_Huo_Dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Fen_dian_yan_shou</servlet-name>
+    <url-pattern>/Fen_dian_yan_shou</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Yi_Yan_Tuo_Pan_Dan</servlet-name>
+    <url-pattern>/Select_Yi_Yan_Tuo_Pan_Dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Fen_dian_Yi_Yan_Shou</servlet-name>
+    <url-pattern>/Select_Fen_dian_Yi_Yan_Shou</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Fen_dian_ru_ku</servlet-name>
+    <url-pattern>/Upload_Fen_dian_ru_ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Check_in</servlet-name>
+    <url-pattern>/Check_in</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Driver_Sign</servlet-name>
+    <url-pattern>/Driver_Sign</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Yi_shen_zhuang_che_dan</servlet-name>
+    <url-pattern>/Select_Yi_shen_zhuang_che_dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Driver_Ok</servlet-name>
+    <url-pattern>/Driver_Ok</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_box_Pallet_point</servlet-name>
+    <url-pattern>/Select_box_Pallet_point</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_t_Truck</servlet-name>
+    <url-pattern>/Select_All_t_Truck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_All_t_Store</servlet-name>
+    <url-pattern>/Select_All_t_Store</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Sheng_cheng_ru_ku_dan</servlet-name>
+    <url-pattern>/Sheng_cheng_ru_ku_dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Images</servlet-name>
+    <url-pattern>/Upload_Images</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Return_Pallet_box</servlet-name>
+    <url-pattern>/Return_Pallet_box</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Not_Check_Fen_jian_dan</servlet-name>
+    <url-pattern>/Not_Check_Fen_jian_dan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_fu_he</servlet-name>
+    <url-pattern>/Upload_fu_he</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_xiao_piao</servlet-name>
+    <url-pattern>/Select_xiao_piao</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_xiao_piaoContent</servlet-name>
+    <url-pattern>/Select_xiao_piaoContent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Box_union_goods</servlet-name>
+    <url-pattern>/Box_union_goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Version</servlet-name>
+    <url-pattern>/Version</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>edit_version</servlet-name>
+    <url-pattern>/edit_version</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Horizontal_report_table</servlet-name>
+    <url-pattern>/Horizontal_report_table</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>upload_fen_dian_tui_huo</servlet-name>
+    <url-pattern>/upload_fen_dian_tui_huo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Update_Bu_Huo</servlet-name>
+    <url-pattern>/Update_Bu_Huo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_fen_dian_bu_huo</servlet-name>
+    <url-pattern>/Select_fen_dian_bu_huo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Diao_bo_chu_ku</servlet-name>
+    <url-pattern>/Diao_bo_chu_ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Diao_bo_ru_ku</servlet-name>
+    <url-pattern>/Diao_bo_ru_ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Diao_bo_chu_ku_Select</servlet-name>
+    <url-pattern>/Diao_bo_chu_ku_Select</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>goods_Sale_Details</servlet-name>
+    <url-pattern>/goods_Sale_Details</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Larage_group_Goods_Zi_dong</servlet-name>
+    <url-pattern>/Select_Larage_group_Goods_Zi_dong</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Request_Smart_Order</servlet-name>
+    <url-pattern>/Upload_Request_Smart_Order</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>tongzhi</servlet-name>
+    <url-pattern>/tongzhi</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>Login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Type_Group_Sales</servlet-name>
+    <servlet-class>report_forms.Type_Group_Sales</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_discount</servlet-name>
+    <servlet-class>Price_Policy.Upload_discount</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_discount_Type</servlet-name>
+    <servlet-class>Price_Policy.Select_discount_Type</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Time_Manager</servlet-name>
+    <servlet-class>operation.Time_Manager</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Fresh_ru_ku</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_Fresh_ru_ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Fresh_Ru_ku</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Upload_Fresh_Ru_ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Discount_card_Unit_Manager</servlet-name>
+    <servlet-class>Price_Policy.Discount_card_Unit_Manager</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Bao_Sun</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Bao_Sun</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_cStore_box_Pallet_point</servlet-name>
+    <servlet-class>operation.Select_cStore_box_Pallet_point</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Bao_Yi</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Bao_Yi</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Hand_in_Money</servlet-name>
+    <servlet-class>operation.Hand_in_Money</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_ru_ku_dan_Googs</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_ru_ku_dan_Googs</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Goods_Ploy_details</servlet-name>
+    <servlet-class>Price_Policy.Select_Goods_Ploy_details</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_t_cStoreGoods</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_t_cStoreGoods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Print_price_tag</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Print_price_tag</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_t_cStoreGoods_Message</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_t_cStoreGoods_Message</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Zongbu_Yanhuo</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Zongbu_Yanhuo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Vip_Price</servlet-name>
+    <servlet-class>Price_Policy.Vip_Price</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Vip_Price</servlet-name>
+    <servlet-class>Price_Policy.Select_Vip_Price</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Stored_Value_Card</servlet-name>
+    <servlet-class>Price_Policy.Select_Stored_Value_Card</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>upload_men_dian_zhi_pei</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.upload_men_dian_zhi_pei</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_bu_huo_dan_goods</servlet-name>
+    <servlet-class>Online.Online_Select_bu_huo_dan_goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Online_fen_jian</servlet-name>
+    <servlet-class>Online.Upload_Online_fen_jian</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_Softing_goods</servlet-name>
+    <servlet-class>Online.Online_Select_Softing_goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Pan_dian_Cha_Yi</servlet-name>
+    <servlet-class>operation.Pan_dian_Cha_Yi</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Online_Tuo_Pan</servlet-name>
+    <servlet-class>Online.Upload_Online_Tuo_Pan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_Tu_Pan_goods</servlet-name>
+    <servlet-class>Online.Online_Select_Tu_Pan_goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Online_Pei_Song_Yan</servlet-name>
+    <servlet-class>Online.Upload_Online_Pei_Song_Yan</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Upload_Online_Zhuang_Che</servlet-name>
+    <servlet-class>Online.Upload_Online_Zhuang_Che</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_Pei_Song_Chu_Ku</servlet-name>
+    <servlet-class>Online.Online_Select_Pei_Song_Chu_Ku</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_Box</servlet-name>
+    <servlet-class>Online.Online_Select_Box</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Online_Select_cSheet_Below_Goods</servlet-name>
+    <servlet-class>Online.Online_Select_cSheet_Below_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Update_User_Pass</servlet-name>
+    <servlet-class>operation.Update_User_Pass</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Fresh_Zi_Dong_Bu_Huo</servlet-name>
+    <servlet-class>Goods_flow_Servlet.Select_Fresh_Zi_Dong_Bu_Huo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ReturnSupplier</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.ReturnSupplier</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Head_Shop_Check_Goods</servlet-name>
+    <servlet-class>Head_shop.Head_Shop_Check_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectcSheetno</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.SelectcSheetno</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Testing</servlet-name>
+    <servlet-class>operation.Testing</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Report_Servlet</servlet-name>
+    <servlet-class>report_forms.Report_Servlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Testing_Servelt</servlet-name>
+    <servlet-class>Tool.Testing_Servelt</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Select_Bao_Sun_Bao_Yi_Goods</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.Select_Bao_Sun_Bao_Yi_Goods</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectFenPurchaseOrder</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.SelectFenPurchaseOrder</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectFenPurchaseOrderGoods</servlet-name>
+    <servlet-class>Fen_dian_yan_shou.SelectFenPurchaseOrderGoods</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Type_Group_Sales</servlet-name>
+    <url-pattern>/Type_Group_Sales</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_discount</servlet-name>
+    <url-pattern>/Upload_discount</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_discount_Type</servlet-name>
+    <url-pattern>/Select_discount_Type</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Time_Manager</servlet-name>
+    <url-pattern>/Time_Manager</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Fresh_ru_ku</servlet-name>
+    <url-pattern>/Select_Fresh_ru_ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Fresh_Ru_ku</servlet-name>
+    <url-pattern>/Upload_Fresh_Ru_ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Discount_card_Unit_Manager</servlet-name>
+    <url-pattern>/Discount_card_Unit_Manager</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Bao_Sun</servlet-name>
+    <url-pattern>/Bao_Sun</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_cStore_box_Pallet_point</servlet-name>
+    <url-pattern>/Select_cStore_box_Pallet_point</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Bao_Yi</servlet-name>
+    <url-pattern>/Bao_Yi</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Hand_in_Money</servlet-name>
+    <url-pattern>/Hand_in_Money</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_ru_ku_dan_Googs</servlet-name>
+    <url-pattern>/Select_ru_ku_dan_Googs</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Goods_Ploy_details</servlet-name>
+    <url-pattern>/Select_Goods_Ploy_details</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_t_cStoreGoods</servlet-name>
+    <url-pattern>/Select_t_cStoreGoods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Print_price_tag</servlet-name>
+    <url-pattern>/Print_price_tag</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_t_cStoreGoods_Message</servlet-name>
+    <url-pattern>/Select_t_cStoreGoods_Message</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Zongbu_Yanhuo</servlet-name>
+    <url-pattern>/Select_Zongbu_Yanhuo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Vip_Price</servlet-name>
+    <url-pattern>/Vip_Price</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Vip_Price</servlet-name>
+    <url-pattern>/Select_Vip_Price</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Stored_Value_Card</servlet-name>
+    <url-pattern>/Select_Stored_Value_Card</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>upload_men_dian_zhi_pei</servlet-name>
+    <url-pattern>/upload_men_dian_zhi_pei</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_bu_huo_dan_goods</servlet-name>
+    <url-pattern>/Online_Select_bu_huo_dan_goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Online_fen_jian</servlet-name>
+    <url-pattern>/Upload_Online_fen_jian</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_Softing_goods</servlet-name>
+    <url-pattern>/Online_Select_Softing_goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Pan_dian_Cha_Yi</servlet-name>
+    <url-pattern>/Pan_dian_Cha_Yi</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Online_Tuo_Pan</servlet-name>
+    <url-pattern>/Upload_Online_Tuo_Pan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_Tu_Pan_goods</servlet-name>
+    <url-pattern>/Online_Select_Tu_Pan_goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Online_Pei_Song_Yan</servlet-name>
+    <url-pattern>/Upload_Online_Pei_Song_Yan</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Upload_Online_Zhuang_Che</servlet-name>
+    <url-pattern>/Upload_Online_Zhuang_Che</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_Pei_Song_Chu_Ku</servlet-name>
+    <url-pattern>/Online_Select_Pei_Song_Chu_Ku</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_Box</servlet-name>
+    <url-pattern>/Online_Select_Box</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Online_Select_cSheet_Below_Goods</servlet-name>
+    <url-pattern>/Online_Select_cSheet_Below_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Update_User_Pass</servlet-name>
+    <url-pattern>/Update_User_Pass</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Fresh_Zi_Dong_Bu_Huo</servlet-name>
+    <url-pattern>/Select_Fresh_Zi_Dong_Bu_Huo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReturnSupplier</servlet-name>
+    <url-pattern>/ReturnSupplier</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Head_Shop_Check_Goods</servlet-name>
+    <url-pattern>/Head_Shop_Check_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectcSheetno</servlet-name>
+    <url-pattern>/SelectcSheetno</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Testing</servlet-name>
+    <url-pattern>/Testing</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Report_Servlet</servlet-name>
+    <url-pattern>/Report_Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Testing_Servelt</servlet-name>
+    <url-pattern>/Testing_Servelt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Select_Bao_Sun_Bao_Yi_Goods</servlet-name>
+    <url-pattern>/Select_Bao_Sun_Bao_Yi_Goods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectFenPurchaseOrder</servlet-name>
+    <url-pattern>/SelectFenPurchaseOrder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectFenPurchaseOrderGoods</servlet-name>
+    <url-pattern>/SelectFenPurchaseOrderGoods</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/error_500</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error_404</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error_500</location>
+  </error-page>
+  <error-page>
+    <error-code>501</error-code>
+    <location>/error_500</location>
+  </error-page>
+  <error-page>
+    <error-code>502</error-code>
+    <location>/error_500</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error_404</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error_404</location>
+  </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error_404</location>
+  </error-page>
+</web-app>
