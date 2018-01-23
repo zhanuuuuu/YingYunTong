@@ -87,8 +87,12 @@ public class Upload_Qian_Xi_Pei_Song_Chu_ku_Dan extends HttpServlet {
 			past_detail.executeBatch();
 			DB.closePreparedStatement(past_detail);
 
-
-			PreparedStatement past = conn.prepareStatement("INSERT INTO wh_StockVerify  (dDate,cSheetno,cStoreNo,cStoreName,cOperatorNo,cOperator,cWhNo,cWh,dFillin,cFillinTime,cTime,cFillEmpNo,cFillEmp,cSheetno_stock,cSupplierNo,cSupplier,fMoney,bExamin,bPeisong) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+				
+			//cSheetState
+			//门店验货单 6
+			//cSheetStateNo				  
+			
+			PreparedStatement past = conn.prepareStatement("INSERT INTO wh_StockVerify  (dDate,cSheetno,cStoreNo,cStoreName,cOperatorNo,cOperator,cWhNo,cWh,dFillin,cFillinTime,cTime,cFillEmpNo,cFillEmp,cSheetno_stock,cSupplierNo,cSupplier,fMoney,bExamin,bPeisong,cSheetStateNo,cSheetState) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			past.setString(1, String_Tool.DataBaseYear_Month_Day());
 			past.setString(2, "" + strrandom);
 			past.setString(3, obj.getString("cCustomerNo"));
@@ -108,6 +112,11 @@ public class Upload_Qian_Xi_Pei_Song_Chu_ku_Dan extends HttpServlet {
 			past.setString(17, "" + sum);
 			past.setString(18, "0");
 			past.setString(19, "1");
+			//cSheetState
+			//门店验货单 6
+			//cSheetStateNo	
+			past.setString(20, "6");
+			past.setString(21, "门店验货单");
 			past.execute();
 			DB.closePreparedStatement(past);
 			

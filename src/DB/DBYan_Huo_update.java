@@ -657,7 +657,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_tui_huo_no(conn, String_Tool.DataBaseYear(),
-					obj.getString("cSupplierNo"));
+					obj.getString("cClientNo"));
 			System.out.println(strrandom);
 			past1 = conn.prepareStatement(
 					"INSERT INTO WH_cStoreReturnGoodsDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit) values (?,?,?,?,?,?,?,?,?,?)");
@@ -1521,7 +1521,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_tui_huo_no(conn, String_Tool.DataBaseYear(),
-					obj.getString("cSupplierNo"));
+					obj.getString("cClientNo"));
 			System.out.println(strrandom);
 			past1 = conn.prepareStatement(
 					"INSERT INTO WH_cStoreReturnGoodsDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit) values (?,?,?,?,?,?,?,?,?,?)");

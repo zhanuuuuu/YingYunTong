@@ -41,13 +41,8 @@ public class Select_MenDian_Goods extends HttpServlet {
 		try {
 			System.out.println(Number_of_pages);
 			System.out.println(cStoreNo);
-<<<<<<< HEAD
 			//--and  isnull(bStorage,0)=1  and ISNUll(bUnStock,0)='0'  and cBarcode not like '%X%'   and ISNUll(bDeled,0)='0' 
 			String sql=String_Tool.sql("cGoodsNo", "select a.cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=isnull(b.EndQty,0),a.fPreservationUp,a.fPreservationDown,a.fPreservation_soft,bStorage  from t_cStoreGoods a left join (select cGoodsNo,EndQty from t_goodsKuCurQty_wei where cStoreNo=? ) b on a.cGoodsNo=b.cGoodsNo where a.cStoreNo=?  ", Integer.parseInt(Number_of_pages));
-=======
-			//--and  isnull(bStorage,0)=1  and ISNUll(bUnStock,0)='0'
-			String sql=String_Tool.sql("cGoodsNo", "select a.cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=isnull(b.EndQty,0),a.fPreservationUp,a.fPreservationDown,a.fPreservation_soft,bStorage  from t_cStoreGoods a left join (select cGoodsNo,EndQty from t_goodsKuCurQty_wei where cStoreNo=? ) b on a.cGoodsNo=b.cGoodsNo where a.cStoreNo=? and cBarcode not like '%X%'   and ISNUll(bDeled,0)='0'  ", Integer.parseInt(Number_of_pages));
->>>>>>> 9b696f8b134c574b427eb7da14a8d09d45cd5b09
 			System.out.println(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, cStoreNo);

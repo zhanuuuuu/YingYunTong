@@ -44,7 +44,15 @@ private static final long serialVersionUID = 1L;
 		CallableStatement c = null;
 		String Number_of_pages=request.getParameter("Number_of_pages");
 		String cStoreNo=request.getParameter("cStoreNo");
+		
+		
 		try {
+			
+			if (Number_of_pages==null || cStoreNo==null ){
+				out.print("{\"resultStatus\":\"" + -1 + "\"," + "\"dDate\":" +null + "}");
+				
+				return;
+			}else{
 			conn = GetConnection.getStoreConn();
 			c = conn.prepareCall(" {call Select_MenDian_Goods_ZMY(?,?,?) }");
 			c.setString(1, cStoreNo);
@@ -62,6 +70,7 @@ private static final long serialVersionUID = 1L;
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
+			}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

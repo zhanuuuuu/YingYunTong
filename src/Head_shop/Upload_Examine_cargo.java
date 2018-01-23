@@ -113,9 +113,12 @@ public class Upload_Examine_cargo extends HttpServlet {
 			}
 			past_detail.executeBatch();
 			DB.closePreparedStatement(past_detail);
-
+			//cSheetState
+			//采购验货单
+			//cSheetStateNo
+			//1
 			PreparedStatement past = conn.prepareStatement(
-					"insert into WH_StockVerify(cStoreNo,cStoreName,dDate,cSheetNO,cSupplierNo,cSupplier,cOperatorNo,cOperator,cFillEmpNo,cFillEmp,dFillin,cFillinTime,cStockDptno,cStockDpt,fMoney,cWhNo,cWh,cTime,cSheetStateNo)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into WH_StockVerify(cStoreNo,cStoreName,dDate,cSheetNO,cSupplierNo,cSupplier,cOperatorNo,cOperator,cFillEmpNo,cFillEmp,dFillin,cFillinTime,cStockDptno,cStockDpt,fMoney,cWhNo,cWh,cTime,cSheetStateNo,cSheetState)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			past.setString(1, obj.getString("cStoreNo"));//
 			past.setString(2, obj.getString("cStoreName"));
 			past.setString(3, String_Tool.DataBaseYear_Month_Day());
@@ -135,6 +138,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 			past.setString(17, obj.getString("cWh"));
 			past.setString(18, String_Tool.DataBaseH_M_S());// obj.getString("cTime")
 			past.setString(19, "1");// obj.getString("cTime")
+			past.setString(20, "采购验货单");// obj.getString("cTime")
 			past.execute();
 			DB.closePreparedStatement(past);
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");

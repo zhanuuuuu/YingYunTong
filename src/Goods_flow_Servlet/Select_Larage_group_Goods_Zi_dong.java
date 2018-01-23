@@ -15,6 +15,11 @@ import DB.DBupdate;
 import DB.GetConnection;
 import Tool.String_Tool;
 
+/**
+ * 自动补货接口  查询
+ * @author Administrator
+ *
+ */
 public class Select_Larage_group_Goods_Zi_dong extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

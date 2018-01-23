@@ -12,6 +12,11 @@ import org.json.JSONObject;
 import DB.DBupdate;
 import DB.GetConnection;
 
+/**
+ * 提交验货货单   采购单
+ * @author Administrator
+ *
+ */
 public class Upload_Request_Smart_Order extends HttpServlet {
 
 
