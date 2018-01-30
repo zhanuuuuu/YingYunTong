@@ -57,7 +57,9 @@ public class driverSureGetRtGoods extends HttpServlet {
 		Connection conn=null;
 		PreparedStatement ps=null;
 		PreparedStatement psat=null;
-		ResultSet rs=null;
+		
+		PreparedStatement past_select=null;
+		ResultSet past_rs=null;
 		
 		conn=GetConnection.getStoreConn();
 		
@@ -70,6 +72,24 @@ public class driverSureGetRtGoods extends HttpServlet {
 			JSONArray array=new JSONArray(data);
 			JSONObject obj=array.getJSONObject(0);
 			conn.setAutoCommit(false);
+			
+			past_select= conn.prepareStatement(
+				" SELECT cSheetno FROM  WH_cStoreReturnGoods "+
+				"	WHERE cDriverState=1 and  "+
+				"	 cSheetno=?");
+			past_select.setString(1, obj.getString("cSheetno"));
+			past_rs=past_select.executeQuery();
+			if(past_rs.next()){
+				DB.closePreparedStatement(past_select);
+				conn.commit();
+				conn.setAutoCommit(true);
+				out.print("{\"resultStatus\":\"" + 2 + "\"," + "\"dDate\":" +null+ "}");  //单子已经被司机扫过了
+				return;
+			}
+			
+			DB.closePreparedStatement(past_select);
+			
+			
 			ps= conn.prepareStatement(
 					"UPDATE WH_cStoreReturnGoods "+
 				"	SET cDriverState=1,cDriverOperaterno=?,cDriverdate=? "+
@@ -117,6 +137,7 @@ public class driverSureGetRtGoods extends HttpServlet {
 			out.print("{\"resultStatus\":\"" + -3 + "\"," + "\"dDate\":" + null + "}"); //传过来的数据格式不对
 			e.printStackTrace();
 		}finally{
+			
 			DB.closeConn(conn);
 			out.flush();
 			out.close();

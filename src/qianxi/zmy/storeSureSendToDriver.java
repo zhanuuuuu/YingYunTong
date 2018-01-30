@@ -59,9 +59,10 @@ public class storeSureSendToDriver extends HttpServlet {
 			}
 		
 			conn.setAutoCommit(false);
+			//cDriverSte  1 表示司机强制接单  2  表示司机已经接单
 			ps= conn.prepareStatement(
 					"UPDATE WH_cStoreReturnGoods "+
-				"	SET cStoreState=1,cStoreOperaterno=?,cStoredate=? "+
+				"	SET cStoreState=1,cStoreOperaterno=?,cStoredate=?,cDriverSte='2' "+
 				"	WHERE cSheetno=?");
 			ps.setString(1, cStoreOperaterno);
 			ps.setString(2, String_Tool.DataBaseTime());

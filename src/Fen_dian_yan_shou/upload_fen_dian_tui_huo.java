@@ -44,6 +44,7 @@ public class upload_fen_dian_tui_huo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace("\n", "").replace("\r", "");
 		String cBeizhu1=request.getParameter("cBeizhu1");
+		System.out.println(cBeizhu1);
 		System.out.println(data);
 		boolean a = false;
 		try {

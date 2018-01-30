@@ -42,6 +42,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
+		
 		String cSheetno=request.getParameter("cSheetno");
 		String cSheetStateNo=request.getParameter("cSheetStateNo");
 	
@@ -57,8 +58,8 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			conn.setAutoCommit(false);
 
 			JSONObject obj = array.getJSONObject(0);
-
-			/* 取单号正常验货单单号   此处无用*/
+			
+			
 			SheetNo = GetcSheetno.get_commonality_cSheetNo(conn,
 					"select SheetNo=" + new ReadConfig().getprop().getProperty("DataSource") + ".dbo.f_GenYHsheetno('"
 							+ String_Tool.DataBaseYear() + "','" + obj.getString("cSupplierNo") + "')");
@@ -69,7 +70,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 					"insert into WH_StockVerifyDetail(cSheetno,iLineNo,cGoodsNo,cGoodsName,cBarcode,cUnitedNo,fQuantity,fInPrice,fInMoney,fTaxrate,bTax,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,cUnit,cSpec,fPacks)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
-				past_detail.setString(1, cSheetno);
+				past_detail.setString(1, SheetNo);
 				past_detail.setString(2, "" + i);
 				past_detail.setString(3, obj1.getString("cGoodsNo"));
 
@@ -98,14 +99,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 				float fInPrice=Float.parseFloat(obj1.getString("fInPrice"));
 				
 				String Money="0.00";
-				/*
-				 * *******
-				 */
-//				if(fQuantity*fInPrice==Float.parseFloat(obj1.getString("fInMoney"))){
-//					Money=obj1.getString("fInMoney");
-//				}else{
-//					Money=String.valueOf(fQuantity*fInPrice);
-//				}
+
 				Money=String.valueOf(fQuantity*fInPrice);
 				past_detail.setString(9, Money);
 				float fInMoney = fQuantity*fInPrice;
@@ -131,13 +125,31 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			}
 			past_detail.executeBatch();
 			DB.closePreparedStatement(past_detail);
+			
+			//从数据库查询退货门店的 供应商编号  和供应商名称
+			PreparedStatement past_tuihuosupper = conn.prepareStatement(
+					"SELECT cSheetno,cSupNo,cSupName FROM WH_cStoreReturnGoods WHERE  cSheetno = ?");
+			past_tuihuosupper.setString(1,cSheetno);//
+			
+			ResultSet rs_tuihuosupper=past_tuihuosupper.executeQuery();
+			String cSuperNo=null;
+			String cSupperName=null;
+			if(rs_tuihuosupper.next()){
+				cSuperNo=rs_tuihuosupper.getString("cSupNo");
+				cSupperName=rs_tuihuosupper.getString("cSupName");
+			}
+			DB.closePreparedStatement(past_tuihuosupper);
+			DB.closeResultSet(rs_tuihuosupper);
+			
+			
+			
 			//cSheetStateName=门店退货验货单
 			PreparedStatement past = conn.prepareStatement(
-					"insert into WH_StockVerify(cStoreNo,cStoreName,dDate,cSheetNO,cSupplierNo,cSupplier,cOperatorNo,cOperator,cFillEmpNo,cFillEmp,dFillin,cFillinTime,cStockDptno,cStockDpt,fMoney,cWhNo,cWh,cTime,cSheetno_stock,cSheetStateNo,cSheetState)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into WH_StockVerify(cStoreNo,cStoreName,dDate,cSheetNO,cSupplierNo,cSupplier,cOperatorNo,cOperator,cFillEmpNo,cFillEmp,dFillin,cFillinTime,cStockDptno,cStockDpt,fMoney,cWhNo,cWh,cTime,cSheetno_stock,cSheetStateNo,cSheetState,cSupNo,cSupName)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			past.setString(1, obj.getString("cStoreNo"));//
 			past.setString(2, obj.getString("cStoreName"));
 			past.setString(3, String_Tool.DataBaseYear_Month_Day());
-			past.setString(4, cSheetno);// obj.getString("cSheetNO");
+			past.setString(4, SheetNo);// obj.getString("cSheetNO");
 			past.setString(5, obj.getString("cSupplierNo"));
 			past.setString(6, obj.getString("cSupplier"));
 			past.setString(7, obj.getString("cOperatorNo"));
@@ -155,8 +167,57 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			past.setString(19,cSheetno);// 
 			past.setString(20, cSheetStateNo);
 			past.setString(21, "门店退货验货单");
+			past.setString(22, cSuperNo);
+			past.setString(23,cSupperName);
+			
 			past.execute();
 			DB.closePreparedStatement(past);
+			
+			PreparedStatement p = conn.prepareStatement(
+					" UPDATE wh_StockVerifyDetail "+
+					" SET wh_StockVerifyDetail.fQuantity_stock=B.fQuantity "+
+					" FROM WH_cStoreReturnGoodsDetail B "+
+					" WHERE wh_StockVerifyDetail.cSheetno=?  "+
+					" AND B.cSheetno=? AND wh_StockVerifyDetail.cGoodsNo=B.cGoodsNo");
+			p.setString(1, SheetNo);
+			p.setString(2, cSheetno);
+			int a = p.executeUpdate();
+			System.out.println("影响行数"+a);
+			DB.closePreparedStatement(p);
+			
+			/*
+			 * PreparedStatement p1 = conn.prepareStatement(
+					" UPDATE wh_StockVerifyDetail "+
+					" SET wh_StockVerifyDetail.fQuantity_stock=B.fQuantity "+
+					" FROM WH_cStoreReturnGoodsDetail B "+
+					" WHERE wh_StockVerifyDetail.cSheetno=?  "+
+					" AND B.cSheetno=? AND wh_StockVerifyDetail.cGoodsNo=B.cGoodsNo");
+			p1.setString(1, SheetNo);
+			p1.setString(2, cSheetno);
+			 a = p.executeUpdate();
+			System.out.println("影响行数"+a);
+			DB.closePreparedStatement(p1);
+			
+			 */
+			
+			PreparedStatement p1 = conn.prepareStatement(
+					" select cSheetno from wh_StockVerifyDetail where cSheetno=? AND fQuantity<>fQuantity_stock ");
+			p1.setString(1, SheetNo);
+			ResultSet rs1=p1.executeQuery();
+			if(rs1.next()){
+				
+				PreparedStatement ps = conn.prepareStatement(
+						" update wh_StockVerify set iDiffExamin=1 where csheetNo= ?");
+				ps.setString(1, SheetNo);
+				 a = p.executeUpdate();
+				System.out.println("影响行数"+a);
+				DB.closePreparedStatement(ps);
+				
+			}
+			DB.closeResultSet(rs1);
+			DB.closePreparedStatement(p1);
+			
+			
 			//cSheetStateNo=4
 			String sql="update WH_cStoreReturnGoods  set bPresent='1' where cSheetno = ? ";
 			if(cSheetStateNo.equals("5")){
@@ -164,7 +225,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			}
 			PreparedStatement past2 = conn.prepareStatement(sql);
 			past2.setString(1, cSheetno);
-			int a = past2.executeUpdate();
+			 a = past2.executeUpdate();
 			System.out.println("影响行数"+a);
 			DB.closePreparedStatement(past2);
 			
