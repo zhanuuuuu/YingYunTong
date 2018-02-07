@@ -2,6 +2,8 @@ package Tool;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,6 +80,26 @@ public class String_Tool {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = simpleDateFormat.format(new Date());
 		return time;
+	}
+	
+	public static String Dataadd(int n)  {
+
+		Format f = new SimpleDateFormat("yyyy-MM-dd");
+		 
+        Date today = new Date();
+        
+ 
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DAY_OF_MONTH, n);// ½ñÌì+1Ìì
+ 
+        Date tomorrow = c.getTime();
+        
+        String time = f.format(tomorrow);
+     
+
+        return time;   
+     
 	}
 
 	public static String DataBaseTime_MM() {
@@ -170,30 +192,9 @@ public class String_Tool {
 		return apm == 0 ? "Ôç°à" : "Íí°à";
 	}
 
-	public static void main(String args[]) {
-		//
-		// System.out.println(reformat());
-		// System.out.println(DataBaseH_M_S());
-		// System.out.println(String_IS_Four(100));
-		// System.out.println(UUID.randomUUID());
-		// System.out.println(isJia(0.11, 0.1492));
-		// System.out.println(keep_two(mulMoney("0.11", "0.1492")));
-		// System.out.println(String_IS_Four("0.1"));
-		// System.out.println(DataBaseYear_Month_Day());
-
-		// System.out.println(MD5key.getMD5Pass("13125011111"+"2.0000"+"warelucent"));
-
-//		List list = new ArrayList();
-//		HashMap<String, String> employee1 = new HashMap<String, String>();
-//		employee1.put("name", "wangqiang");
-//		employee1.put("age", "1");
-//		list.add(employee1);
-//		HashMap<String, String> employee2 = new HashMap<String, String>();
-//		employee2.put("name", "wangqi");
-//		employee2.put("age", "1");
-//		list.add(employee2);
-//		System.out.println();
-//		System.out.println(search("wangq", list));;
+	public static void main(String args[]) throws ParseException {
+		System.out.println(Dataadd(2));
+		DataBaseTime();
 		
 		
 		System.out.println(reformat());

@@ -23,6 +23,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-web-4.3.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-webmvc-4.3.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sqljdbc41.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dubbo-2.5.3.jar"/>
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_7.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>

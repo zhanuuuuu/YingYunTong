@@ -133,13 +133,28 @@ public class Upload_purchase extends HttpServlet {
 			past.setString(10, obj.getString("cOperator"));
 			past.setString(11, String_Tool.DataBaseTime());
 			past.setString(12, String_Tool.DataBaseH_M_S());// obj.getString("cFillinTime")
-			past.setString(13, "");// obj.getString("iDays")
+			
+			//查询到货天数
+			int iDays=3;
+			PreparedStatement ps = conn.prepareStatement(
+					"SELECT isnull(iArrivalDay,3) as iArrivalDay FROM t_SupplierStore "+
+                 " WHERE cStoreNo=? AND cSupNo=? ");
+			ps.setString(1, obj.getString("cStoreNo"));//
+			ps.setString(2, obj.getString("cSupplierNo"));
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				iDays=rs.getInt("iArrivalDay");
+			}
+			DB.closeResultSet(rs);
+			DB.closePreparedStatement(ps);
+			
+			past.setString(13, ""+iDays);// obj.getString("iDays")
 			past.setString(14, "");// obj.getString("cStockDptno")
 			past.setString(15, "");// obj.getString("cStockDpt")
 			past.setString(16, "" + String_Tool.String_IS_Two(fMoney));// obj.getString("fMoney")
 			past.setString(17, obj.getString("cWhNo"));
 			past.setString(18, obj.getString("cWh"));
-			past.setString(19, String_Tool.DataBaseTime());// obj.getString("dDeadLine")
+			past.setString(19, String_Tool.Dataadd(iDays));// obj.getString("dDeadLine")
 			past.setString(20, String_Tool.DataBaseH_M_S());// obj.getString("cTime")
 			past.execute();
 			DB.closePreparedStatement(past);

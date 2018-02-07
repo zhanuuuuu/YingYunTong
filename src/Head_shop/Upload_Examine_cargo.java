@@ -54,7 +54,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 			DB.closePreparedStatement(past1);
 
 			PreparedStatement past_detail = conn.prepareStatement(
-					"insert into WH_StockVerifyDetail(cSheetno,iLineNo,cGoodsNo,cGoodsName,cBarcode,cUnitedNo,fQuantity,fInPrice,fInMoney,fTaxrate,bTax,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,cUnit,cSpec,fPacks)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into WH_StockVerifyDetail(cSheetno,iLineNo,cGoodsNo,cGoodsName,cBarcode,cUnitedNo,fQuantity,fInPrice,fInMoney,fTaxrate,bTax,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,cUnit,cSpec,fPacks,fQuantity_stock)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				
@@ -105,6 +105,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 				past_detail.setString(16, obj1.optString("cUnit"));
 				past_detail.setString(17, obj1.optString("cSpec"));
 				past_detail.setString(18, "1");// obj1.getString("fPacks")
+				past_detail.setDouble(19, Double.parseDouble(obj1.getString("fQuantity")));
 				past_detail.addBatch();
 				
 				

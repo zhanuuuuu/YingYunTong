@@ -502,6 +502,7 @@ public class DBupdate {
 			past.setString(16, "0");
 			past.execute();
 
+			
 			PreparedStatement past1 = conn.prepareStatement(
 					"INSERT INTO t_Messages (title,content,itimes,acceptusername,acceptrealname,cSheetNo) values(?,?,?,?,?,?)");
 			past1.setString(1, "√≈µÍ≤πªıµ•…Û∫À");
