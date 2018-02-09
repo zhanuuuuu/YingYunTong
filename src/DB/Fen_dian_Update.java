@@ -433,7 +433,7 @@ public class Fen_dian_Update {
 		try {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
-			strrandom = GetcSheetno.get_bo_sun_no(conn, String_Tool.DataBaseYear(), obj.getString("cStoreNo"));
+			strrandom = GetcSheetno.get_bo_sun_no(conn, String_Tool.DataBaseYear(), obj.getString("cSupNo"));//cSupNo  cStoreNo
 			System.out.println(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
@@ -462,8 +462,10 @@ public class Fen_dian_Update {
 			past.setString(2, "" + strrandom);
 			past.setString(3, obj.getString("cStoreNo"));
 			past.setString(4, obj.getString("cStoreName"));
-			past.setString(5, obj.getString("cStoreNo"));
-			past.setString(6, obj.getString("cStoreName"));
+//			past.setString(5, obj.getString("cStoreNo"));
+//			past.setString(6, obj.getString("cStoreName"));
+			past.setString(5, obj.getString("cSupNo"));
+			past.setString(6, obj.getString("cSupName"));
 			past.setString(7, obj.getString("cOperatorNo"));
 			past.setString(8, obj.getString("cOperator"));
 			past.setString(9, obj.getString("cWhNo"));

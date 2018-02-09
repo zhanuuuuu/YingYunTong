@@ -50,6 +50,8 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 		double cStorefMoney = 0;
 		try {
 			JSONArray array = new JSONArray(data);
+			
+			System.out.println("data   zmy:"+array.toString());
 			conn = GetConnection.getStoreConn();
 			conn.setAutoCommit(false);
 
@@ -71,6 +73,13 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 //			DB.closePreparedStatement(forbid_past);
 
 			/* 插入供应商验货表 */
+			
+			/**
+			 * exec sp_execute 16,N'CT201816417-000003',N'1',N'2133030028',N'木饭勺'
+			 * ,N'6933482322022',N'',N'27.0',N'0.0000',
+			 * N'0.0',N'Infinity',N'1',
+			 * N'2.6',N'70.2',N'2.6000',N'70.2',N'',N'',N'1'
+			 */
 			PreparedStatement past_detail = conn.prepareStatement(
 					"insert into wh_StockVerifyDetail_Ct(cSheetno,iLineNo,cGoodsNo,cGoodsName,cBarcode,cUnitedNo,fQuantity,fInPrice,fInMoney,fTaxrate,bTax,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,cUnit,cSpec,fPacks)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			for (int i = 0; i < array.length(); i++) {
@@ -100,9 +109,28 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 				past_detail.setString(9, obj1.getString("fInMoney"));
 				double fInMoney = Double.parseDouble(obj1.getString("fInMoney"));
 				fMoney = fInMoney + fMoney;
+				
+				//
 				double fTaxrate = (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")))
 						/ Double.parseDouble(obj1.getString("fInPrice"));
-				past_detail.setString(10, "" + fTaxrate);
+				
+				//
+				if(String.valueOf(fTaxrate).equals("Infinity")){
+					fTaxrate=0.00;
+					System.out.println("123:                "+fTaxrate);
+				}
+				
+				//past_detail.setString(10, "" + fTaxrate);
+				
+				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
+				{
+					System.out.println("TAG:                "+fTaxrate);
+					fTaxrate=0.00;
+				}
+				
+				
+				
+				past_detail.setDouble(10,fTaxrate);
 				past_detail.setString(11, "1");
 				String fTaxPrice = ""
 						+ (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")));
@@ -218,6 +246,20 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 					double fTaxrate = (Double.parseDouble(fNormalPrice)
 							- Double.parseDouble(obj_str.getString("fInPrice")))
 							/ Double.parseDouble(obj_str.getString("fInPrice"));
+					
+					if(String.valueOf(fTaxrate).equals("Infinity")){
+						fTaxrate=0.00;
+						System.out.println("123:                "+fTaxrate);
+					}
+					
+					//past_detail.setString(10, "" + fTaxrate);
+					
+					if(Double.parseDouble(obj_str.getString("fInPrice")) == 0)
+					{
+						System.out.println("TAG:                "+fTaxrate);
+						fTaxrate=0.00;
+					}
+					
 					past_detail_St.setString(10, "" + fTaxrate);
 					past_detail_St.setString(11, "1");
 					String fTaxPrice = ""
@@ -322,6 +364,19 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 				fMoney = fInMoney + fMoney;
 				double fTaxrate = (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")))
 						/ Double.parseDouble(obj1.getString("fInPrice"));
+				if(String.valueOf(fTaxrate).equals("Infinity")){
+					fTaxrate=0.00;
+					System.out.println("123:                "+fTaxrate);
+				}
+				
+				//past_detail.setString(10, "" + fTaxrate);
+				
+				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
+				{
+					System.out.println("TAG:                "+fTaxrate);
+					fTaxrate=0.00;
+				}
+				
 				wh_StockVerifyDetail_Diff_past.setString(10, "" + fTaxrate);
 				wh_StockVerifyDetail_Diff_past.setString(11, "1");
 				String fTaxPrice = ""
@@ -378,6 +433,20 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 				fMoney = fInMoney + fMoney;
 				double fTaxrate = (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")))
 						/ Double.parseDouble(obj1.getString("fInPrice"));
+				
+				if(String.valueOf(fTaxrate).equals("Infinity")){
+					fTaxrate=0.00;
+					System.out.println("123:                "+fTaxrate);
+				}
+				
+				//past_detail.setString(10, "" + fTaxrate);
+				
+				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
+				{
+					System.out.println("TAG:                "+fTaxrate);
+					fTaxrate=0.00;
+				}
+				
 				wh_StockVerifyDetail_Other_past.setString(10, "" + fTaxrate);
 				wh_StockVerifyDetail_Other_past.setString(11, "1");
 				String fTaxPrice = ""
