@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
 
@@ -39,12 +41,12 @@ public class Select_ALL_t_Pallet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String str = request.getParameter("data");
-		System.out.println(str);
+		LoggerUtil.info(str);
 		JSONArray array = null;
 		if (!str.equals("")&&str != null) {
 			array = DBupdate.Select_ALL_Pallet(GetConnection
 					.getStoreConn(),str);
-			System.out.println("込込込");
+			LoggerUtil.info("込込込");
 		}
 		else {
 			array = DBupdate.Select_ALL_Pallet(GetConnection
@@ -58,8 +60,7 @@ public class Select_ALL_t_Pallet extends HttpServlet {
 					+ array.toString() + "}");
 		}
 
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-				+ array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 
 		out.flush();
 		out.close();

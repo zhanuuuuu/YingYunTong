@@ -10,6 +10,8 @@ import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
 
@@ -59,7 +61,7 @@ public class Select_Online_Manager {
 			String sql = "select b.cGoodsNo,b.cGoodsName,fQuantity=sum(b.Num) from dbo.Order_Table a, dbo.Order_Details b where  a.cSheetno=b.cSheetno  and a.Pay_state='1'  and a.Date_time between '"
 					+ start_time + "' and '" + end_time + "'  group by cGoodsNo,cGoodsName ";
 			past = conn.prepareStatement(sql);
-			System.out.println(sql);
+			LoggerUtil.info(sql);
 			rs = past.executeQuery();
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
@@ -135,14 +137,14 @@ public class Select_Online_Manager {
 			String sql = "";
 			if (String_Tool.isEmpty(cStoreNo)) { // 如果店铺是null的话就查询所有
 				sql = "select a.*,b.cTel,b.cStorename ,c.Describe  from Simple_online.dbo.Order_Table a,posmanagement_main.dbo.t_Store b,Simple_online.dbo.Pay_way_Table c where Pay_state=? and a.cStoreNo=b.cStoreNo and a.Order_State<> 0 and Convert (varchar(10),Date_time,20) between ? and ?  and a.Pay_wayId=c.Pay_wayId"; // Order_State订单状态，0是不可用，1是可用，2是已经配送
-				System.out.println(sql);
+				LoggerUtil.info(sql);
 				past = conn.prepareStatement(sql);
 				past.setString(1, Pay_state);
 				past.setString(2, start);
 				past.setString(3, end);
 			} else {
 				sql = "select a.*,b.cTel,b.cStorename ,c.Describe  from Simple_online.dbo.Order_Table a,posmanagement_main.dbo.t_Store b,Simple_online.dbo.Pay_way_Table c where Pay_state=? and a.cStoreNo=b.cStoreNo and a.Order_State<> 0 and Convert (varchar(10),Date_time,20) between ? and ?  and a.Send_cStoreNo=? and a.Pay_wayId=c.Pay_wayId"; // Order_State订单状态，0是不可用，1是可用，2是已经配送
-				System.out.println(sql);
+				LoggerUtil.info(sql);
 				past = conn.prepareStatement(sql);
 				past.setString(1, Pay_state);
 				past.setString(2, start);
@@ -192,13 +194,13 @@ public class Select_Online_Manager {
 				request_Order_Json.put("UserNo", UserNo);
 				request_Order_Json.put("Send_Way", Send_Way);
 				String sql1 = "";
-				System.out.println(Send_Way);
+				LoggerUtil.info(Send_Way);
 				if (Send_Way.equals("2")) {
 					sql1 = "select * from Simple_online.dbo.User_Address where AddressID= ?";
 				} else if (Send_Way.equals("1")) {
 					sql1 = "select * from Simple_online.dbo.Store_address_site where id= ? ";
 				}
-				System.out.println(sql1);
+				LoggerUtil.info(sql1);
 				PreparedStatement past2 = conn.prepareStatement(sql1);
 				past2.setString(1, AddressID);
 				ResultSet rs2 = past2.executeQuery();
@@ -215,7 +217,7 @@ public class Select_Online_Manager {
 			} else {
 				str = "{\"resultStatus\":\"" + 0 + "\"," + "\"array\":" + list.toString() + "}";
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -233,7 +235,7 @@ public class Select_Online_Manager {
 		JSONArray list = new JSONArray();
 		try {
 			String sql = "select a.*,b.cTel,b.cStorename ,c.Describe,d.cOperatorNo,d.cOperator,d.dDate  from Simple_online.dbo.Order_Table a,posmanagement_main.dbo.t_Store b,Simple_online.dbo.Pay_way_Table c, Simple_online.dbo.Store_Receive_Order_Log d where (Pay_state=? or Pay_state='3') and a.cStoreNo=b.cStoreNo and a.Order_State<> 0 and cast(dbo.[getDayStr](a.Date_time) as datetime) between ? and ?  and a.cStoreNo=? and a.Pay_wayId=c.Pay_wayId and a.cSheetno=d.cSheetno "; // Order_State订单状态
-			System.out.println(sql);
+			LoggerUtil.info(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, Pay_state);
 			past.setString(2, start);
@@ -264,7 +266,7 @@ public class Select_Online_Manager {
 				PreparedStatement past1 = conn.prepareStatement(
 						"select a.cGoodsImagePath,a.Description,b.cGoodsNo,b.cGoodsName,b.Num, b.Last_Price,b.Last_Money,b.RealityNum,b.Reality_Money,b.Reality_Money  from  posmanagement_main.dbo.T_goods a, Simple_online.dbo.Order_Details  b where cSheetno= ? and a.cGoodsNo=b.cGoodsNo ");
 				past1.setString(1, cSheetno);
-				System.out.println(cSheetno);
+				LoggerUtil.info(cSheetno);
 				ResultSet rs1 = past1.executeQuery();
 				JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs1);
 				DB.closeRs_Con(rs1, past1, null);
@@ -307,7 +309,7 @@ public class Select_Online_Manager {
 			} else {
 				str = "{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + list.toString() + "}";
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -416,7 +418,7 @@ public class Select_Online_Manager {
 
 	public static boolean updateA_key_online(Connection conn, JSONArray array, String percentage, String cStoreNo) {
 		String a = String_Tool.String_IS_Four(Double.parseDouble(percentage) / 100);
-		System.out.println(a);
+		LoggerUtil.info(a);
 		Statement past = null;
 		try {
 			for (int i = 0; i < array.length(); i++) {
@@ -435,7 +437,7 @@ public class Select_Online_Manager {
 							+ (a) + "')+fCKPrice where  cStoreNo='" + cStoreNo + "' and  cGoodsTypeno='" + cGoodsTypeNo
 							+ "'";
 					past.addBatch(sql);
-					System.out.println(sql);
+					LoggerUtil.info(sql);
 				}
 				past.executeBatch();
 				DB.closePreparedStatement(past);

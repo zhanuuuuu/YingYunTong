@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -45,21 +47,21 @@ public class select_Supper_Goods_SheetNo extends HttpServlet {
 			String dEndDate = request.getParameter("dEndDate"); //
 			String cStoreNo = request.getParameter("cStoreNo"); //
 			
-			System.out.println(dBeginDate);
-			System.out.println(dEndDate);
-			System.out.println(cStoreNo);
+			LoggerUtil.info(dBeginDate);
+			LoggerUtil.info(dEndDate);
+			LoggerUtil.info(cStoreNo);
 
 			JSONArray array = Fen_dian_Update.select_Supper_Goods_SheetNo_function(GetConnection.getStoreConn(), cStoreNo,
 					dBeginDate, dEndDate);
 
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\"" + "" + "\"}");
 
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 
 		} catch (Exception e) {
 			e.printStackTrace();

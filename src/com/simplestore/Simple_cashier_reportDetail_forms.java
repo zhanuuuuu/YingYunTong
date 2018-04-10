@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -39,9 +41,9 @@ public class Simple_cashier_reportDetail_forms extends HttpServlet {
 		String Start_Time = request.getParameter("Start_Time");
 		String End_Time = request.getParameter("End_Time");
 		String UserNo = request.getParameter("UserNo");
-		System.out.println(UserNo);
-		System.out.println(Start_Time);
-		System.out.println(End_Time);
+		LoggerUtil.info(UserNo);
+		LoggerUtil.info(Start_Time);
+		LoggerUtil.info(End_Time);
 		CallableStatement c = null;
 		try {
 			c = conn.prepareCall("{Call p_Account_sheetList(?,?,?)}");
@@ -52,10 +54,10 @@ public class Simple_cashier_reportDetail_forms extends HttpServlet {
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

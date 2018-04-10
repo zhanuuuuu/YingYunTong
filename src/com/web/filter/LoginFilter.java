@@ -10,8 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = "/LoginFilter",asyncSupported = true) 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
+import Tool.ReadConfig;
+
+//@WebFilter(urlPatterns = "/LoginFilter",asyncSupported = true) 
 public class LoginFilter implements Filter {
 	
 	public void destroy() {
@@ -22,15 +27,23 @@ public class LoginFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 	
 		HttpServletRequest req = (HttpServletRequest) request;
-		Object user = req.getSession().getAttribute("user");
-		if(user == null) {
-			req.getRequestDispatcher("/Login.jsp").forward(req, response);
-		} else {
-			chain.doFilter(request, response);
-		}
+		HttpServletResponse res = (HttpServletResponse) response;
+		chain.doFilter(req, res);
+//		Object user = req.getSession().getAttribute("user");
+//		if(user == null) {
+//			req.getRequestDispatcher("/Login.jsp").forward(req, response);
+//		} else {
+//			chain.doFilter(request, response);
+//		}
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-
+		//控制日志打印的
+		
+		String str=new ReadConfig().getprop().getProperty("Logger");
+		System.out.println(str);
+		LoggerUtil.info(str);
+		boolean b=Boolean.parseBoolean(str);
+		LoggerUtil.setLogger(b);
 	}
 }

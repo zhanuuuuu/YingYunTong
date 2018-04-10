@@ -64,7 +64,7 @@ public class HttpPostClient {
 			}
 			
 			URL url = new URL(BaseURL.getUrlForPath(path, enableSSL));	
-			//System.out.println(BaseURL.getUrlForPath(path, enableSSL));
+			//LoggerUtil.info(BaseURL.getUrlForPath(path, enableSSL));
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT);
 			conn.setReadTimeout(DEFAULT_SOCKET_TIMEOUT);
@@ -88,7 +88,7 @@ public class HttpPostClient {
 				while ((len = reader.read(buff)) > 0) {
 					sb.append(buff, 0, len);
 				}
-			//	System.out.println("send params = "+sb.toString());
+			//	LoggerUtil.info("send params = "+sb.toString());
 				if(!"".equals(sb.toString())){
 					messageResult = MessageResult.fromValue(sb.toString());
 				}

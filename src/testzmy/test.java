@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -32,7 +33,7 @@ public class test {
 				array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 				conn.commit();
 				conn.setAutoCommit(true);
-				System.out.println(array.toString());
+				LoggerUtil.info(array.toString());
 				
 			
 		} catch (Exception e) {

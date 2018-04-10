@@ -4,13 +4,18 @@ import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -38,8 +43,8 @@ public class Qian_Xi_Select_Zhi_Tong_Yan_Huo extends HttpServlet {
 		String data = request.getParameter("data");
 		String cStoreNo = request.getParameter("cStoreNo");
 		String cGroupTypeNo=request.getParameter("cGroupTypeNo");
-		System.out.println(data);
-		System.out.println(cStoreNo);
+		LoggerUtil.info(data);
+		LoggerUtil.info(cStoreNo);
 		try {
 			conn = GetConnection.getStoreConn();
 			if (String_Tool.isEmpty(data)) {// 查询采购单，供应商。

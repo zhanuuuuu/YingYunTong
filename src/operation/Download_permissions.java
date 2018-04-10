@@ -5,12 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -43,11 +48,11 @@ public class Download_permissions extends HttpServlet {
 		    JSONArray array=ResultSet_To_JSON.resultSetToJsonArray(rs);
 		    if(array!=null&&array.length()>0){
 		    	 out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString().replace(" ", "") + "}");
-		    	 System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString().replace(" ", "") + "}");
+		    	 LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString().replace(" ", "") + "}");
 		    }
 		    else{
 		    	out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString()+ "}");
-		    	 System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString().replace(" ", "") + "}");
+		    	 LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString().replace(" ", "") + "}");
 		    }
 		   
 		} catch (SQLException e) {

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -43,16 +45,16 @@ public class Bao_Yi extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(""+data);
+		LoggerUtil.info(""+data);
 		try {
 			JSONArray array = new JSONArray(data);
 			boolean a = Fen_dian_Update.Insert_into_Bao_Yi(GetConnection.getStoreConn(), array);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

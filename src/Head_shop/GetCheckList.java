@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -41,8 +43,8 @@ public class GetCheckList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String cStoreNo=request.getParameter("cStoreNo");
 		String action=request.getParameter("action");
-		System.out.println(cStoreNo);
-		System.out.println(action);
+		LoggerUtil.info(cStoreNo);
+		LoggerUtil.info(action);
 		Connection conn= GetConnection.getStoreConn();
 		PreparedStatement past=null;
 		ResultSet rs=null;

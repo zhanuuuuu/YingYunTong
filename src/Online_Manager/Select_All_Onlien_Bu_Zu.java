@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -31,14 +33,14 @@ public class Select_All_Onlien_Bu_Zu extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 		    String cParentNo=request.getParameter("cParentNo");
-		    System.out.println(cParentNo);
+		    LoggerUtil.info(cParentNo);
 			JSONArray array = Select_Online_Manager.getBg(GetConnection.getStoreConn(),cParentNo);
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import Tool.ResultSet_To_JSON;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
+import Tool.ResultSet_To_JSON;
 
 public class Select_discount_Type extends HttpServlet {
 
@@ -51,7 +52,7 @@ public class Select_discount_Type extends HttpServlet {
 			DB.closePreparedStatement(past);
 			DB.closeConn(conn);
 			out.print(array.toString());
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

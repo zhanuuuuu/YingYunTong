@@ -1,7 +1,5 @@
 package Tool;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,10 +27,10 @@ public class ReadConfig {
 	}
 
 	public static void main(String arg[]) {
-	//	System.out.println(new ReadConfig().getprop().getProperty("IP"));
+	//	LoggerUtil.info(new ReadConfig().getprop().getProperty("IP"));
 		// new ReadConfig().getprop();
 		
-		//System.out.println("{\"resultStatus\":\"" + 0 + "\""+ "}");
+		//LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\""+ "}");
 		
 	
 		try {

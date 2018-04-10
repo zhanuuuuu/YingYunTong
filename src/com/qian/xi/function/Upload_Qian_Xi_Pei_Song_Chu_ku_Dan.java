@@ -12,13 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
 import Tool.GetcSheetno;
-import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
 
 @WebServlet(description = "提交千禧配送验货单", urlPatterns = { "/Upload_Qian_Xi_Pei_Song_Chu_ku_Dan" })
@@ -39,7 +41,7 @@ public class Upload_Qian_Xi_Pei_Song_Chu_ku_Dan extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Connection conn = GetConnection.getStoreConn();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		String strrandom = "";
 		double sum = 0;
 		try {

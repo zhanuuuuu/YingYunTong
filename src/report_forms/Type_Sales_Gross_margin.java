@@ -1,13 +1,17 @@
 package report_forms;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.report_table;
 
@@ -47,7 +51,7 @@ public class Type_Sales_Gross_margin extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString() + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

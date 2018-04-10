@@ -4,11 +4,14 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -32,8 +35,8 @@ public class Upload_Prepare_Goods extends HttpServlet {
 		Connection conn = GetConnection.getBiddingConn();
 		String cSheetNo = request.getParameter("cSheetNo");
 		String iSsort = request.getParameter("iSsort");
-		System.out.println(cSheetNo);
-		System.out.println(iSsort);
+		LoggerUtil.info(cSheetNo);
+		LoggerUtil.info(iSsort);
 		PreparedStatement past = null;
 		ResultSet rs=null;
 		try {
@@ -45,10 +48,10 @@ public class Upload_Prepare_Goods extends HttpServlet {
 				// 推送给营运通来收货
 				// JPushClientExample.testSend("赶紧来收货","我把货备好了");
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 1 + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
 			}
 			
 		} catch (Exception e) {

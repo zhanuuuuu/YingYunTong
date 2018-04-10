@@ -1,11 +1,16 @@
 package Head_shop;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Head_Shop;
 public class Head_Shop_Check_Goods extends HttpServlet {
@@ -40,7 +45,7 @@ public class Head_Shop_Check_Goods extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("name");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array=new JSONArray(data);
 			int str=Head_Shop.head_shop_Check_Goods(GetConnection.getStoreConn(),array);

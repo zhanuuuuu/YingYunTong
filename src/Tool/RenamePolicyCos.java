@@ -45,7 +45,7 @@ public class RenamePolicyCos implements FileRenamePolicy {
 
 	// public static void main(String[] args) {
 	// RenamePolicyCos my = new RenamePolicyCos();
-	// System.out.println(my.getNewFileName("log.txt"));
+	// LoggerUtil.info(my.getNewFileName("log.txt"));
 	// }
 
 }

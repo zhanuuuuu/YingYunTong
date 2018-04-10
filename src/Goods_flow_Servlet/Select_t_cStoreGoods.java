@@ -14,11 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Tool.ResultSet_To_JSON;
-
 import DB.DB;
-import DB.DBupdate;
 import DB.GetConnection;
+import Tool.ResultSet_To_JSON;
 
 public class Select_t_cStoreGoods extends HttpServlet {
 

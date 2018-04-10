@@ -4,12 +4,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -35,7 +40,7 @@ public class Select_Pan_Dian_t_Config extends HttpServlet {
 		ResultSet rs=null;
 		Connection conn=GetConnection.getStoreConn();
 		String cStoreNo=request.getParameter("cStoreNo");
-		System.out.println(cStoreNo);
+		LoggerUtil.info(cStoreNo);
 		try{
 			if(String_Tool.isEmpty(cStoreNo)){
 				past=conn.prepareStatement("select * from t_Config where cID='ÌõÂë³Ó'  ");
@@ -49,11 +54,11 @@ public class Select_Pan_Dian_t_Config extends HttpServlet {
 			JSONArray array=ResultSet_To_JSON.resultSetToJsonArray(rs);
 			if(array!=null&&array.length()>0){
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -12,9 +12,10 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
-import Fen_dian_yan_shou.Upload_Fen_dian_ru_ku;
 
 public class Upload_Request_Order extends HttpServlet {
 
@@ -43,11 +44,11 @@ public class Upload_Request_Order extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			JSONArray array = obj.getJSONArray("dData");
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			boolean a = DBupdate.insert_into_group_Good(GetConnection.getStoreConn(), array);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");

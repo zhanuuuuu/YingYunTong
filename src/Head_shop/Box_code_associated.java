@@ -3,13 +3,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 
 @WebServlet(description = "×öÏäÂë¹ØÁª", urlPatterns = { "/Box_code_associated" })
@@ -30,7 +35,7 @@ public class Box_code_associated extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn = GetConnection.getStoreConn();
 		try {
 			JSONArray array = new JSONArray(data);

@@ -2,6 +2,8 @@ package ModelRas;
 
 import java.util.Map;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 public class RasHelp {
 
 	public static Map<String, Object> keyMap;
@@ -38,7 +40,7 @@ public class RasHelp {
 	public static String getstr(byte data[], String privateKey) {
 		try {
 			byte[] a1 = Coder.RasGetPut.decryptByPrivateKey(data, privateKey);
-			System.out.println(a1);
+			LoggerUtil.info(a1);
 			String str = new String(a1,"utf-8");
 			return str;
 		} catch (Exception e) {

@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import DB.DBupdate;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -34,7 +35,7 @@ public class Check_in extends HttpServlet {
 		else{
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
 		
 		out.flush();
 		out.close();
@@ -48,7 +49,7 @@ public class Check_in extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		System.out.println();
+		LoggerUtil.info("");
 		JSONArray array=Operation_update.Check_in_Select(GetConnection.getStoreConn());
 		if(array!=null&&array.length()>0){
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
@@ -56,7 +57,7 @@ public class Check_in extends HttpServlet {
 		else{
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
 		
 		out.flush();
 		out.close();

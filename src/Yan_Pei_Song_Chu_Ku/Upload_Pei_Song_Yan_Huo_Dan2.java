@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
@@ -36,12 +37,12 @@ public class Upload_Pei_Song_Yan_Huo_Dan2 extends HttpServlet {
 		String pallet_array_str = request.getParameter("pallet_array");
 		String cha_yi_array_str=request.getParameter("cha_yi_array");
 		String chu_ku_no_array_str=request.getParameter("chu_ku_no_array");
-		System.out.println(goods_array_str);
-		System.out.println(pallet_array_str);
-		System.out.println(cha_yi_array_str);
-		System.out.println(chu_ku_no_array_str);
+		LoggerUtil.info(goods_array_str);
+		LoggerUtil.info(pallet_array_str);
+		LoggerUtil.info(cha_yi_array_str);
+		LoggerUtil.info(chu_ku_no_array_str);
 		try {
-			System.out.println("½²¹þ");
+			LoggerUtil.info("½²¹þ");
 			JSONArray goods_array = new JSONArray(goods_array_str);
 			JSONArray pallet_array =  new JSONArray(pallet_array_str);
 			JSONArray cha_yi_array=new JSONArray(cha_yi_array_str);
@@ -54,7 +55,7 @@ public class Upload_Pei_Song_Yan_Huo_Dan2 extends HttpServlet {
 			}
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-			System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			e.printStackTrace();
 		}
 		out.flush();

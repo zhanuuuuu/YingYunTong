@@ -12,10 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Tool.iStatus_Change;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
-import DB.DBupdate;
 import DB.GetConnection;
+import Tool.iStatus_Change;
 
 public class Recovery_Pallet extends HttpServlet {
 
@@ -46,7 +46,7 @@ public class Recovery_Pallet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String userType = obj.getString("userType");
@@ -83,10 +83,10 @@ public class Recovery_Pallet extends HttpServlet {
 			}
 			if (a >=1) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

@@ -2,7 +2,6 @@ package Goods_flow_Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import DB.DB;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
 
@@ -43,7 +43,7 @@ public class Select_Larage_group extends HttpServlet {
 		} else {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 		out.flush();
 		out.close();
 	}

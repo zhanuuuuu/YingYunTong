@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 @WebServlet(description = "门店地址管理", urlPatterns = { "/Upload_Store_Address" })
@@ -32,12 +34,12 @@ public class Upload_Store_Address extends HttpServlet {
 		String Tel = request.getParameter("tel");
 		String fLont = request.getParameter("fLont");
 		String fLant = request.getParameter("fLant");
-		System.out.println(fLont);
-		System.out.println(fLant);
+		LoggerUtil.info(fLont);
+		LoggerUtil.info(fLant);
 		String province = request.getParameter("province");
 		String city = request.getParameter("city");
 		String distrinct = request.getParameter("distrinct");
-		System.out.println(distrinct);
+		LoggerUtil.info(distrinct);
 		String street = request.getParameter("street");
 		String beizhu1 = request.getParameter("beizhu1");
 		String beizhu2 = request.getParameter("beizhu2");
@@ -45,7 +47,7 @@ public class Upload_Store_Address extends HttpServlet {
 		String cOperator = request.getParameter("cOperator");
 		
 		int a= Select_Online_Manager.cStore_Address(GetConnection.getStoreConn(),cStoreNo, cStoreName, Address,Tel, fLont, fLant, province, city, distrinct,street,beizhu1, beizhu2, cOperatorNo,cOperator);
-	    System.out.println("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
+	    LoggerUtil.info("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
 		out.print("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
 		out.flush();
 		out.close();

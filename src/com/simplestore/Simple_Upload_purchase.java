@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ReadConfig;
@@ -40,7 +42,7 @@ public class Simple_Upload_purchase extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("name");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn = null;
 		String SheetNo = null;
 		double fMoney = 0;
@@ -57,7 +59,7 @@ public class Simple_Upload_purchase extends HttpServlet {
 			if (rs1.next()) {
 				SheetNo = rs1.getString("SheetNo");
 			}
-			System.out.println(SheetNo);
+			LoggerUtil.info(SheetNo);
 			DB.closeResultSet(rs1);
 			DB.closePreparedStatement(past1);
 
@@ -86,9 +88,9 @@ public class Simple_Upload_purchase extends HttpServlet {
 				past_detail.setString(7, obj1.getString("fQuantity"));
 				
 				
-				System.out.println(obj1.getString("fQuantity"));
-				System.out.println(obj1.getString("fInPrice"));
-				System.out.println(obj1.getString("fInMoney"));
+				LoggerUtil.info(obj1.getString("fQuantity"));
+				LoggerUtil.info(obj1.getString("fInPrice"));
+				LoggerUtil.info(obj1.getString("fInMoney"));
 				
 				
 				past_detail.setString(8, obj1.getString("fInPrice"));
@@ -97,19 +99,19 @@ public class Simple_Upload_purchase extends HttpServlet {
 				fMoney = fInMoney + fMoney;
 				double fTaxrate = (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")))/ Double.parseDouble(obj1.getString("fInPrice"));
 				past_detail.setString(10, String_Tool.String_IS_Two(fTaxrate));
-				System.out.println(String_Tool.String_IS_Two(fTaxrate));
+				LoggerUtil.info(String_Tool.String_IS_Two(fTaxrate));
 				past_detail.setString(11, "1");
 				String fTaxPrice = ""+ (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")));
 				past_detail.setString(12, "" + String_Tool.String_IS_Two(fTaxPrice));// obj1.getString("fTaxPrice")
-				System.out.println(String_Tool.String_IS_Two(fTaxPrice));
+				LoggerUtil.info(String_Tool.String_IS_Two(fTaxPrice));
 				String fTaxMoney = ""+ (Double.parseDouble(fTaxPrice) * Double.parseDouble(obj1.getString("fQuantity")));
 				past_detail.setString(13, String_Tool.String_IS_Two(fTaxMoney));// obj1.getString("fTaxMoney")
-				System.out.println(String_Tool.String_IS_Two(fTaxMoney));
+				LoggerUtil.info(String_Tool.String_IS_Two(fTaxMoney));
 				past_detail.setString(14, String_Tool.String_IS_Two(fNormalPrice));// obj1.getString("fNoTaxPrice")
-				System.out.println(String_Tool.String_IS_Two(fNormalPrice));
+				LoggerUtil.info(String_Tool.String_IS_Two(fNormalPrice));
 				past_detail.setString(15,
 						"" + String_Tool.String_IS_Two((Double.parseDouble(fNormalPrice) * Double.parseDouble(obj1.getString("fQuantity")))));// obj1.getString("fNoTaxMoney")
-				System.out.println(String_Tool.String_IS_Two((Double.parseDouble(fNormalPrice) * Double.parseDouble(obj1.getString("fQuantity")))));
+				LoggerUtil.info(String_Tool.String_IS_Two((Double.parseDouble(fNormalPrice) * Double.parseDouble(obj1.getString("fQuantity")))));
 				past_detail.setString(16, obj1.optString("cUnit"));
 				past_detail.setString(17, obj1.optString("cSpec"));
 				past_detail.setString(18, obj1.optString("fQty_Cur"));
@@ -142,7 +144,7 @@ public class Simple_Upload_purchase extends HttpServlet {
 			past.execute();
 			DB.closePreparedStatement(past);
 			out.print("{\"resultStatus\":\"" + 1 + "\"}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"}");
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (Exception e) {

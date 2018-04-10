@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
-import Tool.String_Tool;
 
 /**
  * Servlet implementation class Select_Qian_Xi_T_GroupType
@@ -56,10 +57,10 @@ public class Select_Qian_Xi_T_GroupType extends HttpServlet {
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
 			}
 
 		} catch (Exception e) {

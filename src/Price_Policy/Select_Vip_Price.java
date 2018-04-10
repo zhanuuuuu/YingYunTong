@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import Tool.ResultSet_To_JSON;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
+import Tool.ResultSet_To_JSON;
 
 public class Select_Vip_Price extends HttpServlet {
 
@@ -57,9 +58,9 @@ public class Select_Vip_Price extends HttpServlet {
 		Connection conn = GetConnection.getStoreConn();
 		ResultSet rs = null;
 		PreparedStatement past = null;
-		System.out.println(cGoodsNo);
-		System.out.println(dDateBgn);
-		System.out.println(dDateEnd);
+		LoggerUtil.info(cGoodsNo);
+		LoggerUtil.info(dDateBgn);
+		LoggerUtil.info(dDateEnd);
 		try {
 			past = conn.prepareStatement("select a.dDateBgn,a.dDateEnd,a.cSheetno from  dbo.t_VipcGoodsPrice a,   t_VipcGoodsPriceDetail b where a.cSheetno=b.cSheetno  and b.cGoodsNo=?  and cStoreNo=?  and (? between a.dDateBgn and a.dDateEnd or   ?   between a.dDateBgn and a.dDateEnd )");
 			past.setString(1, cGoodsNo);

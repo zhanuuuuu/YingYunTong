@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.report_table;
 
@@ -44,7 +46,7 @@ public class Type_Group_Sales extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String date1 = obj.getString("dDate1");
@@ -59,7 +61,7 @@ public class Type_Group_Sales extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,12 +1,17 @@
 package Fen_dian_yan_shou;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -43,16 +48,16 @@ public class Select_Fen_dian_Yi_Yan_Shou extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String AppNo = obj.getString("AppNo");
            //先总部掉，再从掉
 			//JSONArray array = Fen_dian_Update.Select_Yi_Shen_Fen_dian_yan_dan(GetConnection.getStoreConn(), AppNo);
-			//System.out.println("到此");
+			//LoggerUtil.info("到此");
 			//if (array.length() == 0) {
 				JSONArray array = Fen_dian_Update.Select_Yi_Shen_Fen_dian_yan_dan(GetConnection.getStoreConn(AppNo), AppNo);
-			//	System.out.println("到此1");
+			//	LoggerUtil.info("到此1");
 			//}
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
@@ -60,8 +65,7 @@ public class Select_Fen_dian_Yi_Yan_Shou extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","
-					+ "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","	+ "\"dDate\":" + array.toString() + "}");
 
 		} catch (Exception e) {
 			e.printStackTrace();

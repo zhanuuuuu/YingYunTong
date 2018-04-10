@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.oreilly.servlet.MultipartRequest;
 
 import Tool.RenamePolicyCos;
@@ -44,7 +45,7 @@ public class Upload_goods_Image extends HttpServlet {
             // MultipartRequest()有8种构造函数！  
             multirequest = new MultipartRequest(request, fileDir.getAbsolutePath(), inmaxPostSize, "UTF-8", myRenamePolicyCos); // GBK中文编码模式上传文件  
             String cBarcode= multirequest.getParameter("cBarcode");// 获取普通信息  
-            System.out.println(cBarcode);  
+            LoggerUtil.info(cBarcode);  
             Enumeration<String> filedFileNames = multirequest.getFileNames();  
             String filedName = null;  
             if (null != filedFileNames) {  
@@ -53,15 +54,15 @@ public class Upload_goods_Image extends HttpServlet {
                     // 获取该文件框中上传的文件，即对应到上传到服务器中的文件  
                     File uploadFile = multirequest.getFile(filedName);  
                     if (null != uploadFile && uploadFile.length() > 0) {  
-                        System.out.println(uploadFile.getName());  
-                        System.out.println(uploadFile.getPath());  
+                        LoggerUtil.info(uploadFile.getName());  
+                        LoggerUtil.info(uploadFile.getPath());  
                         
-                        System.out.println(uploadFile.length());  
+                        LoggerUtil.info(uploadFile.length());  
                     }  
                     // 获取未重命名的文件名称  
                     String Originalname = multirequest  
                             .getOriginalFileName(filedName);  
-                    System.out.println(Originalname);  
+                    LoggerUtil.info(Originalname);  
                     
 //                    Connection conn=GetConnection.getStoreConn();
 //                    String sql="Update t_Store set image_path=? where  cStoreNo=?";

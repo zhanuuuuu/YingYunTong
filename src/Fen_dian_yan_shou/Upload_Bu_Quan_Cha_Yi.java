@@ -3,13 +3,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -54,7 +58,7 @@ public class Upload_Bu_Quan_Cha_Yi extends HttpServlet {
 				c.execute();
 			}
 			out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			Logger.getLogger(Upload_Bu_Quan_Cha_Yi.class).error(e.getLocalizedMessage());

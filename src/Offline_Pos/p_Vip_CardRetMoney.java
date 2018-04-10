@@ -8,12 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
+
 import DB.DB;
 import DB.GetConnection;
 import ModelRas.MD5key;
@@ -59,19 +63,19 @@ public class p_Vip_CardRetMoney extends HttpServlet {
 		cDetail=java.net.URLDecoder.decode(cDetail,"GBK"); 
 		String sign = request.getParameter("sign");
 
-		System.out.println(cVipNo);
-		System.out.println(dConsum);
-		System.out.println(cSalesheetNo); 
-		System.out.println(fCardRetMoney); 		
-		System.out.print(fScore_join);
-	    System.out.println(cOpertorNo);
-		System.out.println(cOpername);
-		System.out.println(dOperate);
-		System.out.println(cPostion);
-		System.out.println(cStyle);
-		System.out.println(cDetail);
+		LoggerUtil.info(cVipNo);
+		LoggerUtil.info(dConsum);
+		LoggerUtil.info(cSalesheetNo); 
+		LoggerUtil.info(fCardRetMoney); 		
+		//System.out.print(fScore_join);
+	    LoggerUtil.info(cOpertorNo);
+		LoggerUtil.info(cOpername);
+		LoggerUtil.info(dOperate);
+		LoggerUtil.info(cPostion);
+		LoggerUtil.info(cStyle);
+		LoggerUtil.info(cDetail);
 		
-		System.out.println(sign);
+		LoggerUtil.info(sign);
 		HashMap<String, String> map = new HashMap<String, String>();
 		String str = "";
 		if (MD5key.getMD5Pass(cVipNo + "ware13391810430").equals(sign)) {
@@ -101,7 +105,7 @@ public class p_Vip_CardRetMoney extends HttpServlet {
 				str = gson.toJson(list);
 
 				out.print("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
-				System.out.println("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
 				conn.commit();
 				conn.setAutoCommit(true);
 			} catch (Exception e) {
@@ -118,7 +122,7 @@ public class p_Vip_CardRetMoney extends HttpServlet {
 				}
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

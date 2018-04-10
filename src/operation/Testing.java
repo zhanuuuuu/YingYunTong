@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import DB.GetConnection;
-import DB.Operation_update;
 import Tool.ResultSet_To_JSON;
 
 public class Testing extends HttpServlet {

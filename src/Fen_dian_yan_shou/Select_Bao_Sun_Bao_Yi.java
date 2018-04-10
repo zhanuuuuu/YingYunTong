@@ -1,12 +1,17 @@
 package Fen_dian_yan_shou;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -33,11 +38,11 @@ public class Select_Bao_Sun_Bao_Yi extends HttpServlet {
 			String dDate1 = request.getParameter("dDate1");
 			String dDate2 = request.getParameter("dDate2");
 			String fage = request.getParameter("fage"); // "0是报损 1是褒义"
-			System.out.println("0是报损 1是褒义");
-			System.out.println(cStoreNo);
-			System.out.println(dDate1);
-			System.out.println(dDate2);
-			System.out.println(fage);
+			LoggerUtil.info("0是报损 1是褒义");
+			LoggerUtil.info(cStoreNo);
+			LoggerUtil.info(dDate1);
+			LoggerUtil.info(dDate2);
+			LoggerUtil.info(fage);
 			JSONArray array=new JSONArray();
 			if (fage.equals("0")) {
 				array = Fen_dian_Update.Select_Bao_Sun(GetConnection.getStoreConn(), cStoreNo,dDate1,dDate2);
@@ -47,7 +52,7 @@ public class Select_Bao_Sun_Bao_Yi extends HttpServlet {
 			}
 			if (array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ array.toString() + "}");

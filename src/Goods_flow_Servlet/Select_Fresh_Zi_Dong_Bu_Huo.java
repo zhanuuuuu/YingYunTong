@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
 
@@ -45,9 +47,9 @@ public class Select_Fresh_Zi_Dong_Bu_Huo extends HttpServlet {
 		String Store_array=request.getParameter("Store_array");
 		String Sup_array =request.getParameter("cSupNo_array");
 		String dDate1 =request.getParameter("dDate1");
-		System.out.println(dDate1);
-		System.out.println( Store_array);
-		System.out.println(Sup_array);
+		LoggerUtil.info(dDate1);
+		LoggerUtil.info( Store_array);
+		LoggerUtil.info(Sup_array);
 		JSONArray array;
 		try {
 			JSONArray array1=new JSONArray(Store_array);
@@ -59,7 +61,7 @@ public class Select_Fresh_Zi_Dong_Bu_Huo extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 	
 		} catch (Exception e) {
 			

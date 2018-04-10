@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 @WebServlet(description = "Ç®°ü³äÖµ²ßÂÔ", urlPatterns = { "/Wallet_recharge_strategy" })
@@ -38,7 +40,7 @@ public class Wallet_recharge_strategy extends HttpServlet {
 	    else{
 	    	a= Select_Online_Manager.wallet_updaterecharge_strategy(GetConnection.getWalletConn(),Pay_Money, excess_Money,ID);
 	    }
-	    System.out.println("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
+	    LoggerUtil.info("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
 		out.print("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":"+ a + "}");
 		out.flush();
 		out.close();

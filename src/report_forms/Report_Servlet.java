@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -72,8 +75,8 @@ public class Report_Servlet extends HttpServlet {
 				past = conn.prepareStatement("select [User],Name,userType,cStoreNo,cStoreName from t_Pass where [User]=? and Pass =?");
 				past.setString(1, user);
 				past.setString(2, pass);
-				System.out.println(user);
-				System.out.println(pass);
+				LoggerUtil.info(user);
+				LoggerUtil.info(pass);
 				rs = past.executeQuery();
 				Map<String, String> user_map = new HashMap<String, String>();
 				if (rs.next()) {
@@ -88,7 +91,7 @@ public class Report_Servlet extends HttpServlet {
 					user_map.put("cStoreNo", cStoreNo);
 					user_map.put("cStoreName", cStoreName);
 					session.setAttribute("user", user_map);
-					System.out.print(user_map);
+					//System.out.print(user_map);
 					request.getRequestDispatcher("jsps/main.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("Login.jsp");

@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
-import DB.DBupdate;
 import DB.GetConnection;
 
 public class Select_Yi_shen_Yan_huo_dan extends HttpServlet {
@@ -43,8 +44,7 @@ public class Select_Yi_shen_Yan_huo_dan extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","
-					+ "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
 
@@ -50,7 +52,7 @@ public class Operation_update {
 					String DriverN = rs.getString("DriverNo");
 					if (DriverNo.equals(DriverN)) {
 						a = "3"; // ÒÑ¾­Ç©µ½
-						System.out.println(DriverNo + "" + DriverN);
+						LoggerUtil.info(DriverNo + "" + DriverN);
 					} else {
 						a = Driver;
 					}
@@ -308,7 +310,7 @@ public class Operation_update {
 			 past.setString(1, UserNo);
 			 past.setString(2, OldPass);
 			 rs=past.executeQuery();
-			 System.out.println(rs.toString());
+			 LoggerUtil.info(rs.toString());
 			 if(rs.next()){
 				 past = conn.prepareStatement("Update t_Pass set Pass=?   where [User]= ? and Pass=? ");
 				 past.setString(1, NewPass);

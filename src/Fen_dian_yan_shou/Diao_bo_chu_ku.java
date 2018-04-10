@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -48,8 +50,8 @@ public class Diao_bo_chu_ku extends HttpServlet {
 		String data = request.getParameter("data");
 		
 		String cBeizhu1 = request.getParameter("cBeizhu1");
-		System.out.println(cBeizhu1);
-		System.out.println(""+data);
+		LoggerUtil.info(cBeizhu1);
+		LoggerUtil.info(""+data);
 		boolean a = false;
 		try {
 			JSONArray array = new JSONArray(data);
@@ -61,12 +63,12 @@ public class Diao_bo_chu_ku extends HttpServlet {
 			
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("提交成功");
+				LoggerUtil.info("提交成功");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("提交失败");
+				LoggerUtil.info("提交失败");
 			}
-			System.out.println();
+			LoggerUtil.info("");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

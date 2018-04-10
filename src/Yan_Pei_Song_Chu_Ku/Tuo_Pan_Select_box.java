@@ -2,14 +2,17 @@ package Yan_Pei_Song_Chu_Ku;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
-import DB.DBupdate;
 import DB.GetConnection;
 
 public class Tuo_Pan_Select_box extends HttpServlet {
@@ -42,7 +45,7 @@ public class Tuo_Pan_Select_box extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace(' ', '+').replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = DBYan_Huo_update.Tuo_Pan_Select_Box(GetConnection.getStoreConn(),data);
 			if (array!=null&&array.length()>0) {
@@ -53,8 +56,7 @@ public class Tuo_Pan_Select_box extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-					+ array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"	+ array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

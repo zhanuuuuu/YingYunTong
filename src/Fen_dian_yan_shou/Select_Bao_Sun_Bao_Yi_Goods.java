@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -46,8 +48,7 @@ public class Select_Bao_Sun_Bao_Yi_Goods extends HttpServlet {
 				if (array != null && array.length() > 0) {
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
 							+ array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-							+ array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"	+ array.toString() + "}");
 				} 
 			} else {
 				JSONArray array = Fen_dian_Update.Select_Bao_Yi_Goods(
@@ -56,8 +57,7 @@ public class Select_Bao_Sun_Bao_Yi_Goods extends HttpServlet {
 				if (array != null && array.length() > 0) {
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
 							+ array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-							+ array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"	+ array.toString() + "}");
 				} 
 			}
 		} catch (Exception e) {

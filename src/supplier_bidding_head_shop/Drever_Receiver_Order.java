@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import Tool.String_Tool;
 
@@ -36,7 +38,7 @@ public class Drever_Receiver_Order extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Connection conn = GetConnection.getBiddingConn();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		PreparedStatement past = null;
 		try {
 			conn.setAutoCommit(false);
@@ -58,12 +60,12 @@ public class Drever_Receiver_Order extends HttpServlet {
 					// JPushClientExample.testSend("司机接单","准备迎接我");
 					// 推送到服务器
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":\"" + 1 + "\"}");
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
 					conn.commit();
 					conn.setAutoCommit(true);
 				} else {
 					out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\"" + 0 + "\"}");
-					System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
 				}
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\"" + 0 + "\"}");

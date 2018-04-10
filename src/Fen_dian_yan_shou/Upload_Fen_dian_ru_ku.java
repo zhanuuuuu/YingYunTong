@@ -2,6 +2,7 @@ package Fen_dian_yan_shou;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -43,7 +47,7 @@ public class Upload_Fen_dian_ru_ku extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj=new JSONObject(data);
 			JSONArray array = obj.getJSONArray("dData");
@@ -54,7 +58,7 @@ public class Upload_Fen_dian_ru_ku extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			Logger.getLogger(Upload_Fen_dian_ru_ku.class).error(e.getLocalizedMessage());
 			e.printStackTrace();

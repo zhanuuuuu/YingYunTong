@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
-import Tool.String_Tool;
 
 public class Select_fen_dian_bu_huo extends HttpServlet {
 
@@ -44,7 +45,7 @@ public class Select_fen_dian_bu_huo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		JSONArray array = null;
 		try {
 			JSONObject obj = new JSONObject(data);
@@ -69,7 +70,7 @@ public class Select_fen_dian_bu_huo extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println();
+			LoggerUtil.info("");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

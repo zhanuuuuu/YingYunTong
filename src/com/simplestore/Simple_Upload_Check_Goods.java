@@ -12,12 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import DB.Head_Shop;
 
 @WebServlet(description = "查询总部所有的信息", urlPatterns = { "/Simple_Upload_Check_Goods" })
 public class Simple_Upload_Check_Goods extends HttpServlet {
@@ -40,12 +42,12 @@ public class Simple_Upload_Check_Goods extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("name");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array=new JSONArray(data);
 			int str=head_shop_Check_Goods(GetConnection.getStoreConn(),array);
 			out.print("{\"resultStatus\":\"" + str + "\"," + "\"dDate\":\"" +"" + "\"}");
-			System.out.println("{\"resultStatus\":\"" + str + "\"," + "\"dDate\":\"" +"" + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + str + "\"," + "\"dDate\":\"" +"" + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

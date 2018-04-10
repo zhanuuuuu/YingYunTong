@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -32,8 +34,8 @@ public class Select_Goods_summary extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String start_time=request.getParameter("start_time");
 		String end_time=request.getParameter("end_time");
-		System.out.println(start_time);
-		System.out.println(end_time);
+		LoggerUtil.info(start_time);
+		LoggerUtil.info(end_time);
 		try {
 			JSONArray array = Select_Online_Manager.Fresh_items_summary(GetConnection.getonlineConn(),start_time,end_time);
 			if (array != null && array.length() > 0) {
@@ -41,7 +43,7 @@ public class Select_Goods_summary extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

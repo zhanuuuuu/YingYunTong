@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -38,17 +40,17 @@ public class Select_Men_Dian_Goods extends HttpServlet {
 		ResultSet rs = null;
 		String sql="";
 		try {
-			System.out.println(Number_of_pages);
+			LoggerUtil.info(Number_of_pages);
 			if (String_Tool.isEmpty(Number_of_pages)) {
 				 sql = "select cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=0,fPreservationUp,fPreservationDown,fPreservation_soft,cSupNo, cSupName , bStorage from t_cStoreGoods where  cStoreNo=? and ISNull(bStorage,0)='0'  and bDeled='0'  ";
-                System.out.println("查询所有的商品");
+                LoggerUtil.info("查询所有的商品");
 			} else {
 				sql = String_Tool.sql("cGoodsNo",
 						"select cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=0,fPreservationUp,fPreservationDown,fPreservation_soft,cSupNo, cSupName ,bStorage from t_cStoreGoods where  cStoreNo=? and ISNull(bStorage,0)='0' and bDeled='0'  ",
 						Integer.parseInt(Number_of_pages));
-				System.out.println("分页查询商品");
+				LoggerUtil.info("分页查询商品");
 			}
-			System.out.println(sql);
+			LoggerUtil.info(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, cStoreNo);
 			rs = past.executeQuery();

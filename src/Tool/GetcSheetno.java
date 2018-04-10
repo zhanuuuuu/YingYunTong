@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 
 public class GetcSheetno {
@@ -394,7 +396,7 @@ public class GetcSheetno {
 			if (rs.next()) {
 				cSheetNo = rs.getString("SheetNo");
 			}
-			System.out.println(cSheetNo);
+			LoggerUtil.info(cSheetNo);
 			DB.closeResultSet(rs);
 			DB.closePreparedStatement(past);
 			return cSheetNo;

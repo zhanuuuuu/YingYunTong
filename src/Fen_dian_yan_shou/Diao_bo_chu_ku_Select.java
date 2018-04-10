@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
-import DB.DBupdate;
-import DB.Fen_dian_Update;
 import DB.GetConnection;
 
 public class Diao_bo_chu_ku_Select extends HttpServlet {
@@ -46,7 +46,7 @@ public class Diao_bo_chu_ku_Select extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String str = request.getParameter("data");
-		System.out.println(str);
+		LoggerUtil.info(str);
 		
 		JSONArray array = DBYan_Huo_update.diao_bo_chu_ku_Select(GetConnection.getStoreConn(),str);
 		
@@ -59,8 +59,7 @@ public class Diao_bo_chu_ku_Select extends HttpServlet {
 					+ array.toString() + "}");
 		}
 
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-				+ array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 
 		out.flush();
 		out.close();

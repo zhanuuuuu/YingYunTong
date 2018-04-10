@@ -4,12 +4,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -33,8 +38,8 @@ public class Select_Yi_pan_goods extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String cStoreNo=request.getParameter("cStoreNo");
 		String cCheckTaskNo=request.getParameter("cCheckTaskNo");
-		System.out.println(cStoreNo);
-		System.out.println(cCheckTaskNo);
+		LoggerUtil.info(cStoreNo);
+		LoggerUtil.info(cCheckTaskNo);
 		Connection conn= GetConnection.getStoreConn();
 		PreparedStatement past=null;
 		ResultSet rs=null;

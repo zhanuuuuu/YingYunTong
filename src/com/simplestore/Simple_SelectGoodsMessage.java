@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
@@ -15,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
-import Tool.String_Tool;
 
 
 @WebServlet(description = "商品信息查询", urlPatterns = { "/Simple_SelectGoodsMessage" })
@@ -52,11 +52,11 @@ public class Simple_SelectGoodsMessage extends HttpServlet {
 			JSONArray array=ResultSet_To_JSON.resultSetToJsonArray(rs);
 			if(array!=null&&array.length()>0){
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

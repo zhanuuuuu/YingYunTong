@@ -2,6 +2,8 @@ package cn.jpush.example;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import cn.jpush.api.ErrorCodeEnum;
 import cn.jpush.api.IOSExtra;
 import cn.jpush.api.JPushClient;
@@ -79,14 +81,14 @@ public class JPushClientExample {
 	//	MessageResult msgResult = jpush.sendCustomMessageWithAppKey(sendNo,msgTitle, msgContent);
 		
 		if (null != msgResult) {
-			System.out.println("服务器返回数据: " + msgResult.toString());
+			LoggerUtil.info("服务器返回数据: " + msgResult.toString());
 			if (msgResult.getErrcode() == ErrorCodeEnum.NOERROR.value()) {
-				System.out.println("发送成功， sendNo=" + msgResult.getSendno());
+				LoggerUtil.info("发送成功， sendNo=" + msgResult.getSendno());
 			} else {
-				System.out.println("发送失败， 错误代码=" + msgResult.getErrcode() + ", 错误消息=" + msgResult.getErrmsg());
+				LoggerUtil.info("发送失败， 错误代码=" + msgResult.getErrcode() + ", 错误消息=" + msgResult.getErrmsg());
 			}
 		} else {
-			System.out.println("无法获取数据");
+			LoggerUtil.info("无法获取数据");
 		}
 		
 		
@@ -119,14 +121,14 @@ public class JPushClientExample {
 	//	MessageResult msgResult = jpush.sendCustomMessageWithAppKey(sendNo,msgTitle, msgContent);
 		
 		if (null != msgResult) {
-			System.out.println("服务器返回数据: " + msgResult.toString());
+			LoggerUtil.info("服务器返回数据: " + msgResult.toString());
 			if (msgResult.getErrcode() == ErrorCodeEnum.NOERROR.value()) {
-				System.out.println("发送成功， sendNo=" + msgResult.getSendno());
+				LoggerUtil.info("发送成功， sendNo=" + msgResult.getSendno());
 			} else {
-				System.out.println("发送失败， 错误代码=" + msgResult.getErrcode() + ", 错误消息=" + msgResult.getErrmsg());
+				LoggerUtil.info("发送失败， 错误代码=" + msgResult.getErrcode() + ", 错误消息=" + msgResult.getErrmsg());
 			}
 		} else {
-			System.out.println("无法获取数据");
+			LoggerUtil.info("无法获取数据");
 		}
 		
 		

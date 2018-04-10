@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -35,20 +37,20 @@ public class Upload_Bidding extends HttpServlet {
 			String Head_cStoreName=request.getParameter("Head_cStoreName");
 			if(String_Tool.isEmpty(Head_cStoreNo)){
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ 0 + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\","+ "\"dDate\":" + "µêÆÌ±àºÅ²»ÄÜÎª¿Õ" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\","+ "\"dDate\":" + "µêÆÌ±àºÅ²»ÄÜÎª¿Õ" + "}");
 				return ;
 			}
 			
-			System.out.println(data);
+			LoggerUtil.info(data);
 			JSONArray array=new JSONArray(data);
 			boolean a=DB_Supplier_Bidding.Upload_Bidding(GetConnection.getBiddingConn(),array,Head_cStoreNo,Head_cStoreName);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ 1+ "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + 0 + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ 0 + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\","+ "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\","+ "\"dDate\":" + 0 + "}");
 			}
 			
 		} catch (Exception e) {

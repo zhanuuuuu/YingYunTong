@@ -8,11 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
-import DB.DBupdate;
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -48,11 +45,11 @@ public class Update_User_Pass extends HttpServlet {
 		String UserNo = request.getParameter("UserNo");
 		String OldPass=request.getParameter("OldPass");
 		String NewPass=request.getParameter("NewPass");
-		System.out.println(UserNo+"---"+OldPass+"---"+NewPass);
+		LoggerUtil.info(UserNo+"---"+OldPass+"---"+NewPass);
 		try {
 			String a = Operation_update.Update_Pass(GetConnection.getStoreConn(),UserNo,OldPass, NewPass);
 			out.print("{\"resultStatus\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"}");
 			e.printStackTrace();

@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.Fen_dian_Update;
 import DB.GetConnection;
@@ -45,7 +46,7 @@ public class Return_Pallet_box extends HttpServlet {
 
 		String data = request.getParameter("data").replace("\n", "")
 				.replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 
@@ -65,7 +66,7 @@ public class Return_Pallet_box extends HttpServlet {
 					cDistDev_Return, TruckLicenseTag, cDriverNo, cDriverName,
 					TruckNo);
 			out.print("{\"resultStatus\":\"" + a + "\"" + "}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"" + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"" + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

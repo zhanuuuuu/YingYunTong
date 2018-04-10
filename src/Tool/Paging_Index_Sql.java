@@ -1,5 +1,7 @@
 package Tool;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 public class Paging_Index_Sql {
 
 	public static void main(String args[]) {
@@ -12,7 +14,7 @@ public class Paging_Index_Sql {
 		String sql = "SELECT TOP 10 *  FROM (SELECT ROW_NUMBER() OVER (ORDER BY  "+sort+") AS RowNumber,* FROM  ("
 				+ sql_ + " ) as  Z ) as A WHERE RowNumber > 10*("+(Number_of_pages-1)+")";
 
-		System.out.println(sql);
+		LoggerUtil.info(sql);
 		return sql;
 
 	}

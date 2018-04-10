@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
 
@@ -44,12 +46,12 @@ public class Upload_fu_he extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace(' ', '+').replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj=new JSONObject(data);
 			String SortSheetNo=obj.getString("SortSheetNo");
 			JSONArray array=obj.getJSONArray("data");
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			boolean a = DBupdate.Update_Fen_jian_dan(GetConnection.getStoreConn(), SortSheetNo, array);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\""+ "}");

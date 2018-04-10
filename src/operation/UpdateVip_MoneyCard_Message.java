@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -42,7 +44,7 @@ public class UpdateVip_MoneyCard_Message extends HttpServlet {
 				a = Operation_update.Update_Money_card_message(GetConnection.getStoreConn(),obj);
 			}
 			out.print("{\"resultStatus\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"}");
 			e.printStackTrace();

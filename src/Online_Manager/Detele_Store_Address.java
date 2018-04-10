@@ -4,11 +4,15 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 
@@ -33,7 +37,7 @@ public class Detele_Store_Address extends HttpServlet {
 		String cStoreNo = request.getParameter("cStoreNo");
 		String cOperatorNo = request.getParameter("cOperatorNo");
 		String id = request.getParameter("id");
-		System.out.println(id);
+		LoggerUtil.info(id);
 		Connection conn=null;
 		try {
 		    conn = GetConnection.getStoreConn();
@@ -45,12 +49,12 @@ public class Detele_Store_Address extends HttpServlet {
 				String City=rs.getString("city");
 				String District=rs.getString("district");
 				String street=rs.getString("street");
-				System.out.println(street);
+				LoggerUtil.info(street);
 				String sql="update  Simple_online.dbo.User_Address set Available='0' where Detailaddress like '%"+street+"%' ";
 				PreparedStatement past2 = conn.prepareStatement(sql);
 				past2.executeUpdate();
 				DB.closePreparedStatement(past2);
-				System.out.println("有地址");
+				LoggerUtil.info("有地址");
 			}
 			PreparedStatement past = conn.prepareStatement("delete from Simple_online.dbo.Store_address_site where id= ? ");
 			past.setString(1, id);

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -49,7 +51,7 @@ public class Fen_Jian_dan_No_Select_Goods extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace(' ', '+')
 				.replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = DBYan_Huo_update.Box_Select_Goods(
 					GetConnection.getStoreConn(),data);
@@ -60,7 +62,7 @@ public class Fen_Jian_dan_No_Select_Goods extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

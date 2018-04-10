@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 
@@ -33,7 +35,7 @@ public class Ok_bidding_Order extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String data=request.getParameter("data");
-			System.out.println(data);
+			LoggerUtil.info(data);
 			JSONArray array=new JSONArray(data);
 			boolean a=DB_Supplier_Bidding.Head_Store_Ok_bidding_Order(GetConnection.getBiddingConn(),array);
 			if (a) {
@@ -42,7 +44,7 @@ public class Ok_bidding_Order extends HttpServlet {
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ 0 + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + 0 + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + 0 + "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ e.getMessage() + "}");
 			e.printStackTrace();

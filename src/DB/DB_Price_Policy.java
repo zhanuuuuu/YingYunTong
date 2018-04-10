@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.GetcSheetno;
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
@@ -23,8 +25,7 @@ public class DB_Price_Policy {
 				c.setString(1, obj.getString("cStoreNo")
 						+ String_Tool.DataBaseTime_MM().replace("-", "")
 								.replace(" ", "").replace(":", ""));
-				System.out.println(String_Tool.DataBaseTime().replace("-", "")
-						.replace(" ", "").replace(":", ""));
+				LoggerUtil.info(String_Tool.DataBaseTime().replace("-", "").replace(" ", "").replace(":", ""));
 				c.setString(2, obj.getString("cGoodsNo"));
 				c.setString(3, obj.getString("fPrice_So"));
 				c.setString(4, obj.getString("fVipValue"));
@@ -81,7 +82,7 @@ public class DB_Price_Policy {
 		CallableStatement c = null;
 		ResultSet rs = null;
 		try {
-			System.out.println("heheh");
+			LoggerUtil.info("heheh");
 			c = conn.prepareCall("{call p_SelectGoodsPloyISNOTNull_ALL (?,?) }");
 			c.setString(1, cStoreNo);
 			c.setString(2, cPloyNo);

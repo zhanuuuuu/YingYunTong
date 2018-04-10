@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -37,9 +39,9 @@ public class Select_Yi_Pei_Song extends HttpServlet {
 			String fage=request.getParameter("fage");
 			fage="2";
 			cStoreNo="000";
-			System.out.println(cStoreNo);
-			System.out.println(start);
-			System.out.println(end);
+			LoggerUtil.info(cStoreNo);
+			LoggerUtil.info(start);
+			LoggerUtil.info(end);
 			String str = Select_Online_Manager.Yi_Pei_Song_select_Order(GetConnection.getonlineConn(), fage, cStoreNo,start,end);
 			out.print(str);
 		} catch (Exception e) {

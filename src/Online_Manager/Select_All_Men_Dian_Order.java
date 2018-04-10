@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -39,9 +41,9 @@ public class Select_All_Men_Dian_Order extends HttpServlet {
 			String start=request.getParameter("starttime");
 			String end=request.getParameter("endtime");
 			String fage ="1";
-			System.out.println(cStoreNo);
-			System.out.println(start);
-			System.out.println(end);
+			LoggerUtil.info(cStoreNo);
+			LoggerUtil.info(start);
+			LoggerUtil.info(end);
 			String str = Select_Online_Manager.select_Order(GetConnection.getStoreConn(), fage, cStoreNo,start,end);
 			out.print(str);
 		} catch (Exception e) {

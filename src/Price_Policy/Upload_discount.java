@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Price_Policy;
 import DB.GetConnection;
 
@@ -45,7 +47,7 @@ public class Upload_discount extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data=request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		JSONArray array;
 		try {
 			array = new JSONArray(data);

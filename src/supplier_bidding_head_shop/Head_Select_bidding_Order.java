@@ -2,6 +2,7 @@ package supplier_bidding_head_shop;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
@@ -34,7 +37,7 @@ public class Head_Select_bidding_Order extends HttpServlet {
 			JSONArray array=DB_Supplier_Bidding.head_Select_bidding_Order(GetConnection.getBiddingConn(),Head_cStoreNo,dDate);
 			if (array!=null&&array.length()>0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString()+ "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","+ "\"dDate\":" + array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ 0 + "}");

@@ -11,13 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.jstl.sql.Result;
 
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
-import Fen_dian_yan_shou.Upload_Fen_dian_ru_ku;
 
 public class Testing_Servelt extends HttpServlet {
 
@@ -37,7 +36,7 @@ public class Testing_Servelt extends HttpServlet {
 			rs = past.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 			out.println(array.toString());
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

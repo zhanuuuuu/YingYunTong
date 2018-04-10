@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 
 import DB.DB;
@@ -43,9 +44,9 @@ public class Vip_AddScore_Pos extends HttpServlet {
 		String cVipNo = request.getParameter("cVipNo");
 		String fAddScore = request.getParameter("fAddScore");
 		String sign = request.getParameter("sign");
-		System.out.println(cVipNo);
-		System.out.println(fAddScore);
-		System.out.println(sign);
+		LoggerUtil.info(cVipNo);
+		LoggerUtil.info(fAddScore);
+		LoggerUtil.info(sign);
 		String str="";
 		HashMap<String, String> map=new HashMap<String, String>();
 		if (MD5key.getMD5Pass(cVipNo + "ware13391810430").equals(sign)) {
@@ -65,7 +66,7 @@ public class Vip_AddScore_Pos extends HttpServlet {
 					str=gson.toJson(list);
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
 					
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
 				} else {
 					map.put("result", "1");//失败
 					Gson gson=new Gson();
@@ -74,7 +75,7 @@ public class Vip_AddScore_Pos extends HttpServlet {
 					str=gson.toJson(list);
 					out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + str + "}");
 					
-					System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + str + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + str + "}");
 				}
 			} catch (Exception e) {
 				map.put("result", "-1");
@@ -86,7 +87,7 @@ public class Vip_AddScore_Pos extends HttpServlet {
 			
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				out.flush();
 				out.close();
 				DB.closeRs_Con(null, c, conn);

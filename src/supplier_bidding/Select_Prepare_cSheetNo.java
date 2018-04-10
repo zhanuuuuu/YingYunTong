@@ -1,12 +1,17 @@
 package supplier_bidding;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 
@@ -31,8 +36,8 @@ public class Select_Prepare_cSheetNo extends HttpServlet {
 		try {
 			String cSupNo = request.getParameter("cSupNo");
 			String dDate = request.getParameter("dDate");
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			JSONArray array = DB_Supplier_Bidding.Select_Select_Prepare_cSheetno(GetConnection.getBiddingConn(), cSupNo,dDate);
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");

@@ -2,12 +2,15 @@ package Fen_dian_yan_shou;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.Fen_dian_Update;
 import DB.GetConnection;
@@ -45,7 +48,7 @@ public class Diao_bo_ru_ku extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(""+data);
+		LoggerUtil.info(""+data);
 		try {
 			JSONArray array = new JSONArray(data);
 			boolean a = Fen_dian_Update.Insert_into_Diao_bo_ru_ku(GetConnection.getStoreConn(), array);
@@ -54,7 +57,7 @@ public class Diao_bo_ru_ku extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
-			System.out.println();
+			LoggerUtil.info("");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

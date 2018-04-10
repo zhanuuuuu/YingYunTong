@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.GetcSheetno;
 import Tool.ReadConfig;
 import Tool.ResultSet_To_JSON;
@@ -109,7 +111,7 @@ public class DBYan_Huo_update {
 				str = "{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + array.toString() + "," + "\"dDate1\":"
 						+ array1 + "}";
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,8 +208,8 @@ public class DBYan_Huo_update {
 				if(rs.next()){
 					DB.closeResultSet(rs);
 					DB.closePreparedStatement(past_select);
-					System.out.println(obj1.getString("cSheetno"));
-					System.out.println("此托盘单已经提交配送验货");
+					LoggerUtil.info(obj1.getString("cSheetno"));
+					LoggerUtil.info("此托盘单已经提交配送验货");
 					return false;
 				}
 				DB.closeResultSet(rs);
@@ -236,7 +238,7 @@ public class DBYan_Huo_update {
 			past.setString(18, obj.getString("cOutSerNo"));
 			past.execute();
 			DB.closePreparedStatement(past);
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 
 			PreparedStatement past1 = conn.prepareStatement(
 					"INSERT INTO wh_cStoreOutVerifySheetDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit,cUnitedNo,fPrice_SO,cOutiLineNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -425,7 +427,7 @@ public class DBYan_Huo_update {
 			}
 			DB.closeResultSet(rs);
 			DB.closeConn(conn0);
-			System.out.println("提交入库接口bReceive的状态"+bReceive);
+			LoggerUtil.info("提交入库接口bReceive的状态"+bReceive);
 			if (!String_Tool.isEmpty(bReceive) && bReceive.equals("1")) {//已经入库了返回true
 				return true;
 			} else {
@@ -435,8 +437,8 @@ public class DBYan_Huo_update {
 					conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 					JSONObject obj = array.getJSONObject(0);
 					strrandom = GetcSheetno.getfen_dian_ru_ku_dan_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-					System.out.println(obj.getString("cSupplierNo"));
-					System.out.println(strrandom);
+					LoggerUtil.info(obj.getString("cSupplierNo"));
+					LoggerUtil.info(strrandom);
 					PreparedStatement past1 = conn.prepareStatement("INSERT INTO wh_InWarehouseDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit,cUnitedNo,fQty_Original) values (?,?,?,?,?,?,?,?,?,?,?,?)");
 					PreparedStatement past11 = conn.prepareStatement("update t_cStoreGoods set  fCKPrice=?,cCkPriceInSheetno=? where cStoreNo=? and cGoodsNo=? ");
 					
@@ -508,7 +510,7 @@ public class DBYan_Huo_update {
 							.prepareStatement("UPdate wh_StockVerify  set bReceive ='1' where cSheetno = ? ");
 					past2.setString(1, obj.getString("cSheetno"));
 					int a = past2.executeUpdate();
-					System.out.println(a);
+					LoggerUtil.info(a);
 					DB.closePreparedStatement(past2);
 					DB.closeConn(conn1);
 
@@ -517,7 +519,7 @@ public class DBYan_Huo_update {
 							.prepareStatement("UPdate wh_StockVerify  set bReceive ='1' where cSheetno = ? ");
 					past3.setString(1, obj.getString("cSheetno"));
 					int b = past3.executeUpdate();
-					System.out.println(b);
+					LoggerUtil.info(b);
 					DB.closePreparedStatement(past3);
 					if (a > 0 || b > 0) {
 						conn.commit();
@@ -559,7 +561,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_ru_ku_dan_no(conn, String_Tool.DataBaseYear(),obj.getString("cStoreNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				past1 = conn.prepareStatement(
@@ -621,7 +623,7 @@ public class DBYan_Huo_update {
 					"UPdate wh_cStoreOutWarehouse   set  bShip='1', bOutYH='1',  bReceive ='1' where cSheetno = ? ");
 			past2.setString(1, obj.getString("cSheetno"));
 			int a = past2.executeUpdate();
-			System.out.println(a);
+			LoggerUtil.info(a);
 			DB.closePreparedStatement(past2);
 
 			if (a > 0) {
@@ -658,7 +660,7 @@ public class DBYan_Huo_update {
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_tui_huo_no(conn, String_Tool.DataBaseYear(),
 					obj.getString("cClientNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			past1 = conn.prepareStatement(
 					"INSERT INTO WH_cStoreReturnGoodsDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit) values (?,?,?,?,?,?,?,?,?,?)");
 			for (int i = 0; i < array.length(); i++) {
@@ -857,7 +859,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = obj.getString("cStoreNo") + String_Tool.reformat(); // 单号
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			String sql = "INSERT INTO t_StorePrint (dDate,cStoreNo,cSheetNo,cStoreName,cOperatorNo,cOperator,bPrint)values(?,?,?,?,?,?,?)";
 			past = conn.prepareStatement(sql);
 			past.setString(1, String_Tool.DataBaseYear_Month_Day());
@@ -906,7 +908,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_men_dian_zhi_pei_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement(
 					"INSERT INTO wh_StoreInWarehouseDetail (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,dProduct,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
@@ -956,7 +958,7 @@ public class DBYan_Huo_update {
 				past1.setString(12, "" + String_Tool
 						.String_IS_Two(Double.parseDouble(fNormalPrice) * (Double.parseDouble(fQuantity))));
 				past1.setString(13, "" + obj1.optString("dProduct")); //
-				System.out.println(obj1.optString("dProduct"));
+				LoggerUtil.info(obj1.optString("dProduct"));
 				past1.setString(14, "" + obj1.optString("fTimes"));
 				fMoney = Double.parseDouble(String_Tool.String_IS_Two(fInMoney)) + fMoney;
 				past1.addBatch();
@@ -1012,7 +1014,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_men_dian_zhi_pei_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement("INSERT INTO wh_StoreInWarehouseDetail (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,dProduct,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
 			for (int i = 0; i < array.length(); i++) {
@@ -1058,7 +1060,7 @@ public class DBYan_Huo_update {
 				past1.setString(12, "" + String_Tool
 						.String_IS_Two(Double.parseDouble(fNormalPrice) * (Double.parseDouble(fQuantity))));
 				past1.setString(13, "" + obj1.optString("dProduct")); //
-				System.out.println(obj1.optString("dProduct"));
+				LoggerUtil.info(obj1.optString("dProduct"));
 				past1.setString(14, "" + obj1.optString("fTimes"));
 				fMoney = Double.parseDouble(String_Tool.String_IS_Two(fInMoney)) + fMoney;
 				past1.addBatch();
@@ -1114,7 +1116,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_men_dian_zhi_pei_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement("INSERT INTO wh_InWarehouseDetail (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,fPrice_SO,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
 			for (int i = 0; i < array.length(); i++) {
@@ -1218,7 +1220,7 @@ public class DBYan_Huo_update {
 					"select SheetNo=" + new ReadConfig().getprop().getProperty("DataSource") + ".dbo.f_GenZsInsheetno('"
 							+ String_Tool.DataBaseYear() + "','" + obj.getString("cSupplierNo") + "')");
 
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement("INSERT INTO wh_InWarehouseDetail (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,fPrice_SO,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
 			for (int i = 0; i < array.length(); i++) {
@@ -1318,7 +1320,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_men_dian_chang_jia_cai_gou_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement("INSERT INTO  WH_StockDetail_lP (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,fPrice_SO,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
 			for (int i = 0; i < array.length(); i++) {
@@ -1419,7 +1421,7 @@ public class DBYan_Huo_update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_men_dian_chang_jia_cai_gou_no(conn, String_Tool.DataBaseYear(),obj.getString("cSupplierNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past1 = conn.prepareStatement("INSERT INTO  WH_StockDetail (cSheetNo,iLineNo,cGoodsNo,cBarcode,cGoodsName,fQuantity,fInPrice,fInMoney,fTaxPrice,fTaxMoney,fNoTaxPrice,fNoTaxMoney,fPrice_SO,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			double fQty = 0.0;
 			for (int i = 0; i < array.length(); i++) {
@@ -1522,7 +1524,7 @@ public class DBYan_Huo_update {
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_tui_huo_no(conn, String_Tool.DataBaseYear(),
 					obj.getString("cClientNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			past1 = conn.prepareStatement(
 					"INSERT INTO WH_cStoreReturnGoodsDetail (cSheetno,iLineNo,cGoodsName,cBarcode,fQuantity,fInPrice,fInMoney,dProduct,cGoodsNo,cUnit) values (?,?,?,?,?,?,?,?,?,?)");
 			for (int i = 0; i < array.length(); i++) {

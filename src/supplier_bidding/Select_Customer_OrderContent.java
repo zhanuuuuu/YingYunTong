@@ -2,12 +2,16 @@ package supplier_bidding;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 import bean.Head_affirm_Order;
@@ -29,13 +33,13 @@ public class Select_Customer_OrderContent extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String cSheetNo=request.getParameter("cSheetNo");
-			System.out.println(cSheetNo);
+			LoggerUtil.info(cSheetNo);
 			ArrayList<Head_affirm_Order> list=(ArrayList<Head_affirm_Order>) DB_Supplier_Bidding.Select_Customer_OrderContent(GetConnection.getBiddingConn(),cSheetNo);
 			if(list!=null&&list.size()>0){
 				 Gson gson=new Gson();
 				 String str= gson.toJson(list);
 				 out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ str + "}");
-				 System.out.println(str);
+				 LoggerUtil.info(str);
 			}
 			else{
 				 out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\""+ "" + "\"}");

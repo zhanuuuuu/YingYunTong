@@ -14,6 +14,8 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.TrustManager;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 public class HttpPostClient {
 
 	private final String CHARSET = "UTF-8";
@@ -43,7 +45,7 @@ public class HttpPostClient {
 			}
 			
 			URL url = new URL(BaseURL.getUrlForPath(path, enableSSL));
-			System.out.println("sendPost--->"+url.toString()+" enableSSL: "+enableSSL);
+			LoggerUtil.info("sendPost--->"+url.toString()+" enableSSL: "+enableSSL);
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT);
 			conn.setReadTimeout(DEFAULT_SOCKET_TIMEOUT);
@@ -125,7 +127,7 @@ public class HttpPostClient {
 		if (message.getTimeToLive() >=0) {
 			nvPair.put("time_to_live", String.valueOf(message.getTimeToLive()));
 		}
-		System.out.println(nvPair.toString()+message.getMsgContent().getMessage());
+		LoggerUtil.info(nvPair.toString()+message.getMsgContent().getMessage());
 		return mapWithParms(nvPair);
 	}
 

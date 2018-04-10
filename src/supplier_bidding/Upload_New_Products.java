@@ -3,16 +3,19 @@ package supplier_bidding;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.oreilly.servlet.MultipartRequest;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 import Tool.RenamePolicyCos;
@@ -48,7 +51,7 @@ public class Upload_New_Products extends HttpServlet {
 			multirequest = new MultipartRequest(request, fileDir.getAbsolutePath(), inmaxPostSize, "UTF-8",myRenamePolicyCos); // GBK中文编码模式上传文件 //所有的请求参数
 		
 			String data = multirequest.getParameter("data");// 获取普通信息
-			System.out.println(""+data);
+			LoggerUtil.info(""+data);
 			JSONArray array=new JSONArray(data);
 			Enumeration<String> filedFileNames = multirequest.getFileNames();
 			String filedName = null;
@@ -59,21 +62,19 @@ public class Upload_New_Products extends HttpServlet {
 					File uploadFile = multirequest.getFile(filedName);
 					// 获取未重命名的文件名称
 					String Originalname = multirequest.getOriginalFileName(filedName);
-					System.out.println(Originalname);
+					LoggerUtil.info(Originalname);
 					
 					
 					boolean a=DB_Supplier_Bidding.upload_New_Products(GetConnection.getBiddingConn(),array);
 					if (a) {
 						out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
 								+ 1+ "}");
-						System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-								+ 1+ "}");
+						LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ 1+ "}");
 					}
 					else{
 						out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 								+ 0 + "}");
-						System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
-								+ 0 + "}");
+						LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ 0 + "}");
 					}
 				}
 			}

@@ -6,24 +6,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import ModelRas.MD5key;
 import Tool.GetLog;
 import Tool.ReadConfig;
 import Tool.ResultSet_To_JSON;
@@ -39,12 +39,12 @@ public class DB {
 
 //		String a = "1234567890123";
 //		a = a.substring(1 - 1, 2);
-//		System.out.println(a);
+//		LoggerUtil.info(a);
 //		String fQuantity = "0344";
 //
 //		Double Kg = (double) (Integer.parseInt(fQuantity) / 1000);// 由g改成kg
-//		System.out.println(Kg );
-//		System.out.println(0344/1000);
+//		LoggerUtil.info(Kg );
+//		LoggerUtil.info(0344/1000);
 		Select_(GetConnection.getPos_SaleConn()) ;
 
 	}
@@ -57,7 +57,7 @@ public class DB {
 			rs = past.executeQuery();
 			String str = ResultSet_To_JSON.resultSetTostr(rs);
 			// JSONArray array=ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println(str);
+			LoggerUtil.info(str);
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class DB {
 		List<Request_Order_Json> list = new ArrayList<Request_Order_Json>();
 		try {
 			String sql = "select a.*,b.cTel,b.cStorename ,c.Describe,d.cOperatorNo,d.cOperator,d.dDate  from Simple_online.dbo.Order_Table a,posmanagement_main.dbo.t_Store b,Simple_online.dbo.Pay_way_Table c, Simple_online.dbo.Store_Receive_Order_Log d where Pay_state=? and a.cStoreNo=b.cStoreNo and a.Order_State<> 0 and cast(dbo.[getDayStr](a.Date_time) as datetime) between ? and ?  and a.cStoreNo=? and a.Pay_wayId=c.Pay_wayId and a.cSheetno=d.cSheetno "; // Order_State订单状态
-			System.out.println(sql);
+			LoggerUtil.info(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, Pay_state);
 			past.setString(2, start);
@@ -103,7 +103,7 @@ public class DB {
 				PreparedStatement past1 = conn.prepareStatement(
 						"select a.cGoodsImagePath,a.Description,b.cGoodsNo,b.cGoodsName,b.Num,b.Last_Price,b.Last_Money from  posmanagement_main.dbo.T_goods a, Simple_online.dbo.Order_Details  b where cSheetno= ? and a.cGoodsNo=b.cGoodsNo ");
 				past1.setString(1, cSheetno);
-				System.out.println(cSheetno);
+				LoggerUtil.info(cSheetno);
 				ResultSet rs1 = past1.executeQuery();
 				JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs1);
 
@@ -117,7 +117,7 @@ public class DB {
 				request_Order_Json.setcSheetno(cSheetno);
 				request_Order_Json.setDate_time(date_time);
 				request_Order_Json.setAll_Money(all_Money);
-				System.out.println(request_Order_Json.getAll_Money());
+				LoggerUtil.info(request_Order_Json.getAll_Money());
 				request_Order_Json.setPay_wayId(pay_wayId);
 				request_Order_Json.setSend_Money(send_Money);
 				request_Order_Json.setTotal_money(total_money);
@@ -148,7 +148,7 @@ public class DB {
 			} else {
 				str = "{\"resultStatus\":\"" + 0 + "\"," + "\"array\":" + array.toString() + "}";
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -164,7 +164,7 @@ public class DB {
 			PreparedStatement past = conn.prepareStatement(sql);
 			ResultSet rs = past.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println(array);
+			LoggerUtil.info(array);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -175,7 +175,7 @@ public class DB {
 
 	public static void init(String Ip, String DataSourceName) {
 		if (String_Tool.isEmpty(Ip) || String_Tool.isEmpty(DataSourceName)) {
-			System.out.println("配置文件没有数据");
+			LoggerUtil.info("配置文件没有数据");
 			return;
 		}
 		Properties p = new Properties();
@@ -225,7 +225,7 @@ public class DB {
 		BasicDataSource dataSource = (BasicDataSource) map.get(DataSourceName);
 		if (dataSource == null) {
 			init(Ip, DataSourceName);
-			System.out.println("新建连接池" + DataSourceName);
+			LoggerUtil.info("新建连接池" + DataSourceName);
 			dataSource = (BasicDataSource) map.get(DataSourceName);
 		}
 		return dataSource.getConnection();
@@ -235,7 +235,7 @@ public class DB {
 		BasicDataSource dataSource = (BasicDataSource) map.get(DataSourceName);
 		if (dataSource == null) {
 			init(Ip, DataSourceName, PassWord);
-			System.out.println("新建连接池" + DataSourceName);
+			LoggerUtil.info("新建连接池" + DataSourceName);
 			dataSource = (BasicDataSource) map.get(DataSourceName);
 		}
 		return dataSource.getConnection();

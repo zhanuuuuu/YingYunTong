@@ -11,13 +11,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 
-import ModelRas.MD5key;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 public class String_Tool {
 
@@ -193,11 +192,11 @@ public class String_Tool {
 	}
 
 	public static void main(String args[]) throws ParseException {
-		System.out.println(Dataadd(2));
+		LoggerUtil.info(Dataadd(2));
 		DataBaseTime();
 		
 		
-		System.out.println(reformat());
+		LoggerUtil.info(reformat());
 
 	}
 

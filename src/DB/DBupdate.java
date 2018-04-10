@@ -10,7 +10,8 @@ import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Tool.GetLog;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.GetcSheetno;
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
@@ -329,7 +330,7 @@ public class DBupdate {
 		CallableStatement c = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(GroupTypeNo);
+			LoggerUtil.info(GroupTypeNo);
 			c = conn.prepareCall("{call p_AppGetFreshSale (?,?,?,?,?)}");
 			c.setString(1, cStoreNo);
 			c.setString(2, dDate1);
@@ -352,7 +353,7 @@ public class DBupdate {
 		CallableStatement c = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(GroupTypeNo);
+			LoggerUtil.info(GroupTypeNo);
 			c = conn.prepareCall("{call p_AppGetFreshSale_OUTO (?,?,?,?,?)}");
 			c.setString(1, cStoreNo);
 			c.setString(2, dDate1);
@@ -410,7 +411,7 @@ public class DBupdate {
 				JSONObject obj = Store_array.getJSONObject(i);
 				sql = "INSERT INTO #tmp_Store (cStoreNo,cStoreName) values('" + obj.getString("cStoreNo") + "'" + ","
 						+ "'" + obj.getString("cStoreName") + "')";
-				System.out.println(sql);
+				LoggerUtil.info(sql);
 				stat.addBatch(sql);
 			}
 			for (int i = 0; i < Sup_array.length(); i++) {
@@ -438,11 +439,11 @@ public class DBupdate {
 		CallableStatement c = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(GroupTypeNo);
+			LoggerUtil.info(GroupTypeNo);
 			c = conn.prepareCall("{call p_AppGetFreshSale_Goods (?,?,?)}");
 			c.setString(1, cStoreNo);
 			c.setString(2, cWhNo);
-			System.out.println(GroupTypeNo);
+			LoggerUtil.info(GroupTypeNo);
 			c.setString(3, GroupTypeNo);
 			rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
@@ -594,12 +595,12 @@ public class DBupdate {
 
 			CallableStatement c = null;
 			c = conn.prepareCall("{call p_cStoreBhApplyTocStoreOut (?,?)}");
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			c.setString(1, strrandom);
 			c.registerOutParameter("return", java.sql.Types.LONGNVARCHAR);
 			c.execute();
 			String fage = c.getString("return");
-			System.out.println(fage);
+			LoggerUtil.info(fage);
 			DB.closeCallState(c);
 			if (fage.equals("0")) {
 				conn.rollback();
@@ -637,7 +638,7 @@ public class DBupdate {
 			c.setString(3, cStoreNo);
 			rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			return array;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -712,7 +713,7 @@ public class DBupdate {
 			pastselect.setString(3, obj.getString("cCustomerNo"));
 			ResultSet rs=pastselect.executeQuery(); //此箱子今天已经提交
 			if(rs.next()){
-				System.out.println("已经装了");
+				LoggerUtil.info("已经装了");
 				return 2;
 			}
 			PreparedStatement past = conn.prepareStatement("INSERT INTO wh_cStoreOutWarehouse_Sort (dDate,cSheetno,cStoreNo,cStoreName,cOperatorNo,cOperator,cWhNo,cWh,cDistBoxNo,cCustomerNo,cCustomer,dFillin,cFillinTime,cTime,cFillEmpNo,cFillEmp,jiesuanno,bExamin,cOutSerNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -897,7 +898,7 @@ public class DBupdate {
 		try {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			strrandom = GetcSheetno.get_zhuang_che_Sheetno(conn, String_Tool.DataBaseYear(), String_Tool.DataBaseM());
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			
 			PreparedStatement past = conn.prepareStatement("INSERT INTO wh_ShipSheetDetail (cSheetno,iLineNo,cSheetno_YH,cGoodsNo,cGoodsName,cBarcode,cUnitedNo,fQuantity,fInPrice,fInMoney,cUnit,fTimes) values (?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -983,7 +984,7 @@ public class DBupdate {
 				past2.setString(5, obj1.getString("cSheetno"));
 				past2.setString(6, String_Tool.DataBaseYear_Month_Day());
 				past2.setString(7, obj1.getString("cSheetNo_Pallet"));
-				System.out.println("" + i + obj1.getString("cSheetNo_Pallet"));
+				LoggerUtil.info("" + i + obj1.getString("cSheetNo_Pallet"));
 				past2.addBatch();
 
 			}

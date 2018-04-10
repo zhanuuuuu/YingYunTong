@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.GetConnection;
 import DB.Operation_update;
@@ -63,7 +63,7 @@ public class Select_box_Pallet_point extends HttpServlet {
 		else{
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"date\":" + array.toString() + "}");
 		
 		out.flush();
 		out.close();

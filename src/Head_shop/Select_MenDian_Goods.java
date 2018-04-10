@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -39,11 +41,11 @@ public class Select_MenDian_Goods extends HttpServlet {
 		PreparedStatement past = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(Number_of_pages);
-			System.out.println(cStoreNo);
+			LoggerUtil.info(Number_of_pages);
+			LoggerUtil.info(cStoreNo);
 			//--and  isnull(bStorage,0)=1  and ISNUll(bUnStock,0)='0'  and cBarcode not like '%X%'   and ISNUll(bDeled,0)='0' 
 			String sql=String_Tool.sql("cGoodsNo", "select a.cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=isnull(b.EndQty,0),a.fPreservationUp,a.fPreservationDown,a.fPreservation_soft,bStorage  from t_cStoreGoods a left join (select cGoodsNo,EndQty from t_goodsKuCurQty_wei where cStoreNo=? ) b on a.cGoodsNo=b.cGoodsNo where a.cStoreNo=?  ", Integer.parseInt(Number_of_pages));
-			System.out.println(sql);
+			LoggerUtil.info(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, cStoreNo);
 			past.setString(2, cStoreNo);

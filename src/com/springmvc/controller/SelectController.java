@@ -3,12 +3,16 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -65,7 +69,7 @@ public class SelectController {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String cStoreNo = request.getParameter("cStoreNo");
-		System.out.println(cStoreNo);
+		LoggerUtil.info(cStoreNo);
 		Connection conn = GetConnection.getStoreConn();
 		ResultSet rs = null;
 		PreparedStatement past = null;

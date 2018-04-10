@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.GetConnection;
 import DB.Operation_update;
@@ -43,7 +44,7 @@ public class Hand_in_Money extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String RMB = obj.getString("RMB");
@@ -69,8 +70,7 @@ public class Hand_in_Money extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + 1
 						+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"
-					+ 1 + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ 1 + "}");
 
 		} catch (Exception e) {
 			e.printStackTrace();

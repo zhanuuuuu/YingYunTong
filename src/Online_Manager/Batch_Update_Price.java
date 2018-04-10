@@ -2,12 +2,17 @@ package Online_Manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -31,7 +36,7 @@ public class Batch_Update_Price extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String data=request.getParameter("data");
-			System.out.println(data);
+			LoggerUtil.info(data);
 			JSONArray array=new JSONArray(data);
 			boolean str = Select_Online_Manager.Update_Goods(GetConnection.getStoreConn() , array);
 			if (str) {
@@ -39,7 +44,7 @@ public class Batch_Update_Price extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

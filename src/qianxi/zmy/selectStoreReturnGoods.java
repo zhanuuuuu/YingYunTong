@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import DB.DB;
-import DB.DBupdate;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
 

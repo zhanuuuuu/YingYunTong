@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 
@@ -34,16 +36,16 @@ public class Select_Yi_shipped_cSheetno extends HttpServlet {
 		try {
 			String cSupNo = request.getParameter("cSupNo");
 			String dDate = request.getParameter("dDate");
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			String str = "";
 			JSONArray array = DB_Supplier_Bidding.select_Yishipped_cSheetno(GetConnection.getBiddingConn(), cSupNo, dDate);
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\"" + str + "\"}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + str + "}");
 			}
 		}
 		catch (Exception e) {

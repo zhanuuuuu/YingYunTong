@@ -4,12 +4,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -57,9 +62,9 @@ public class Select_Fen_Dian_Goods extends HttpServlet {
 		PreparedStatement past = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(Number_of_pages);
+			LoggerUtil.info(Number_of_pages);
 			String sql=String_Tool.sql("cGoodsNo", "select  a.cGoodsNo,a.cGoodsName,a.cBarcode,a.cUnit,a.cSpec,a.fNormalPrice,a.fCKPrice, a.cSupNo,b.EndQty as fQty_Cur , a.fPreservationUp,a.fPreservationDown,a.fPreservation_soft,bStorage from t_cStoreGoods a,t_goodsKuCurQty_wei b where  a.cStoreNo=? and b.cStoreNo=a.cStoreNo and a.cGoodsNo=b.cGoodsNo", Integer.parseInt(Number_of_pages));
-		    System.out.println(sql);
+		    LoggerUtil.info(sql);
 			past = conn.prepareStatement(sql);
 			past.setString(1, cStoreNo);
 		    rs=  past.executeQuery();

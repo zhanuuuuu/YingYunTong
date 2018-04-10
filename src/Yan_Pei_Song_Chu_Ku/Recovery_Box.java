@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import Tool.iStatus_Change;
 
@@ -45,7 +47,7 @@ public class Recovery_Box extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data=request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 		/*	托盘：不能使用 -1， 可以使用0，正在使用1，随车返程中2
 			配送箱：不能使用 -1， 可以使用0，正在使用1，随车返程中2*/
@@ -83,10 +85,10 @@ public class Recovery_Box extends HttpServlet {
 			}
 			if (a >=1) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

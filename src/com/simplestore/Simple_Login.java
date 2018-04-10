@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -51,7 +53,7 @@ public class Simple_Login extends HttpServlet {
 			JSONArray array=ResultSet_To_JSON.resultSetToJsonArray(rs);
 			if (array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString() + "}");

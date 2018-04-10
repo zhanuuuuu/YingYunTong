@@ -5,13 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ReadConfig;
@@ -33,7 +38,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("name");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn = null;
 		String SheetNo = null;
 		double fMoney = 0;
@@ -49,7 +54,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 			if (rs1.next()) {
 				SheetNo = rs1.getString("SheetNo");
 			}
-			System.out.println(SheetNo);
+			LoggerUtil.info(SheetNo);
 			DB.closeResultSet(rs1);
 			DB.closePreparedStatement(past1);
 
@@ -58,7 +63,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				
-			   System.out.println(obj1.toString());
+			   LoggerUtil.info(obj1.toString());
 				
 				past_detail.setString(1, SheetNo);
 				past_detail.setString(2, "" + i);
@@ -80,13 +85,13 @@ public class Upload_Examine_cargo extends HttpServlet {
 				past_detail.setString(6, "");// obj1.getString("cUnitedNo")
 				past_detail.setString(7, obj1.getString("fQuantity"));
 				
-				System.out.println(obj1.getString("fQuantity"));
+				LoggerUtil.info(obj1.getString("fQuantity"));
 				past_detail.setString(8, obj1.getString("fInPrice"));
 				
-				System.out.println(obj1.getString("fInPrice"));
+				LoggerUtil.info(obj1.getString("fInPrice"));
 				past_detail.setString(9, obj1.getString("fInMoney"));
 				
-				System.out.println(obj1.getString("fInMoney"));
+				LoggerUtil.info(obj1.getString("fInMoney"));
 				double fInMoney = Double.parseDouble(obj1.getString("fInMoney"));
 				fMoney = fInMoney + fMoney;
 				double fTaxrate = (Double.parseDouble(fNormalPrice) - Double.parseDouble(obj1.getString("fInPrice")))
@@ -143,7 +148,7 @@ public class Upload_Examine_cargo extends HttpServlet {
 			past.execute();
 			DB.closePreparedStatement(past);
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (Exception e) {

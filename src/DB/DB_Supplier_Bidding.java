@@ -11,6 +11,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -314,8 +315,8 @@ public class DB_Supplier_Bidding {
 			past = conn.prepareStatement(sql);
 			past.setString(1, cSupNo);
 			past.setString(2, dDate);
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			rs = past.executeQuery();
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
@@ -352,8 +353,8 @@ public class DB_Supplier_Bidding {
 			past = conn.prepareStatement(sql);
 			past.setString(1, cSupNo);
 			past.setString(2, dDate);
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			rs = past.executeQuery();
 			JSONArray list = new JSONArray();
 			JSONObject obj = new JSONObject();
@@ -389,8 +390,8 @@ public class DB_Supplier_Bidding {
 			past = conn.prepareStatement(sql);
 			past.setString(1, cSupNo);
 			past.setString(2, dDate);
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			rs = past.executeQuery();
 			JSONArray list = new JSONArray();
 			JSONObject obj = new JSONObject();
@@ -462,7 +463,7 @@ public class DB_Supplier_Bidding {
 				JSONArray array1 = ResultSet_To_JSON.resultSetToJsonArray(rs1);
 				List<cSheetNo> as = gson.fromJson(array1.toString(), new TypeToken<List<cSheetNo>>() {
 				}.getType());
-				System.out.println(array1);
+				LoggerUtil.info(array1);
 				a.setList(as);
 				list.add(a);
 			}
@@ -752,27 +753,27 @@ public class DB_Supplier_Bidding {
 		Gson gson = new Gson();
 		// select_Customer_Order(Connection conn, String cSupNo, String dDate)
 		// String sre = gson.toJson(select_Customer_Order();
-		// System.out.println(
+		// LoggerUtil.info(
 		// new
 		// Gson().toJson(select_head_request_order(GetConnection.getStoreConn(),
 		// "1117", "2017-03-12")));
-		// System.out.println(new
+		// LoggerUtil.info(new
 		// Gson().toJson(select_Customer_Order(GetConnection.getBiddingConn(),
 		// "1001", "2017-03-12")));
-		// System.out.println(new
+		// LoggerUtil.info(new
 		// Gson().toJson(Select_Customer_OrderContent(GetConnection.getBiddingConn(),
 		// "1")));
-		// System.out.println(sre);
-		// System.out.println(Select_driver_the_adress(GetConnection.getBiddingConn(),
+		// LoggerUtil.info(sre);
+		// LoggerUtil.info(Select_driver_the_adress(GetConnection.getBiddingConn(),
 		// "1"));
-		// System.out.println(new
+		// LoggerUtil.info(new
 		// Gson().toJson(select_head_request_order(GetConnection.getStoreConn(),
 		// "1117","2017-03-12")));
-		// System.out.println(
+		// LoggerUtil.info(
 		// new
 		// Gson().toJson(select_Select_Bidding_Order(GetConnection.getBiddingConn(),
 		// "1117", "2017-04-18")));
-		System.out.println(Select_Select_Prepare_cSheetno(GetConnection.getBiddingConn(), "1117", "2017-04-19"));
+		LoggerUtil.info(Select_Select_Prepare_cSheetno(GetConnection.getBiddingConn(), "1117", "2017-04-19"));
 	}
 
 }

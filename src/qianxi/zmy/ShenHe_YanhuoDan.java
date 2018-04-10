@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import Tool.ResultSet_To_JSON;
 
 /**
  * Servlet implementation class ShenHe_YanhuoDan
@@ -43,8 +44,8 @@ public class ShenHe_YanhuoDan extends HttpServlet {
 		String data = request.getParameter("data");
 		String cStoreNO = request.getParameter("cStoreNO");
 		
-		System.out.println(cSheetno);
-		System.out.println(cStoreNO);
+		LoggerUtil.info(cSheetno);
+		LoggerUtil.info(cStoreNO);
 		Double inMoney=0.0;
 		
 		if(cSheetno!=null || cOperatorNo!=null || cOperator!=null || data!=null || cStoreNO!=null){
@@ -63,7 +64,7 @@ public class ShenHe_YanhuoDan extends HttpServlet {
 				for(int i=0;i<array.length();i++){
 					
 					JSONObject obj=array.getJSONObject(i);
-					System.out.println(obj.getBoolean("isModefy"));
+					LoggerUtil.info(obj.getBoolean("isModefy"));
 					inMoney=inMoney+Double.parseDouble(obj.getString("fInMoney"));
 					String fNormalPrice="0.0";
 					if(obj.getBoolean("isModefy")){

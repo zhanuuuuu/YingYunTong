@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-
 import DB.DBYan_Huo_update;
-import DB.DBupdate;
 import DB.GetConnection;
 
 public class Select_Yi_Yan_Tuo_Pan_Dan extends HttpServlet {

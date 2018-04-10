@@ -2,10 +2,8 @@ package Offline_Pos;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -19,8 +17,6 @@ import org.json.JSONObject;
 
 import DB.DB;
 import DB.GetConnection;
-import ModelRas.MD5key;
-import Tool.ResultSet_To_JSON;
 
 @WebServlet(description = "Ã·ΩªΩ·À„", urlPatterns = { "/Upload_Jie_Suan" })
 public class Upload_Jie_Suan extends HttpServlet {

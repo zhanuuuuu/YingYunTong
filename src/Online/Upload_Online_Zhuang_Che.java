@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Tool.String_Tool;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.GetConnection;
 import DB.Online;
+import Tool.String_Tool;
 
 public class Upload_Online_Zhuang_Che extends HttpServlet {
 
@@ -51,19 +52,19 @@ public class Upload_Online_Zhuang_Che extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj=new JSONObject(data);
 			JSONArray array=obj.getJSONArray("data");
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			String a = Online.Insert_Into_onlineZhuang_Che_Dan(GetConnection.getStoreConn(), array);
 			if (String_Tool.isEmpty(a)) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + a + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 			} 
 			else {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + a + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
 			
 		} catch (Exception e) {

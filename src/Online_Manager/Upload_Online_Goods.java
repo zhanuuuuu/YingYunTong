@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -32,7 +34,7 @@ public class Upload_Online_Goods extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String data=request.getParameter("data");
-			System.out.println(data);
+			LoggerUtil.info(data);
 			JSONArray array=new JSONArray(data);
 			boolean str = Select_Online_Manager.Update_Goods(GetConnection.getStoreConn() , array);
 			if (str) {
@@ -40,7 +42,7 @@ public class Upload_Online_Goods extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

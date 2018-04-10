@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
@@ -51,7 +52,7 @@ public class Upload_Fresh_Ru_ku extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = new JSONArray(data);
 			boolean a = DBYan_Huo_update.insert_into_fresh_ru_ku_dan(GetConnection.getStoreConn(), array);
@@ -61,7 +62,7 @@ public class Upload_Fresh_Ru_ku extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

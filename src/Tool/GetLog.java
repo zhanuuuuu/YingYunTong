@@ -2,7 +2,7 @@ package Tool;
 
 import org.apache.log4j.Logger;
 
-import DB.GetConnection;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 public class GetLog {
 	
@@ -12,16 +12,16 @@ public class GetLog {
 	}
 	
 	public static void main(String args[]){
-		System.out.println(123);
+		LoggerUtil.info(123);
 		try{
-		     System.out.println(3/0);;
+		     LoggerUtil.info(3/0);;
 		}catch (Exception e) {
 			e.printStackTrace();
 			Logger.getLogger(GetLog.class).error(e.getCause());
-			System.out.println();
+			LoggerUtil.info("");
 			GetLog.getLogger(GetLog.class).error(e.getLocalizedMessage());
-//			System.out.println(e.getMessage());
-//			System.out.println(e.toString());
+//			LoggerUtil.info(e.getMessage());
+//			LoggerUtil.info(e.toString());
 		}
 		
 	}

@@ -5,10 +5,13 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Properties;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 public class Version extends HttpServlet {
 
@@ -63,7 +66,7 @@ public class Version extends HttpServlet {
 			out.print(str);
 			out.flush();
 			out.close();
-			System.out.println(str);
+			LoggerUtil.info(str);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

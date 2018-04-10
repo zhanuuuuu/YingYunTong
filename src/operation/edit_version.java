@@ -1,7 +1,6 @@
 package operation;
 
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
@@ -10,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 public class edit_version extends HttpServlet {
 
@@ -54,9 +55,9 @@ public class edit_version extends HttpServlet {
 		String version = request.getParameter("version");
 		String force = request.getParameter("force");
 		String explain = request.getParameter("explain");
-		System.out.println(version );
-		System.out.println(force);
-		System.out.println(explain);
+		LoggerUtil.info(version );
+		LoggerUtil.info(force);
+		LoggerUtil.info(explain);
 		FileOutputStream oFile = new FileOutputStream("version.properties",
 				true);// true表示追加打开
 		pro.setProperty("version", version);
@@ -65,7 +66,7 @@ public class edit_version extends HttpServlet {
 		pro.store(oFile, "The New properties file");
 		oFile.close();
 
-		System.out.println("到此");
+		LoggerUtil.info("到此");
 		out.flush();
 		out.close();
 

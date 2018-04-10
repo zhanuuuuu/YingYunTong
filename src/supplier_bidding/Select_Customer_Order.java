@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -35,9 +37,9 @@ public class Select_Customer_Order extends HttpServlet {
 			String cSupNo = request.getParameter("cSupNo");
 			String dDate = request.getParameter("dDate");
 			String Head_cStoreNo = request.getParameter("Head_cStoreNo");
-			System.out.println(cSupNo);
-			System.out.println(dDate);
-			System.out.println(Head_cStoreNo);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
+			LoggerUtil.info(Head_cStoreNo);
 			String str = "";
 			String resultStatus = "0";
 			if (String_Tool.isEmpty(cSupNo)) { // 司机查看 Head_cStoreNo, dDate
@@ -56,10 +58,10 @@ public class Select_Customer_Order extends HttpServlet {
 			}
 			if (resultStatus.equals("1")) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + str + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + str + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":\"" + str + "\"}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + str + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

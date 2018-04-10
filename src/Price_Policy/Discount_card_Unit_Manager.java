@@ -4,21 +4,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
-import Tool.ResultSet_To_JSON;
 
 public class Discount_card_Unit_Manager extends HttpServlet {
 
@@ -49,7 +46,7 @@ public class Discount_card_Unit_Manager extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Connection conn = GetConnection.getStoreConn();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		CallableStatement c = null;
 		try {
 			JSONObject obj = new JSONObject(data);

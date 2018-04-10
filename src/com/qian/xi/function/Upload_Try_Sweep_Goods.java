@@ -4,13 +4,18 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -34,8 +39,8 @@ public class Upload_Try_Sweep_Goods extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data_have");
 		String data1=request.getParameter("data_nothave");
-		System.out.println(data);
-		System.out.println(data1);
+		LoggerUtil.info(data);
+		LoggerUtil.info(data1);
 		try {
 			JSONArray array=new JSONArray(data);
 			JSONArray array1=new JSONArray(data1);
@@ -46,7 +51,7 @@ public class Upload_Try_Sweep_Goods extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +66,7 @@ public class Upload_Try_Sweep_Goods extends HttpServlet {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = "try_sw"+obj.getString("cStoreNo") + String_Tool.reformat(); // 单号
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			String sql = "INSERT INTO t_Try_Sweep_Goods (dDate,cStoreNo,cSheetNo,cStoreName,cOperatorNo,cOperator,bPrint)values(?,?,?,?,?,?,?)";
 			past = conn.prepareStatement(sql);
 			past.setString(1, String_Tool.DataBaseYear_Month_Day());

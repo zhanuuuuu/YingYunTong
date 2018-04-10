@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.GetConnection;
 import DB.Online;
@@ -43,18 +44,18 @@ public class Upload_Online_Tuo_Pan extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array=new JSONArray(data);
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			boolean a = Online.Insert_Into_Tuo_Pan(GetConnection.getStoreConn(), array);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\""+ "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 			} 
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
 			
 		} catch (Exception e) {

@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -37,7 +40,7 @@ public class Confirm_Stock_Up extends HttpServlet {
 			past.setString(1, cSheetno);
 			int a = past.executeUpdate();
 			out.print("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"," + "\"dDate\":\"" + a + "\"}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

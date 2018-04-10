@@ -1,12 +1,15 @@
 package Head_shop;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 @WebServlet(description = "查询所有的供应商", urlPatterns = { "/Select_Total_Supplier" })

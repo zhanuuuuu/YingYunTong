@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import ModelRas.MD5key;
@@ -53,16 +55,16 @@ public class p_Qry_card_activity extends HttpServlet {
 				
 				if (array != null && array.length() > 0) {
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
 				} else {
 					out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
 				}
 			} catch (Exception e) {
 				out.print("{\"resultStatus\":\"" + -1 + "\"," + "\"dData\":" + array.toString() + "}");
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

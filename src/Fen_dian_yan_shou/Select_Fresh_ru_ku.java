@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import DB.DBYan_Huo_update;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -50,8 +51,7 @@ public class Select_Fresh_ru_ku extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","
-					+ "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","	+ "\"dDate\":" + array.toString() + "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + -1 + "\"," + "\"dDate\":"
 					+ null + "}");

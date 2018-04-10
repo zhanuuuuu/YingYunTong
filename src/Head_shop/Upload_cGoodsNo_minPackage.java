@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 
@@ -36,8 +38,8 @@ public class Upload_cGoodsNo_minPackage extends HttpServlet {
 		String cGoodsNo_minPackage=request.getParameter("cGoodsNo_minPackage");
 		PreparedStatement past = null;
 		try {
-			System.out.println(cGoodsNo);
-			System.out.println(cGoodsNo_minPackage);
+			LoggerUtil.info(cGoodsNo);
+			LoggerUtil.info(cGoodsNo_minPackage);
 			past = conn.prepareStatement("UPDATE t_Goods set cGoodsNo_minPackage =? where cGoodsNo=?");
 			past.setString(1, cGoodsNo);
 			past.setString(2, cGoodsNo_minPackage);

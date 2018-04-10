@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -45,7 +47,7 @@ public class Select_Larage_group_Goods extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		// @cStoreNo varchar(32), --门店号
 		// @dDate1 datetime, --开始日期2
 		// @dDate2 datetime, --结束日期2
@@ -59,7 +61,7 @@ public class Select_Larage_group_Goods extends HttpServlet {
 			String dDate2 = obj.optString("dDate2");
 			String cWhNo = obj.getString("cWhNo");
 			String GroupTypeNo = obj.getString("GroupTypeNo").replace("[", ",").replace("]", ",").replace(" ", "");
-			System.out.println(GroupTypeNo);
+			LoggerUtil.info(GroupTypeNo);
 			JSONArray array = null;
 			if (String_Tool.isEmpty(dDate1)) {
 				array = DBupdate.Select_Larage_group_Good(GetConnection.getStoreConn(), cStoreNo,cWhNo, GroupTypeNo);
@@ -75,7 +77,7 @@ public class Select_Larage_group_Goods extends HttpServlet {
 						+ "0" + "}");
 			}
 			/*
-			 * System.out.println("{\"resultStatus\":\"" + 1 + "\"," +
+			 * LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," +
 			 * "\"dDate\":" + array + "}");
 			 */
 		} catch (Exception e) {

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 
 import DB.DB;
@@ -69,17 +70,17 @@ public class Vip_Save extends HttpServlet {
 		cStyle=  java.net.URLDecoder.decode(cStyle,"GBK");  
 		String cStoreNo = request.getParameter("cStoreNo");
 		String sign = request.getParameter("sign");
-		System.out.println(cVipNo);
-		System.out.println(dSaledate);
-		System.out.println(cSalesheetNo);
-		System.out.println(fMoney_save);
-		System.out.println(cOpertorNo);
-		System.out.println(cOperName);
-		System.out.println(dSaveTime);
-		System.out.println(cPostion);
-		System.out.println(cStyle);
-		System.out.println(cStoreNo);
-		System.out.println(sign);
+		LoggerUtil.info(cVipNo);
+		LoggerUtil.info(dSaledate);
+		LoggerUtil.info(cSalesheetNo);
+		LoggerUtil.info(fMoney_save);
+		LoggerUtil.info(cOpertorNo);
+		LoggerUtil.info(cOperName);
+		LoggerUtil.info(dSaveTime);
+		LoggerUtil.info(cPostion);
+		LoggerUtil.info(cStyle);
+		LoggerUtil.info(cStoreNo);
+		LoggerUtil.info(sign);
 		String str = "";
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (MD5key.getMD5Pass(cVipNo + "ware13391810430").equals(sign)) {
@@ -110,7 +111,7 @@ public class Vip_Save extends HttpServlet {
 				str = gson.toJson(list);
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
 				
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + str + "}");
 				conn.commit();
 				conn.setAutoCommit(true);
 			} catch (Exception e) {
@@ -128,7 +129,7 @@ public class Vip_Save extends HttpServlet {
 				}
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

@@ -5,12 +5,17 @@ import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import ModelRas.MD5key;
@@ -39,8 +44,8 @@ public class Select_Moneycard extends HttpServlet {
 		String cardno = request.getParameter("cardno");// 9009
 		String fMoney_Cust = request.getParameter("fMoney_Cust");
 		String sign = request.getParameter("sign");
-		System.out.println(cardno);
-		System.out.println(fMoney_Cust);
+		LoggerUtil.info(cardno);
+		LoggerUtil.info(fMoney_Cust);
 		JSONArray array=new JSONArray();
 		if (MD5key.getMD5Pass(cardno + "ware13391810430").equals(sign)) {
 			try {
@@ -53,17 +58,17 @@ public class Select_Moneycard extends HttpServlet {
 				if (array != null && array.length() > 0) {
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
 				
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
 				} else {
 					out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
 					
-					System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
 				}
 			} catch (Exception e) {
 				out.print("{\"resultStatus\":\"" + -1 + "\"," + "\"dData\":" + array.toString() + "}");
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

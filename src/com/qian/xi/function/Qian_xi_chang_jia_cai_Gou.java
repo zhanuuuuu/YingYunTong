@@ -1,12 +1,17 @@
 package com.qian.xi.function;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -32,22 +37,22 @@ public class Qian_xi_chang_jia_cai_Gou extends HttpServlet {
 		String data = request.getParameter("data");
 		String cStoreNo = request.getParameter("cStoreNo");
 		String cStoreName = request.getParameter("cStoreName");
-		System.out.println(cStoreNo);
-		System.out.println(cStoreName);
-		System.out.println(data);
+		LoggerUtil.info(cStoreNo);
+		LoggerUtil.info(cStoreName);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = new JSONArray(data);// 千禧厂家采购
 			boolean a = DBYan_Huo_update.Qianxi_Chang_Jia_Cai_Gou(GetConnection.getStoreConn(), array, cStoreNo,
 					cStoreName);
 			if (a) {
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (Exception e) {
-			System.out.println("{\"resultStatus\":\"" + "服务器异常" + "\"" + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + "服务器异常" + "\"" + "}");
 			e.printStackTrace();
 		}
 		out.flush();

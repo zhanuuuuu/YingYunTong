@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
-import Tool.String_Tool;
 
 /**
  * 自动补货接口  查询
@@ -49,7 +50,7 @@ public class Select_Larage_group_Goods_Zi_dong extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		// @cStoreNo varchar(32), --门店号
 		// @dDate1 datetime, --开始日期2
 		// @dDate2 datetime, --结束日期2
@@ -71,7 +72,7 @@ public class Select_Larage_group_Goods_Zi_dong extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 	
 		} catch (Exception e) {
 			

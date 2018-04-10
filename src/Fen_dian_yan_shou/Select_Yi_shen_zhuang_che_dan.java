@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -47,7 +49,7 @@ public class Select_Yi_shen_zhuang_che_dan extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data=request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try { 
 			JSONObject obj=new JSONObject(data);
 			String cStoreNo=obj.getString("cStoreNo");
@@ -60,8 +62,7 @@ public class Select_Yi_shen_zhuang_che_dan extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","
-					+ "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","	+ "\"dDate\":" + array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

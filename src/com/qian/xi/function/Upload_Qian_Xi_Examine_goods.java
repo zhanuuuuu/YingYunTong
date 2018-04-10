@@ -13,8 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.GetcSheetno;
@@ -51,7 +55,7 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 		try {
 			JSONArray array = new JSONArray(data);
 			
-			System.out.println("data   zmy:"+array.toString());
+			LoggerUtil.info("data   zmy:"+array.toString());
 			conn = GetConnection.getStoreConn();
 			conn.setAutoCommit(false);
 
@@ -117,14 +121,14 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 				//
 				if(String.valueOf(fTaxrate).equals("Infinity")){
 					fTaxrate=0.00;
-					System.out.println("123:                "+fTaxrate);
+					LoggerUtil.info("123:                "+fTaxrate);
 				}
 				
 				//past_detail.setString(10, "" + fTaxrate);
 				
 				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
 				{
-					System.out.println("TAG:                "+fTaxrate);
+					LoggerUtil.info("TAG:                "+fTaxrate);
 					fTaxrate=0.00;
 				}
 				
@@ -215,7 +219,7 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 					/* 插入门店要供应商表 */
 					JSONObject obj_str = Detail_St_array.getJSONObject(j);
 
-					System.out.println("单号"+cStoreSheetNo+"序号"+(j));
+					LoggerUtil.info("单号"+cStoreSheetNo+"序号"+(j));
 
 					past_detail_St.setString(1, cStoreSheetNo);
 					past_detail_St.setString(2, "" + (j+1));
@@ -249,14 +253,14 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 					
 					if(String.valueOf(fTaxrate).equals("Infinity")){
 						fTaxrate=0.00;
-						System.out.println("123:                "+fTaxrate);
+						LoggerUtil.info("123:                "+fTaxrate);
 					}
 					
 					//past_detail.setString(10, "" + fTaxrate);
 					
 					if(Double.parseDouble(obj_str.getString("fInPrice")) == 0)
 					{
-						System.out.println("TAG:                "+fTaxrate);
+						LoggerUtil.info("TAG:                "+fTaxrate);
 						fTaxrate=0.00;
 					}
 					
@@ -366,14 +370,14 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 						/ Double.parseDouble(obj1.getString("fInPrice"));
 				if(String.valueOf(fTaxrate).equals("Infinity")){
 					fTaxrate=0.00;
-					System.out.println("123:                "+fTaxrate);
+					LoggerUtil.info("123:                "+fTaxrate);
 				}
 				
 				//past_detail.setString(10, "" + fTaxrate);
 				
 				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
 				{
-					System.out.println("TAG:                "+fTaxrate);
+					LoggerUtil.info("TAG:                "+fTaxrate);
 					fTaxrate=0.00;
 				}
 				
@@ -436,14 +440,14 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 				
 				if(String.valueOf(fTaxrate).equals("Infinity")){
 					fTaxrate=0.00;
-					System.out.println("123:                "+fTaxrate);
+					LoggerUtil.info("123:                "+fTaxrate);
 				}
 				
 				//past_detail.setString(10, "" + fTaxrate);
 				
 				if(Double.parseDouble(obj1.getString("fInPrice")) == 0)
 				{
-					System.out.println("TAG:                "+fTaxrate);
+					LoggerUtil.info("TAG:                "+fTaxrate);
 					fTaxrate=0.00;
 				}
 				
@@ -476,7 +480,7 @@ public class Upload_Qian_Xi_Examine_goods extends HttpServlet {
 			
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
 
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
 			
 		} catch (Exception e) {
 			try {

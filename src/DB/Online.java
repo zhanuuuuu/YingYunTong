@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import Tool.GetcSheetno;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
 
@@ -95,7 +98,7 @@ public class Online {
 
 			PreparedStatement past3 = conn1
 					.prepareStatement("Update WH_BhApply_Online set bReceive ='1' where cSheetno = ?");
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			PreparedStatement past4 = conn.prepareStatement("INSERT INTO  Customer_Order_and_Sorting_No (Sorting_cSheetno,Customer_OrderNo)values(?,?)");
 			for (int i = 0; i < array1.length(); i++) { // 把这个出库单的商品设置为已经出库
 				JSONObject obj2 = array1.getJSONObject(i);

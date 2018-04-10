@@ -19,6 +19,8 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 public class BarChart {
 	// 静态代码块
 	static {
@@ -41,7 +43,7 @@ public class BarChart {
 		JFreeChart chart = ChartFactory.createBarChart3D("苹果销售", "苹果种类", "销量", dataset, PlotOrientation.VERTICAL, true,
 				true, true);
 		String filename = ServletUtilities.saveChartAsJPEG(chart, 700, 500, session);
-		System.out.println(filename);
+		LoggerUtil.info(filename);
 		return filename;
 	}
 
@@ -89,7 +91,7 @@ public class BarChart {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(fileName);
+		LoggerUtil.info(fileName);
 		return fileName;
 	}
 

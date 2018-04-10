@@ -4,13 +4,18 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -32,7 +37,7 @@ public class Simple_Upload_shelef extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn = GetConnection.getStoreConn();
 		try {
 			JSONArray array = new JSONArray(data);
@@ -48,7 +53,7 @@ public class Simple_Upload_shelef extends HttpServlet {
 				pasts.setString(2, obj.getString("cShelfNo"));
 				ResultSet rs = pasts.executeQuery();
 				if (rs.next()) {
-					System.out.println("已经插入了就不插入了");
+					LoggerUtil.info("已经插入了就不插入了");
 				} else {
 					past.setString(1, obj.getString("cShelfNo"));
 					past.setString(2, obj.getString("cShelfName"));
@@ -70,7 +75,7 @@ public class Simple_Upload_shelef extends HttpServlet {
 				ResultSet rs1 = pasts1.executeQuery();
 				
 				if(rs1.next()) {
-					System.out.println("已经插入了就不插入了");
+					LoggerUtil.info("已经插入了就不插入了");
 				}else {
 					past1.setString(1, obj.getString("cGoodsNo"));
 					past1.setString(2, obj.getString("name"));
@@ -94,7 +99,7 @@ public class Simple_Upload_shelef extends HttpServlet {
 			past.executeBatch();
 			past1.executeBatch();
 			out.print("{\"resultStatus\":\"" + 1 + "\"}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + -1 + "\"}");
 			e.printStackTrace();

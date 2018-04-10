@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -43,7 +45,7 @@ public class Select_Men_Dian_Gong_Ying_Shang extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String cStoreNo = request.getParameter("cStoreNo");
-		System.out.println(cStoreNo);
+		LoggerUtil.info(cStoreNo);
 		Connection conn=GetConnection.getStoreConn();
 		CallableStatement c = null;
 		ResultSet rs = null;
@@ -52,7 +54,7 @@ public class Select_Men_Dian_Gong_Ying_Shang extends HttpServlet {
 			c.setString(1, cStoreNo);
 			rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println(array);
+			LoggerUtil.info(array);
 			out.write(String_Tool.get_output_str(array));
 		} catch (Exception e) {
 			e.printStackTrace();

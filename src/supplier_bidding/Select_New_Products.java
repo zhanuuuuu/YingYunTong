@@ -1,12 +1,17 @@
 package supplier_bidding;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 
@@ -29,19 +34,17 @@ public class Select_New_Products extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String cSupNo=request.getParameter("cSupNo");
-			System.out.println(cSupNo);
+			LoggerUtil.info(cSupNo);
 			JSONArray array=DB_Supplier_Bidding.select_New_Products(GetConnection.getBiddingConn(), cSupNo);
 			if (array!=null&&array.length()>0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-						+ array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 						+ array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
-						+ array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

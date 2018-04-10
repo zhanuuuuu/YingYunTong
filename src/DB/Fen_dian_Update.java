@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.GetcSheetno;
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
@@ -25,7 +29,7 @@ public class Fen_dian_Update {
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.getfen_dian_yan_zong_bu_no(conn, String_Tool.DataBaseYear(),
 					obj.getString("cCustomerNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 
 			for (int i = 0; i < array1.length(); i++) {
 				JSONObject obj1 = array1.getJSONObject(i);
@@ -37,7 +41,7 @@ public class Fen_dian_Update {
 				past8.setString(4, obj.getString("cCustomerNo"));// 开始的时候,这个是获取店铺的编号
 				ResultSet rs8 = past8.executeQuery();
 				if (rs8.next()) {
-					System.out.println("已经验货");
+					LoggerUtil.info("已经验货");
 					DB.closeResultSet(rs8);
 					DB.closePreparedStatement(past8);
 					return true;
@@ -56,7 +60,7 @@ public class Fen_dian_Update {
 			// 开始的时候,这个是获取店铺的编号
 			// ResultSet rs8 = past8.executeQuery();
 			// if (rs8.next()) {
-			// System.out.println("已经验货");
+			// LoggerUtil.info("已经验货");
 			// DB.closeResultSet(rs8);
 			// DB.closePreparedStatement(past8);
 			// return true;
@@ -71,9 +75,9 @@ public class Fen_dian_Update {
 				past_s.setString(1, obj1.getString("cGoodsNo"));
 				ResultSet rs = past_s.executeQuery();
 				if (!rs.next()) {
-					System.out.println("此条码没有" + obj1.getString("cGoodsNo"));
+					LoggerUtil.info("此条码没有" + obj1.getString("cGoodsNo"));
 				} else {
-					System.out.println("此条码有" + obj1.getString("cGoodsNo"));
+					LoggerUtil.info("此条码有" + obj1.getString("cGoodsNo"));
 				}
 				DB.closeRs_Con(rs, past_s, null);
 			}
@@ -260,7 +264,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_diao_bo_chu_ku_no(conn, String_Tool.DataBaseYear(), obj.getString("cWhNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
@@ -356,7 +360,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_diao_bo_ru_ku_no(conn, String_Tool.DataBaseYear(), obj.getString("cWhNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				PreparedStatement past1 = conn.prepareStatement(
@@ -434,7 +438,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_bo_sun_no(conn, String_Tool.DataBaseYear(), obj.getString("cSupNo"));//cSupNo  cStoreNo
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				PreparedStatement past1 = conn.prepareStatement(
@@ -477,14 +481,14 @@ public class Fen_dian_Update {
 			past.setString(15, "" + sum);
 			past.setString(16, "" + String_Tool.DataBaseH_M_S());
 			past.execute();
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			conn.commit();
 			conn.setAutoCommit(true);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				System.out.println("到此0");
+				LoggerUtil.info("到此0");
 				conn.rollback();
 				return false;
 			} catch (SQLException e1) {
@@ -492,7 +496,7 @@ public class Fen_dian_Update {
 			}
 			return false;
 		} finally {
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			DB.closePreparedStatement(past);
 			DB.closeConn(conn);
 		}
@@ -506,7 +510,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_bo_yi_no(conn, String_Tool.DataBaseYear(), obj.getString("cStoreNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				PreparedStatement past1 = conn.prepareStatement(
@@ -547,14 +551,14 @@ public class Fen_dian_Update {
 			past.setString(15, "" + sum);
 			past.setString(16, "" + String_Tool.DataBaseH_M_S());
 			past.execute();
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			conn.commit();
 			conn.setAutoCommit(true);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				System.out.println("到此0");
+				LoggerUtil.info("到此0");
 				conn.rollback();
 				return false;
 			} catch (SQLException e1) {
@@ -562,7 +566,7 @@ public class Fen_dian_Update {
 			}
 			return false;
 		} finally {
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			DB.closePreparedStatement(past);
 			DB.closeConn(conn);
 		}
@@ -681,14 +685,14 @@ public class Fen_dian_Update {
 			past.setString(25, "0");
 
 			past.execute();
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			conn.commit();
 			conn.setAutoCommit(true);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				System.out.println("到此0");
+				LoggerUtil.info("到此0");
 				conn.rollback();
 				return false;
 			} catch (SQLException e1) {
@@ -696,7 +700,7 @@ public class Fen_dian_Update {
 			}
 			return false;
 		} finally {
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			DB.closePreparedStatement(past);
 			DB.closeConn(conn);
 		}
@@ -707,7 +711,7 @@ public class Fen_dian_Update {
 		PreparedStatement past = null;
 		ResultSet rs = null;
 		try {
-			System.out.println("zz");
+			LoggerUtil.info("zz");
 			past = conn.prepareStatement(
 					"select cSheetno,SUM(fQuantity) as fQuantity from wh_LossWarehouseDetail where cSheetno in(select cSheetno from wh_LossWarehouse where cStoreNo=? and dDate between ? and ?) group by cSheetno");
 			past.setString(1, cStoreNo);
@@ -730,7 +734,7 @@ public class Fen_dian_Update {
 		PreparedStatement past = null;
 		ResultSet rs = null;
 		try {
-			System.out.println("zz");
+			LoggerUtil.info("zz");
 			past = conn.prepareStatement(
 					"select cSheetno,SUM(fQuantity) as fQuantity from wh_EffusionWhDetail where cSheetno in(select cSheetno from wh_EffusionWh where cStoreNo=? and dDate between ? and ?) group by cSheetno");
 			past.setString(1, cStoreNo);
@@ -921,7 +925,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_diao_bo_chu_ku_no(conn, String_Tool.DataBaseYear(), obj.getString("cWhNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
@@ -991,7 +995,7 @@ public class Fen_dian_Update {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = GetcSheetno.get_diao_bo_chu_ku_no(conn, String_Tool.DataBaseYear(), obj.getString("cWhNo"));
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
@@ -1110,14 +1114,14 @@ public class Fen_dian_Update {
 			past.setString(25, "0");//cBeizhu1
 			past.setString(26, cBeizhu1);//cBeizhu1
 			past.execute();
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			conn.commit();
 			conn.setAutoCommit(true);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				System.out.println("到此0");
+				LoggerUtil.info("到此0");
 				conn.rollback();
 				return false;
 			} catch (SQLException e1) {
@@ -1125,7 +1129,7 @@ public class Fen_dian_Update {
 			}
 			return false;
 		} finally {
-			System.out.println("到此1");
+			LoggerUtil.info("到此1");
 			DB.closePreparedStatement(past);
 			DB.closeConn(conn);
 		}

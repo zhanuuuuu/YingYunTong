@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import DB.DBupdate;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Online;
-import Tool.String_Tool;
 
 public class Online_Select_bu_huo_dan_goods extends HttpServlet {
 
@@ -45,7 +44,7 @@ public class Online_Select_bu_huo_dan_goods extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = Online.Select_Online_Bu_huo_goods(GetConnection.getPS_OSSConn()); //得到线上链接  ，PS_OSS
 			if (array != null && array.length() > 0) {

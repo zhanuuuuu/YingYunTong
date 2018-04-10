@@ -5,16 +5,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import Tool.GetcSheetno;
 import Tool.ReadConfig;
 import Tool.String_Tool;
 
@@ -34,7 +38,7 @@ public class Simple_Upload_return_goods extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array=new JSONArray(data);
 			boolean a =insert_into_tui_huo(GetConnection.getStoreConn(), array);
@@ -44,7 +48,7 @@ public class Simple_Upload_return_goods extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +71,7 @@ public class Simple_Upload_return_goods extends HttpServlet {
 			if (rs1.next()) {
 				strrandom = rs1.getString("SheetNo");
 			}
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			
 			
 			past1 = conn.prepareStatement(

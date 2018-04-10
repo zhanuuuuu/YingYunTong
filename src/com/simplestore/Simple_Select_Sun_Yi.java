@@ -4,12 +4,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -33,11 +38,11 @@ public class Simple_Select_Sun_Yi extends HttpServlet {
 			String dDate1 = request.getParameter("dDate1");
 			String dDate2 = request.getParameter("dDate2");
 			String fage = request.getParameter("fage"); // "0是报损 1是褒义"
-			System.out.println("0是报损 1是褒义");
-			System.out.println(cSheetno);
-			System.out.println(dDate1);
-			System.out.println(dDate2);
-			System.out.println(fage);
+			LoggerUtil.info("0是报损 1是褒义");
+			LoggerUtil.info(cSheetno);
+			LoggerUtil.info(dDate1);
+			LoggerUtil.info(dDate2);
+			LoggerUtil.info(fage);
 			JSONArray array=new JSONArray();
 			if (fage.equals("0")) {
 				array = Select_Bao_Sun(GetConnection.getStoreConn(), cSheetno,dDate1,dDate2);
@@ -47,7 +52,7 @@ public class Simple_Select_Sun_Yi extends HttpServlet {
 			}
 			if (array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":"+ array.toString() + "}");
 			}
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString() + "}");

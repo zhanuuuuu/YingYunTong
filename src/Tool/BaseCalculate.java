@@ -2,6 +2,8 @@ package Tool;
 
 import java.math.BigDecimal;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 public class BaseCalculate {
 	
 	private static final int DEF_DIV_SCALE = 10;
@@ -94,7 +96,7 @@ public class BaseCalculate {
 	}
 	
 	public static void main(String args[]){
-		System.out.println(""+add(12.32, 12.912));
+		LoggerUtil.info(""+add(12.32, 12.912));
 		
 	}
 

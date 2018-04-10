@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 
@@ -35,7 +37,7 @@ public class Freight_management extends HttpServlet {
 		PreparedStatement past = null;
 		try {
 			String data = request.getParameter("data");
-			System.out.println(data);
+			LoggerUtil.info(data);
 			JSONObject obj = new JSONObject(data);
 			past = conn.prepareStatement("insert into Oeder_freight_Table values(?,?) ");
 			past.setString(1, obj.getString("Goods_amount"));

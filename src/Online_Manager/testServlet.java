@@ -2,14 +2,17 @@ package Online_Manager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import DB.Select_Online_Manager;
 
 /**
  * Servlet implementation class testServlet
@@ -43,17 +46,17 @@ public class testServlet extends HttpServlet {
 			conn = GetConnection.getonlineConn();
 			{
 				out.print("我是你");
-				System.out.println("呵呵");
+				LoggerUtil.info("呵呵");
 			
 				return ;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("连接");
+			LoggerUtil.info("连接");
 			DB.closeConn(conn);
 		}
-		System.out.println("啦啦");
+		LoggerUtil.info("啦啦");
 		out.flush();
 		out.close();
 		

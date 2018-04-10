@@ -2,7 +2,6 @@ package Select_Goods;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import DB.DBupdate;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Head_Shop;
 
@@ -35,8 +35,7 @@ public class Box_union_goods extends HttpServlet {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 					+ array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-				+ array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 
 		out.flush();
 		out.close();
@@ -61,8 +60,7 @@ public class Box_union_goods extends HttpServlet {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 					+ array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-				+ array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 
 		out.flush();
 		out.close();

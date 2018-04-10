@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import DB.DBupdate;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Online;
 
@@ -45,12 +46,12 @@ public class Upload_Online_fen_jian extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			JSONArray array=obj.getJSONArray("dData");
 			JSONArray array1=obj.getJSONArray("cSheetNo_Out");
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			boolean a = Online.insert_into_online_Fen_jian(GetConnection.getStoreConn(), array,array1);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\""+ "}");
@@ -58,7 +59,7 @@ public class Upload_Online_fen_jian extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			e.printStackTrace();

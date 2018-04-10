@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
@@ -44,8 +45,8 @@ public class upload_fen_dian_tui_huo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace("\n", "").replace("\r", "");
 		String cBeizhu1=request.getParameter("cBeizhu1");
-		System.out.println(cBeizhu1);
-		System.out.println(data);
+		LoggerUtil.info(cBeizhu1);
+		LoggerUtil.info(data);
 		boolean a = false;
 		try {
 			JSONArray array=new JSONArray(data);
@@ -63,7 +64,7 @@ public class upload_fen_dian_tui_huo extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

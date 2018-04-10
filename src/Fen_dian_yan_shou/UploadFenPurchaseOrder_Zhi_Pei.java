@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -31,20 +33,20 @@ public class UploadFenPurchaseOrder_Zhi_Pei extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
 		String cSheetno=request.getParameter("cSheetno");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = new JSONArray(data);
 			boolean a = DBYan_Huo_update.uploadFenPurchaseOrder_Zhi_Pei(GetConnection.getStoreConn(), array,cSheetno);
 			if (a) {
-				System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 				out.print("{\"resultStatus\":\"" + 1 + "\""+ "}");
 			} 
 			else {
-				System.out.println("{\"resultStatus\":\"" + 0 + "\""+ "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\""+ "}");
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
 		} catch (Exception e) {
-			System.out.println("{\"resultStatus\":\"" + "服务器异常" + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + "服务器异常" + "\""+ "}");
 			e.printStackTrace();
 		}
 		out.flush();

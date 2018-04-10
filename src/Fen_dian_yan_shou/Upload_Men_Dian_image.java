@@ -13,9 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
@@ -42,7 +45,7 @@ public class Upload_Men_Dian_image extends HttpServlet {
 		Connection conn = null;
 		// [{"imagecontent":"" + image + "\",\"cStoreNo\":\"" +
 		// SendMessage.storeno + "\",\"cGoodsNo\":\"" + cGoodsNo + ""}]
-		System.out.println(name);
+		LoggerUtil.info(name);
 		try {
 			conn = GetConnection.getStoreConn();
 			JSONArray array = new JSONArray("name");
@@ -73,7 +76,7 @@ public class Upload_Men_Dian_image extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 		} catch (Exception e) {
 			Logger.getLogger(Upload_Fen_dian_ru_ku.class).error(e.getLocalizedMessage());
 			e.printStackTrace();

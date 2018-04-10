@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -83,12 +85,12 @@ public class Receive_User_Order extends HttpServlet {
 			}
 			Order_Details.executeBatch();
 			DB.closePreparedStatement(Order_Details);//
-			System.out.println(Send_Money);
+			LoggerUtil.info(Send_Money);
 			Money = Money.add(new BigDecimal(Send_Money));// 商品的真实的钱+运费
 			PreparedStatement past = conn.prepareStatement(
 					"update  Simple_online.dbo.Order_Table set Pay_state ='2',Reality_All_Money =? where cSheetno= ? ");
 			past.setString(1, Money.toString());
-			System.out.println("" + Money.toString());
+			LoggerUtil.info("" + Money.toString());
 			past.setString(2, cSheetno);
 			past.executeUpdate();
 			DB.closePreparedStatement(past);
@@ -107,10 +109,10 @@ public class Receive_User_Order extends HttpServlet {
 			/* 查询订单的商品进行加入销售表 */
 			CallableStatement c = conn.prepareCall("{call select_online_Order_goods (?)}");
 			c.setString(1, cSheetno);
-			System.out.println(cSheetno);
+			LoggerUtil.info(cSheetno);
 			ResultSet rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println(array);
+			LoggerUtil.info(array);
 			String table = "";// 呵呵哒
 
 			PreparedStatement Pos_Sale = conn.prepareStatement("select cWhNo,cWh,Pos_Sale,Pos_Cost from posmanagement_main.dbo.t_WareHouse where cStoreNo=? ");
@@ -123,7 +125,7 @@ public class Receive_User_Order extends HttpServlet {
 			}
 			DB.closeResultSet(rs3);
 			DB.closePreparedStatement(Pos_Sale);
-			System.out.println(table);
+			LoggerUtil.info(table);
 			PreparedStatement past4 = conn
 					.prepareStatement(" select sheetno  from " + table + ".dbo.jiesuan  where sheetno=? ");
 			past4.setString(1, cSheetno);
@@ -175,7 +177,7 @@ public class Receive_User_Order extends HttpServlet {
 				past2.addBatch();
 			}
 			past2.executeBatch();
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 			
 			PreparedStatement select_goods_sale_num=conn.prepareStatement("select cGoodsNo,RealityNum from Simple_online.dbo.Order_Details where cSheetno =? ");
 			select_goods_sale_num.setString(1, cSheetno);

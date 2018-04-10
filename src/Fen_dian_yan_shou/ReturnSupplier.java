@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -47,7 +49,7 @@ public class ReturnSupplier extends HttpServlet {
 		String data = request.getParameter("data");
 		
 		String cBeizhu1 = request.getParameter("cBeizhu1");
-		System.out.println("" + data);
+		LoggerUtil.info("" + data);
 		boolean a =false;
 		try {
 			JSONArray array = new JSONArray(data);
@@ -60,10 +62,10 @@ public class ReturnSupplier extends HttpServlet {
 			 
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,12 +2,16 @@ package supplier_bidding;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 import bean.Bidding_Order;
@@ -31,8 +35,8 @@ public class Select_Bidding_Order extends HttpServlet {
 		try {
 			String cSupNo=request.getParameter("cSupNo");
 			String dDate=request.getParameter("dDate");
-			System.out.println(cSupNo);
-			System.out.println(dDate);
+			LoggerUtil.info(cSupNo);
+			LoggerUtil.info(dDate);
 			ArrayList<Bidding_Order> list=DB_Supplier_Bidding.select_Select_Bidding_Order(GetConnection.getBiddingConn(), cSupNo, dDate);
 			if(list!=null&&list.size()>0){
 				 Gson gson=new Gson();

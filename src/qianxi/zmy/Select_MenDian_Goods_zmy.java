@@ -13,12 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
-import Tool.String_Tool;
 
 /**
  * Servlet implementation class Select_MenDian_Goods_zmy
@@ -44,7 +42,6 @@ private static final long serialVersionUID = 1L;
 		CallableStatement c = null;
 		String Number_of_pages=request.getParameter("Number_of_pages");
 		String cStoreNo=request.getParameter("cStoreNo");
-		
 		
 		try {
 			

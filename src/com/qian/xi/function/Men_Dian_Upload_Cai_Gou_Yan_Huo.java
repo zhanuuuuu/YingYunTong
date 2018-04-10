@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.GetcSheetno;
@@ -41,8 +43,8 @@ public class Men_Dian_Upload_Cai_Gou_Yan_Huo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
 		String cSheetno=request.getParameter("cSheetno");
-		System.out.println(data);
-		System.out.println(cSheetno);
+		LoggerUtil.info(data);
+		LoggerUtil.info(cSheetno);
 		Connection conn = null;
 		String SheetNo = null;
 		double fMoney = 0;
@@ -141,7 +143,7 @@ public class Men_Dian_Upload_Cai_Gou_Yan_Huo extends HttpServlet {
 			DB.closePreparedStatement(past2);
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
 
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + SheetNo + "\"}");
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (Exception e) {

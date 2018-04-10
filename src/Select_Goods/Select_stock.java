@@ -1,12 +1,17 @@
 package Select_Goods;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Head_Shop;
 
@@ -26,8 +31,8 @@ public class Select_stock extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String cBarcode=request.getParameter("cBarcode");
 		String cStoreNo=request.getParameter("cStoreNo");
-		System.out.println(cBarcode);
-		System.out.println(cStoreNo);
+		LoggerUtil.info(cBarcode);
+		LoggerUtil.info(cStoreNo);
 		
 		JSONArray array = Head_Shop.Select_stock(GetConnection.getStoreConn(), cBarcode,cStoreNo);
 		if (array != null && array.length() > 0) {
@@ -35,8 +40,7 @@ public class Select_stock extends HttpServlet {
 		} else {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString() + "}");
 		}
-		System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"
-				+ array.toString() + "}");
+		LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString() + "}");
 
 		out.flush();
 		out.close();

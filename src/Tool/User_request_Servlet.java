@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Tool.httpTool;
-
 @WebServlet(description = "”√ªß«Î«Ûservlet", urlPatterns = { "/000" })
 public class User_request_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

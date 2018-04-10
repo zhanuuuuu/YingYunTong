@@ -12,8 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
@@ -38,7 +41,7 @@ public class Upload_returned_goods extends HttpServlet {
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("name");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn = null;
 		String SheetNo = null;
 		double fMoney = 0;
@@ -54,7 +57,7 @@ public class Upload_returned_goods extends HttpServlet {
 			if (rs1.next()) {
 				SheetNo = rs1.getString("SheetNo");
 			}
-			System.out.println(SheetNo);
+			LoggerUtil.info(SheetNo);
 			DB.closeResultSet(rs1);
 			DB.closePreparedStatement(past1);
 
@@ -129,7 +132,7 @@ public class Upload_returned_goods extends HttpServlet {
 			past.execute();
 			DB.closePreparedStatement(past);
 			out.print("{\"resultStatus\":\"" + 1 + "\"}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"}");
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (Exception e) {

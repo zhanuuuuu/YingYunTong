@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Tool.ResultSet_To_JSON;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB;
 import DB.GetConnection;
+import Tool.ResultSet_To_JSON;
 
 public class Select_t_cStoreGoods_Message extends HttpServlet {
 	
@@ -53,7 +54,7 @@ public class Select_t_cStoreGoods_Message extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data=request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		Connection conn=null;
 		PreparedStatement past=null;
 		ResultSet rs=null;
@@ -72,8 +73,7 @@ public class Select_t_cStoreGoods_Message extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\","
-					+ "\"dDate\":" + array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\","	+ "\"dDate\":" + array.toString() + "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
 					+ "" + "}");

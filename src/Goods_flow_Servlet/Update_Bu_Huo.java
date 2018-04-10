@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBupdate;
 import DB.GetConnection;
-import Tool.String_Tool;
 
 public class Update_Bu_Huo extends HttpServlet {
 	
@@ -46,7 +47,7 @@ public class Update_Bu_Huo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			JSONArray goods_array = obj.getJSONArray("goods_array");

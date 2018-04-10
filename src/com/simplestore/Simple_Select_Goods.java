@@ -14,7 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -58,7 +62,7 @@ public class Simple_Select_Goods extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				Connection conn = GetConnection.getStoreConn();
 				String Number_of_pages = request.getParameter("Number_of_pages");
-				System.out.println(Number_of_pages);
+				LoggerUtil.info(Number_of_pages);
 				PreparedStatement past = null;
 				ResultSet rs = null;
 				try {

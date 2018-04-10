@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -43,7 +45,7 @@ public class Driver_Ok extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String str = request.getParameter("data");
-		System.out.println(str);
+		LoggerUtil.info(str);
 		try {
 			JSONObject obj = new JSONObject(str);
 			String UserNo=obj.getString("UserNo");
@@ -53,7 +55,7 @@ public class Driver_Ok extends HttpServlet {
 			String cSheetno=obj.getString("cSheetno");
 			String a = Operation_update.OK_Send(GetConnection.getStoreConn(),UserNo,DriverName, Store_no,Store_name,cSheetno);
 			out.print("{\"resultStatus\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"}");
 		} catch (JSONException e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"}");
 			e.printStackTrace();

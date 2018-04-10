@@ -4,13 +4,18 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.GetcSheetno;
@@ -35,7 +40,7 @@ public class Men_Dian_Batch_Update_price extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Connection conn = GetConnection.getStoreConn();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		String strrandom = "";
 		try {
 			JSONArray array = new JSONArray(data);

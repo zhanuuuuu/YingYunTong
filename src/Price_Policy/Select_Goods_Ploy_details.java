@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Tool.String_Tool;
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DB_Price_Policy;
-import DB.DBupdate;
 import DB.GetConnection;
+import Tool.String_Tool;
 
 public class Select_Goods_Ploy_details extends HttpServlet {
 
@@ -46,7 +46,7 @@ public class Select_Goods_Ploy_details extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String date1 = obj.getString("dDate1");
@@ -54,7 +54,7 @@ public class Select_Goods_Ploy_details extends HttpServlet {
 			String cStoreNo = obj.getString("cStoreNo");
 			String cGoodsNo = obj.optString("cGoodsNo");
 			String cPloyNo  = obj.optString("cPloyNo");
-			System.out.println(cStoreNo+cGoodsNo+cPloyNo );
+			LoggerUtil.info(cStoreNo+cGoodsNo+cPloyNo );
 			JSONArray array=null;
 			if(!String_Tool.isEmpty(cGoodsNo)){
 				array = DB_Price_Policy.Select_GoodsPloy(
@@ -69,15 +69,14 @@ public class Select_Goods_Ploy_details extends HttpServlet {
 			else if(!String_Tool.isEmpty(cPloyNo)){
 				array = DB_Price_Policy.Select_GoodsPloy(
     					GetConnection.getStoreConn(), cStoreNo,cPloyNo);
-				System.out.println("大所發生的");
+				LoggerUtil.info("大所發生的");
 			}
 			if (array != null && array.length() > 0) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":"+ array.toString().replace(" ", "") + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"
-						+ array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

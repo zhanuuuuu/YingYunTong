@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
-import DB.DBYan_Huo_update;
 import DB.GetConnection;
 import Tool.String_Tool;
 
@@ -36,7 +37,7 @@ public class Upload_Sui_Ji_Bu_Huo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array=new JSONArray(data);
 			boolean a = insert_into_suiji_buhuo(GetConnection.getStoreConn(), array);
@@ -46,7 +47,7 @@ public class Upload_Sui_Ji_Bu_Huo extends HttpServlet {
 			else {
 				out.print("{\"resultStatus\":\"" + 0 + "\""+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\""+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\""+ "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +62,7 @@ public class Upload_Sui_Ji_Bu_Huo extends HttpServlet {
 			conn.setAutoCommit(false);// 更改JDBC事务的默认提交方式
 			JSONObject obj = array.getJSONObject(0);
 			strrandom = "Random"+obj.getString("cStoreNo") + String_Tool.reformat(); // 单号
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			String sql = "INSERT INTO t_Random_WH_BhApply (dDate,cStoreNo,cSheetNo,cStoreName,cOperatorNo,cOperator,bPrint)values(?,?,?,?,?,?,?)";
 			past = conn.prepareStatement(sql);
 			past.setString(1, String_Tool.DataBaseYear_Month_Day());

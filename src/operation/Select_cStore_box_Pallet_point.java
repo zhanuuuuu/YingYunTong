@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -43,7 +45,7 @@ public class Select_cStore_box_Pallet_point extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONObject obj = new JSONObject(data);
 			String fage = obj.getString("fage");
@@ -57,8 +59,7 @@ public class Select_cStore_box_Pallet_point extends HttpServlet {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"
 						+ array.toString() + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"
-						+ array.toString() + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":"+ array.toString() + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

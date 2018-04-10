@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
@@ -15,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
+import DB.DB;
+import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
 import Tool.String_Tool;
-import DB.DB;
-import DB.DBupdate;
-import DB.GetConnection;
 
 public class Select_Zongbu_Yanhuo extends HttpServlet { // 掉采购单验货
 
@@ -47,8 +47,8 @@ public class Select_Zongbu_Yanhuo extends HttpServlet { // 掉采购单验货
 		CallableStatement c = null;
 		String data = request.getParameter("data");
 		String cStoreNo = request.getParameter("cStoreNo");
-		System.out.println(data);
-		System.out.println(cStoreNo);
+		LoggerUtil.info(data);
+		LoggerUtil.info(cStoreNo);
 		try {
 			conn = GetConnection.getStoreConn();
 			if (String_Tool.isEmpty(data)) {// 查询采购单，供应商。

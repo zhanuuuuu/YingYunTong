@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DBYan_Huo_update;
 import DB.GetConnection;
 
@@ -41,9 +43,9 @@ public class Upload_Pei_Song_Yan_Huo_Dan extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace(' ', '+').replace("\n", "").replace("\r", "");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
-			System.out.println("½²¹þ");
+			LoggerUtil.info("½²¹þ");
 			JSONArray array=new JSONArray(data);
 	
 			boolean a = DBYan_Huo_update.insert_into_yan_huo_dan(GetConnection.getStoreConn(), array);

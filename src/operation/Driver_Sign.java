@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.GetConnection;
 import DB.Operation_update;
@@ -44,7 +45,7 @@ public class Driver_Sign extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String str=request.getParameter("data");
-		System.out.println(str);
+		LoggerUtil.info(str);
 		try {
 			JSONObject obj = new JSONObject(str);
 			String TruckLicenseTag=obj.getString("TruckLicenseTag");   //³µºÅ
@@ -53,7 +54,7 @@ public class Driver_Sign extends HttpServlet {
 			String fage=obj.getString("fage");
 			String  a = Operation_update.Driver_Sign_in(GetConnection.getStoreConn(),TruckLicenseTag, DriverNo,fage,user_name);
 			out.print("{\"resultStatus\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"}");
 		} catch (JSONException e) {
 			out.print("{\"resultStatus\":\"" + 0 + "\"}");
 			e.printStackTrace();

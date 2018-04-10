@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import ModelRas.MD5key;
@@ -43,8 +45,8 @@ public class p_GetVip_PFrate_byScore_All extends HttpServlet {
 		ResultSet rs = null;
 		String cVipNo = request.getParameter("cVipNo");// 9009
 		String sign = request.getParameter("sign");// 请
-		System.out.println(cVipNo);
-		System.out.println(sign);
+		LoggerUtil.info(cVipNo);
+		LoggerUtil.info(sign);
 		JSONArray array=new JSONArray();
 		if (MD5key.getMD5Pass(cVipNo + "ware13391810430").equals(sign)) {
 			try {
@@ -55,16 +57,16 @@ public class p_GetVip_PFrate_byScore_All extends HttpServlet {
 				array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 				if (array != null && array.length() > 0) {
 					out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dData\":" + array.toString() + "}");
 				} else {
 					out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
-					System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
+					LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dData\":" + array.toString() + "}");
 				}
 			} catch (Exception e) {
 				out.print("{\"resultStatus\":\"" + -1 + "\"," + "\"dData\":" + array.toString() + "}");
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

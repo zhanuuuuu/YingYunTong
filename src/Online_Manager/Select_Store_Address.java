@@ -1,12 +1,17 @@
 package Online_Manager;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -31,7 +36,7 @@ public class Select_Store_Address extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			String cStoreNo = request.getParameter("cStoreNo");
-			System.out.println(cStoreNo);
+			LoggerUtil.info(cStoreNo);
 			JSONArray  array = Select_Online_Manager.select_cStore_address(GetConnection.getStoreConn(), cStoreNo);
 			if(array.length()>0){
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString().replace(" ", "")+ "}");
@@ -39,7 +44,7 @@ public class Select_Store_Address extends HttpServlet {
 			else{
 				out.print("{\"resultStatus\":\"" + 0+ "\"," + "\"dDate\":" + array.toString().replace(" ", "")+ "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString().replace(" ", "")+ "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString().replace(" ", "")+ "}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + 0+ "\"," + "\"dDate\":\"" + 0+ "\"}");
 			e.printStackTrace();

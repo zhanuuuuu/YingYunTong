@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Select_Online_Manager;
 
@@ -35,15 +37,15 @@ public class A_key_Update_Price_online extends HttpServlet {
 			String percentage = request.getParameter("percentage");
 			String cStoreNo = request.getParameter("cStoreNo");
 			JSONArray array = new JSONArray(data);
-			System.out.println(array);
-			System.out.println(percentage);
+			LoggerUtil.info(array);
+			LoggerUtil.info(percentage);
 			boolean str = Select_Online_Manager.updateA_key_online(GetConnection.getStoreConn(), array, percentage,cStoreNo);
 			if (str) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array.toString() + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + "0" + "}");
 			}
-			System.out.println(str);
+			LoggerUtil.info(str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

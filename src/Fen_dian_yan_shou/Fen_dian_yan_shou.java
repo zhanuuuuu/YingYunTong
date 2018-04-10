@@ -1,12 +1,17 @@
 package Fen_dian_yan_shou;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.Fen_dian_Update;
 import DB.GetConnection;
 
@@ -38,7 +43,7 @@ public class Fen_dian_yan_shou extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data").replace("\n", "").replace("\r", "");
-		System.out.println(""+data);
+		LoggerUtil.info(""+data);
 		try { 
 			JSONObject obj=new JSONObject(data);
 			String AppNo=obj.getString("AppNo");
@@ -48,10 +53,10 @@ public class Fen_dian_yan_shou extends HttpServlet {
 			boolean a = Fen_dian_Update.Insert_into_fen_dian_yan_dan(GetConnection.getStoreConn(AppNo), array,array1,array2);
 			if (a) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"" + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"" + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"" + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"" + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

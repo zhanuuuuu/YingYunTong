@@ -5,12 +5,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.ResultSet_To_JSON;
@@ -43,8 +48,8 @@ public class Select_Zong_Bu_Goods extends HttpServlet {
 		PreparedStatement past = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(Number_of_pages);
-			System.out.println(cStoreNo);
+			LoggerUtil.info(Number_of_pages);
+			LoggerUtil.info(cStoreNo);
 			String sql=String_Tool.sql("cGoodsNo", "select a.cGoodsNo,cGoodsName,cBarcode,cUnit,cSpec,fNormalPrice,fCKPrice,cSupNo,fQty_Cur=isnull(b.EndQty,0),a.fPreservationUp,a.fPreservationDown,a.fPreservation_soft,bStorage  from t_Goods a left join (select cGoodsNo,EndQty from t_goodsKuCurQty_wei where cStoreNo=? ) b on a.cGoodsNo=b.cGoodsNo where cBarcode not like '%X%'", Integer.parseInt(Number_of_pages));
 			past = conn.prepareStatement(sql);
 			past.setString(1, cStoreNo);

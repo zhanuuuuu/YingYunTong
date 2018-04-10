@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -11,8 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.String_Tool;
@@ -35,8 +38,8 @@ public class t_CheckTast_update extends HttpServlet {
 	
 		String data=request.getParameter("data");
 		String cCheckTaskName=request.getParameter("cCheckTaskName");
-		System.out.println(cStoreNo);
-		System.out.println(data);
+		LoggerUtil.info(cStoreNo);
+		LoggerUtil.info(data);
 		Connection conn= GetConnection.getStoreConn();
 		try {
 			conn.setAutoCommit(false);

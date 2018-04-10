@@ -5,16 +5,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import Tool.GetcSheetno;
 import Tool.ReadConfig;
 import Tool.String_Tool;
 
@@ -44,7 +48,7 @@ public class Simple_Upload_Sun_Yi extends HttpServlet {
 				a=Insert_into_Bao_Yi(GetConnection.getStoreConn(),array);
 			}
 			out.print("{\"resultStatus\":\"" + a + "\"}");
-			System.out.println("{\"resultStatus\":\"" + a + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + a + "\"}");
 		} catch (Exception e) {
 			out.print("{\"resultStatus\":\"" + -1 + "\"}");
 			e.printStackTrace();
@@ -66,11 +70,11 @@ public class Simple_Upload_Sun_Yi extends HttpServlet {
 			if (rs1.next()) {
 				strrandom = rs1.getString("SheetNo");
 			}
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			DB.closeResultSet(rs1);
 			DB.closePreparedStatement(past_cSheetno);
 			
-			System.out.println(strrandom);
+			LoggerUtil.info(strrandom);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj1 = array.getJSONObject(i);
 				PreparedStatement past1 = conn.prepareStatement(

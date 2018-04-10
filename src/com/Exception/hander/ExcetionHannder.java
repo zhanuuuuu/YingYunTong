@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.oreilly.servlet.MultipartRequest;
 
 import Tool.RenamePolicyCos;
@@ -42,7 +43,7 @@ public class ExcetionHannder extends HttpServlet {
     	
     	String imageurl=null;
     	String adcGoodsNo=request.getParameter("cGoodsNo");
-    	System.out.println(adcGoodsNo);
+    	LoggerUtil.info(adcGoodsNo);
     	//可以建文件  多级目录
     	long time=System.currentTimeMillis();
     	//获取本地文件家路径
@@ -50,7 +51,7 @@ public class ExcetionHannder extends HttpServlet {
         if (!fileDir.exists()) {  
             fileDir.mkdirs();  
         }  
-        System.out.println(fileDir.getPath());
+        LoggerUtil.info(fileDir.getPath());
         
      
 		
@@ -74,7 +75,7 @@ public class ExcetionHannder extends HttpServlet {
             multirequest = new MultipartRequest(request, fileDir  
                     .getAbsolutePath(), inmaxPostSize, "UTF-8", myRenamePolicyCos); // GBK中文编码模式上传文件  
             String subject = multirequest.getParameter("subject");// 获取普通信息  (根本获取不到)
-            System.out.println(subject);  
+            LoggerUtil.info(subject);  
             Enumeration<String> filedFileNames = multirequest.getFileNames();  
             String filedName = null;  
             
@@ -85,26 +86,26 @@ public class ExcetionHannder extends HttpServlet {
                     File uploadFile = multirequest.getFile(filedName);  
                     if (null != uploadFile && uploadFile.length() > 0) {  
                     	imageurl=uploadFile.getName();
-                        System.out.println(uploadFile.getName());  
-                        System.out.println(uploadFile.getPath());  
-                        System.out.println(uploadFile.length());  
+                        LoggerUtil.info(uploadFile.getName());  
+                        LoggerUtil.info(uploadFile.getPath());  
+                        LoggerUtil.info(uploadFile.length());  
                     }  
                     // 获取未重命名的文件名称  
                     String Originalname = multirequest  
                             .getOriginalFileName(filedName);  
-                    System.out.println(Originalname);  
+                    LoggerUtil.info(Originalname);  
                 }  
             }  
-            System.out.println(imageurl);
+            LoggerUtil.info(imageurl);
            
             try{
             	
-            	System.out.println("上传成功");
+            	LoggerUtil.info("上传成功");
             	//out.print("上传成功");
             }catch(Exception e){
             	e.printStackTrace();
             	//out.print("上传失败");
-            	System.out.println("上传失败");
+            	LoggerUtil.info("上传失败");
             }
            
         } catch (Exception e) {  

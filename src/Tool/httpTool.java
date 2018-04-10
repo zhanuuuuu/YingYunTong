@@ -1,13 +1,11 @@
 package Tool;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 public class httpTool {
 	
@@ -19,26 +17,26 @@ public class httpTool {
 		//String url=request.getParameter("url");
 		Enumeration<String> e = request.getParameterNames(); 
 		String a = new String();
-		System.out.println("À²À²");
+		LoggerUtil.info("À²À²");
 		while (e.hasMoreElements()) {
 		
 			String paramName = (String) e.nextElement();
-			System.out.println("ºÇºÇkey"+paramName );
+			LoggerUtil.info("ºÇºÇkey"+paramName );
 			String paramValue = request.getParameterValues(paramName)[0];
 			a=a+paramName +"="+paramValue+"&";
 		}
 		String data =a.toString();
-		System.out.println(data);
+		LoggerUtil.info(data);
 		//String str = httpTool.POST(url, data);
 		return data;
 	}
 
 //	public static String POST(String name, String data) {
 //		try {
-//			System.out.println(name);
+//			LoggerUtil.info(name);
 //			String IP=new ReadConfig().getipprop().getProperty("IP");
 //			String path=IP+"warelucent/"+map.get(name);
-//			System.out.println(path);
+//			LoggerUtil.info(path);
 //			URL url = new URL(path);
 //			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 //			conn.setDoOutput(true);

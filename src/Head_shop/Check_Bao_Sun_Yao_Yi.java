@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
-import Tool.ResultSet_To_JSON;
 
 @WebServlet(description = "ÉóºË±¨Ëð°ýÒå", urlPatterns = { "/Check_Bao_Sun_Yao_Yi" })
 public class Check_Bao_Sun_Yao_Yi extends HttpServlet {
@@ -35,9 +36,9 @@ public class Check_Bao_Sun_Yao_Yi extends HttpServlet {
 		String cSheetno = request.getParameter("cSheetno");
 		String action = request.getParameter("action");
 		String get_through = request.getParameter("get_through");
-		System.out.println(cSheetno);
-		System.out.println(action);
-		System.out.println(get_through);
+		LoggerUtil.info(cSheetno);
+		LoggerUtil.info(action);
+		LoggerUtil.info(get_through);
 		Connection conn = GetConnection.getStoreConn();
 		PreparedStatement past = null;
 		try {

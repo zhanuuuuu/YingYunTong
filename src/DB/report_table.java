@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import Tool.ResultSet_To_JSON;
 
 public class report_table {
@@ -22,7 +24,7 @@ public class report_table {
 			c.setString(4, storeno);
 			rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println( array.toString());
+			LoggerUtil.info( array.toString());
 			return array;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,7 +47,7 @@ public class report_table {
 			c.setString(4, storeno);
 			rs = c.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
-			System.out.println( array.toString());
+			LoggerUtil.info( array.toString());
 			return array;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,19 +117,26 @@ public class report_table {
 	public static JSONArray Select_mendianshouyin_report(Connection conn, String d1, String d2,String cStoreNo) { // 查询配送出库单的商品
 		CallableStatement c = null;
 		ResultSet rs = null;
+		CallableStatement c1 = null;
 		try {
 			c = conn.prepareCall("{call  p_Account_Receiver_App(?,?,?,?) }");
 			c.setString(1, "");
 			c.setString(2, d1);
 			c.setString(3, d2);
 			c.setString(4, cStoreNo);
-			rs = c.executeQuery();
+			c.execute();
+			
+			c1 = conn.prepareCall("{call  p_getTestExec(?) }");
+			c1.setString(1, "");
+			
+			rs =c1.executeQuery();
 			JSONArray array = ResultSet_To_JSON.resultSetToJsonArray(rs);
 			return array;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DB.closeResultSet(rs);
+			DB.closeCallState(c1);
 			DB.closeRs_Con(c, conn);
 		}
 		return null;

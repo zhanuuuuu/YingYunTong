@@ -2,11 +2,15 @@ package supplier_bidding_head_shop;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB_Supplier_Bidding;
 import DB.GetConnection;
 
@@ -25,16 +29,16 @@ public class Upload_Driver_address extends HttpServlet {
 			String longitude = request.getParameter("longitude");
 			String latitude = request.getParameter("latitude");
 			String DriverNo = request.getParameter("DriverNo");
-			System.out.println(longitude);
-			System.out.println(latitude);
-			System.out.println(DriverNo);
+			LoggerUtil.info(longitude);
+			LoggerUtil.info(latitude);
+			LoggerUtil.info(DriverNo);
 			int a = DB_Supplier_Bidding.update_Driver_address(GetConnection.getBiddingConn(), longitude, latitude,DriverNo);
 			if (a == 1) {
 				out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 1 + "}");
-				System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + 0 + "}");
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
-				System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" + 0 + "}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

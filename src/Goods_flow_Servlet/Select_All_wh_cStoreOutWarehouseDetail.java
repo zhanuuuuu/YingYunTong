@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 
 import DB.DBupdate;
 import DB.GetConnection;
@@ -44,7 +45,7 @@ public class Select_All_wh_cStoreOutWarehouseDetail extends HttpServlet {
 				array = DBupdate.Select_Out_Warehouse_goods(GetConnection.getStoreConn(),data);
 			}
 			else{
-				System.out.println("到此");
+				LoggerUtil.info("到此");
 				array = DBupdate.Select_Out_Warehouse_goods(GetConnection.getStoreConn());
 			}
 			if(array!=null&&array.length()>0){
@@ -53,7 +54,7 @@ public class Select_All_wh_cStoreOutWarehouseDetail extends HttpServlet {
 			else{
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":" +"0"  + "}");
 			}
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"dDate\":" + array + "}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

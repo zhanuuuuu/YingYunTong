@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
 import com.google.gson.Gson;
 
 import DB.DB;
@@ -63,16 +64,16 @@ public class p_MoneyCard_Done extends HttpServlet {
 		String fMoney_o = request.getParameter("fMoney_o");
 		String fLeftMoney_o = request.getParameter("fLeftMoney_o");
 		String sign = request.getParameter("sign");
-		System.out.println(cardno);
-		System.out.println(fCustmoney);
-		System.out.println(cWHno);
-		System.out.println(dSaleDate);
-		System.out.println(cSaleSheetNo);
-		System.out.println(cOperNo);
-		System.out.println(dSaleDatetime);
-		System.out.println(cPosNo);
-		System.out.println(fMoney_o);
-		System.out.println(fLeftMoney_o);
+		LoggerUtil.info(cardno);
+		LoggerUtil.info(fCustmoney);
+		LoggerUtil.info(cWHno);
+		LoggerUtil.info(dSaleDate);
+		LoggerUtil.info(cSaleSheetNo);
+		LoggerUtil.info(cOperNo);
+		LoggerUtil.info(dSaleDatetime);
+		LoggerUtil.info(cPosNo);
+		LoggerUtil.info(fMoney_o);
+		LoggerUtil.info(fLeftMoney_o);
 		HashMap<String, String> map=new HashMap<String, String>();
 		String str="";
 		if (MD5key.getMD5Pass(cardno + "ware13391810430").equals(sign)) {
@@ -100,7 +101,7 @@ public class p_MoneyCard_Done extends HttpServlet {
 				list.add(map);
 				str=gson.toJson(list);
 	            out.print("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
-				System.out.println("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
+				LoggerUtil.info("{\"resultStatus\":\"" + retCode + "\"," + "\"dData\":" + str + "}");
 				conn.commit();
 				conn.setAutoCommit(true);
 			} catch (Exception e) {
@@ -117,7 +118,7 @@ public class p_MoneyCard_Done extends HttpServlet {
 				}
 				e.printStackTrace();
 			} finally {
-				System.out.println("关闭连接");
+				LoggerUtil.info("关闭连接");
 				DB.closeRs_Con(rs, c, conn);
 			}
 		} else {

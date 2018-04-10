@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.DB;
 import DB.GetConnection;
 import Tool.GetcSheetno;
@@ -46,9 +48,9 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 		String cSheetno=request.getParameter("cSheetno");
 		String cSheetStateNo=request.getParameter("cSheetStateNo");
 	
-		System.out.println(data);
-		System.out.println(cSheetno);
-		System.out.println(cSheetStateNo);
+		LoggerUtil.info(data);
+		LoggerUtil.info(cSheetno);
+		LoggerUtil.info(cSheetStateNo);
 		Connection conn = null;
 		String SheetNo = null;
 		double fMoney = 0;
@@ -182,7 +184,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			p.setString(1, SheetNo);
 			p.setString(2, cSheetno);
 			int a = p.executeUpdate();
-			System.out.println("影响行数"+a);
+			LoggerUtil.info("影响行数"+a);
 			DB.closePreparedStatement(p);
 			
 			/*
@@ -195,7 +197,7 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			p1.setString(1, SheetNo);
 			p1.setString(2, cSheetno);
 			 a = p.executeUpdate();
-			System.out.println("影响行数"+a);
+			LoggerUtil.info("影响行数"+a);
 			DB.closePreparedStatement(p1);
 			
 			 */
@@ -209,8 +211,8 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 				PreparedStatement ps = conn.prepareStatement(
 						" update wh_StockVerify set iDiffExamin=1 where csheetNo= ?");
 				ps.setString(1, SheetNo);
-				 a = p.executeUpdate();
-				System.out.println("影响行数"+a);
+				 a = ps.executeUpdate();
+				LoggerUtil.info("影响行数"+a);
 				DB.closePreparedStatement(ps);
 				
 			}
@@ -226,12 +228,12 @@ public class Upload_Pei_cSheetNo_Examine_goods_ZMY extends HttpServlet {
 			PreparedStatement past2 = conn.prepareStatement(sql);
 			past2.setString(1, cSheetno);
 			 a = past2.executeUpdate();
-			System.out.println("影响行数"+a);
+			LoggerUtil.info("影响行数"+a);
 			DB.closePreparedStatement(past2);
 			
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + cSheetno + "\"}");
 
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + cSheetno + "\"}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":\"" + cSheetno + "\"}");
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (Exception e) {

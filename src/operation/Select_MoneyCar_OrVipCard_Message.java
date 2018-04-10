@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Operation_update;
 
@@ -32,8 +34,8 @@ public class Select_MoneyCar_OrVipCard_Message extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String fage = request.getParameter("fage");
 		String card = request.getParameter("card");
-		System.out.println(fage);
-		System.out.println(card);
+		LoggerUtil.info(fage);
+		LoggerUtil.info(card);
 		String sql = "";
 		if (fage.equals("1")) { //是查询会员卡
 			sql = "select * from dbo.t_Vip where cVipno=? ";
@@ -43,10 +45,10 @@ public class Select_MoneyCar_OrVipCard_Message extends HttpServlet {
 		JSONArray array = Operation_update.Select_MoneyCar_Or_VipCard_Message(GetConnection.getStoreConn(), card, sql);
 		if (array != null && array.length() > 0) {
 			out.print("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
-			System.out.println("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 1 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
 		} else {
 			out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
-			System.out.println("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
+			LoggerUtil.info("{\"resultStatus\":\"" + 0 + "\"," + "\"data\":" + array.toString().replace(" ", "") + "}");
 		}
 		out.flush();
 		out.close();

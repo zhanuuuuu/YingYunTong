@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.cloopen.rest.sdk.utils.LoggerUtil;
+
 import DB.GetConnection;
 import DB.Online;
 
@@ -44,7 +46,7 @@ public class Online_Select_cSheet_Below_Goods extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String data = request.getParameter("data");
-		System.out.println(data);
+		LoggerUtil.info(data);
 		try {
 			JSONArray array = Online.Select_Online_cSheetNo_below_goods(GetConnection.getStoreConn(),data); //查询配送出库验货单
 			if (array != null && array.length() > 0) {
@@ -52,7 +54,7 @@ public class Online_Select_cSheet_Below_Goods extends HttpServlet {
 			} else {
 				out.print("{\"resultStatus\":\"" + 0 + "\"," + "\"dDate\":"+ "0" + "}");
 			}
-			System.out.println(array.toString());
+			LoggerUtil.info(array.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
